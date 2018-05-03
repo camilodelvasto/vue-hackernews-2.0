@@ -17,7 +17,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
+import VueMeta from 'vue-meta'
+
+Vue.use(VueMeta)
 
 export default {
   name: 'About',
