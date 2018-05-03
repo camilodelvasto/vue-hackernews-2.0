@@ -40,7 +40,9 @@ export default {
         { hid: 'og:title', property: 'og:title', content: this.fields.NAME },
         { hid: 'og:image', property: 'og:image', content: 'https://res.cloudinary.com/startics/image/upload/v1523024114/truck_twugdy.png' },
         { hid: 'og:site_name', property: 'og:site_name', content: 'volunteerathon' },
-        { hid: 'og:description', property: 'og:description', content: this.fields.ACTIVITY }
+        { hid: 'og:description', property: 'og:description', content: this.fields.ACTIVITY },
+        { hid: 'twitter:card', property: 'twitter:card', content: this.fields.ACTIVITY },
+        { hid: 'twitter:image', property: 'twitter:image', content: 'https://startcrowd.club/images/startcrowdimage.jpg' },
       ]
     }
   },
