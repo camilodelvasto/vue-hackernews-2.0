@@ -21,7 +21,6 @@ export default context => {
 
     // set router's location
     router.push(url)
-    context.meta = meta
 
 
     // wait until router has resolved possible async hooks
@@ -47,7 +46,14 @@ export default context => {
         // store to pick-up the server-side state without having to duplicate
         // the initial data fetching on the client.
         context.state = store.state
-        resolve(app)
+        context.meta = meta
+        setTimeout(() => {
+          console.log('store.state.lists on entry-server: ', store.state.lists.top.length)
+          console.log('store.state.nonprofit on entry-server: ', store.state)
+        }, 500)
+        setTimeout(() => {
+          resolve(app)
+        }, 550)
       }).catch(reject)
     }, reject)
   })

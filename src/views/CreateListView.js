@@ -14,6 +14,11 @@ export default function createListView (type) {
     },
 
     title: camelize(type),
+    beforeMount () {
+      //const ein = this.$route.params.ein
+      //this.$store.dispatch('FETCH_NONPROFIT', { ein })
+      console.log('this.$store.state.list.length: ', this.$store.state.lists.top.length)
+    },
 
     render (h) {
       return h(ItemList, { props: { type }})

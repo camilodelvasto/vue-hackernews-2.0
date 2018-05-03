@@ -50,6 +50,7 @@ export function fetchIdsByType (type) {
 
 export function fetchNonprofit (ein) {
   return new Promise((resolve, reject) => {
+//    resolve({ EIN: 123123, NAME: 'Fake name'})
     axios.get(`https://irs-eomf-search-api.herokuapp.com/v1/nonprofits/${ein}`)
       .then(response => {
         resolve(response.data[0])
@@ -57,7 +58,6 @@ export function fetchNonprofit (ein) {
       .catch(e => {
         reject(e)
       })
-
   })
 }
 

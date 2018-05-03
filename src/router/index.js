@@ -21,7 +21,6 @@ export function createRouter () {
       { path: '/new/:page(\\d+)?', component: createListView('new') },
       {
         path: '/nonprofits/:ein',
-        name: 'GenericNonprofit',
         component: GenericNonprofit
       }
     ]
