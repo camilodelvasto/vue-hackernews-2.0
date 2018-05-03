@@ -13,6 +13,10 @@
       <li><strong>NTEE_CD</strong>: {{nonprofit.NTEE_CD}}</li>
       <li><strong>SORT_NAME</strong>: {{nonprofit.SORT_NAME}}</li>
     </ul>
+    <ul>
+      <li><router-link to="/nonprofits/660548321">660548321</router-link></li><br>
+      <li><router-link to="/nonprofits/660548326">660548326</router-link></li>
+    </ul>
   </div>
 </template>
 
@@ -61,6 +65,9 @@ export default {
   // due to how the HN Firebase API works.
   asyncData ({ store, route: { params: { ein }}}) {
     return store.dispatch('FETCH_NONPROFIT', { ein })
+  },
+  beforeMount () {
+    console.log('this.$store.state.nonprofits: ', this.$store.state.nonprofits)
   }
 }
 </script>

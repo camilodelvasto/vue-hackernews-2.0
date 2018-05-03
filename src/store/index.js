@@ -20,8 +20,7 @@ export function createStore () {
         show: [],
         ask: [],
         job: []
-      },
-      fake: 0
+      }
     },
     actions,
     mutations,

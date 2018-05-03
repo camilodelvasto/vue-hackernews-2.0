@@ -24,10 +24,7 @@ export default {
   FETCH_NONPROFIT: ({ commit, state }, { ein }) => {
     const nonprofit = fetchNonprofit(ein)
       .then(data => {
-        const fake = {
-          NAME: 'fake name'
-        }
-        return commit('SET_NONPROFIT', { nonprofit: fake })
+        return commit('SET_NONPROFIT', { nonprofit: data })
       })
   },
 
