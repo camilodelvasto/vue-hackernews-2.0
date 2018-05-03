@@ -14,7 +14,7 @@ export function createRouter () {
     routes: [
       {
         path: '/nonprofits/:ein',
-        name: 'Nonprofits',
+        name: 'GenericNonprofit',
         component: GenericNonprofit
       }
     ]
