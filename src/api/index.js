@@ -1,5 +1,6 @@
 // this is aliased in webpack config based on server/client build
 import { createAPI } from 'create-api'
+import axios from 'axios'
 
 const logRequests = !!process.env.DEBUG_API
 
@@ -45,6 +46,19 @@ export function fetchIdsByType (type) {
   return api.cachedIds && api.cachedIds[type]
     ? Promise.resolve(api.cachedIds[type])
     : fetch(`${type}stories`)
+}
+
+export function fetchNonprofit (ein) {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://irs-eomf-search-api.herokuapp.com/v1/nonprofits/${ein}`)
+      .then(response => {
+        resolve(response.data[0])
+      })
+      .catch(e => {
+        reject(e)
+      })
+
+  })
 }
 
 export function fetchItem (id) {

@@ -1,7 +1,8 @@
 import {
   fetchUser,
   fetchItems,
-  fetchIdsByType
+  fetchIdsByType,
+  fetchNonprofit
 } from '../api'
 
 export default {
@@ -18,6 +19,16 @@ export default {
     return dispatch('FETCH_ITEMS', {
       ids: getters.activeIds
     })
+  },
+
+  FETCH_NONPROFIT: ({ commit, state }, { ein }) => {
+    const nonprofit = fetchNonprofit(ein)
+      .then(data => {
+        const fake = {
+          NAME: 'fake name'
+        }
+        return commit('SET_NONPROFIT', { nonprofit: fake })
+      })
   },
 
   FETCH_ITEMS: ({ commit, state }, { ids }) => {

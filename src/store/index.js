@@ -11,6 +11,7 @@ export function createStore () {
     state: {
       activeType: null,
       itemsPerPage: 20,
+      nonprofit: {/* [ein: number]: Item */},
       items: {/* [id: number]: Item */},
       users: {/* [id: string]: User */},
       lists: {
@@ -19,7 +20,8 @@ export function createStore () {
         show: [],
         ask: [],
         job: []
-      }
+      },
+      fake: 0
     },
     actions,
     mutations,

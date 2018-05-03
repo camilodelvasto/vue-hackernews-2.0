@@ -9,6 +9,12 @@ export default {
     state.lists[type] = ids
   },
 
+  SET_NONPROFIT: (state, { nonprofit }) => {
+    state.fake = 1
+    state.nonprofit = { nonprofit }
+    console.log('nonprofit: ', nonprofit)
+  },
+
   SET_ITEMS: (state, { items }) => {
     items.forEach(item => {
       if (item) {
