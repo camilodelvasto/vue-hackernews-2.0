@@ -22,9 +22,9 @@ export default {
   },
 
   FETCH_NONPROFIT: ({ commit, dispatch, state }, { ein }) => {
-    const nonprofit = fetchNonprofit(ein)
+    return fetchNonprofit(ein)
       .then(data => {
-        return commit('SET_NONPROFIT', { nonprofit: data })
+        commit('SET_NONPROFIT', { nonprofit: data })
       })
   },
 

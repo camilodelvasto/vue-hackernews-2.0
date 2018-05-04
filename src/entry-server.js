@@ -47,13 +47,7 @@ export default context => {
         // the initial data fetching on the client.
         context.state = store.state
         context.meta = meta
-        setTimeout(() => {
-          console.log('store.state.lists on entry-server: ', store.state.lists.top.length)
-          console.log('store.state.nonprofit on entry-server: ', store.state)
-        }, 500)
-        setTimeout(() => {
-          resolve(app)
-        }, 550)
+        resolve(app)
       }).catch(reject)
     }, reject)
   })
