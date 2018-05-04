@@ -13,9 +13,13 @@
       <li><strong>NTEE_CD</strong>: {{nonprofit.NTEE_CD}}</li>
       <li><strong>SORT_NAME</strong>: {{nonprofit.SORT_NAME}}</li>
     </ul>
+    <h2>Other nonprofits:</h2>
     <ul>
-      <li><router-link to="/nonprofits/660548321">660548321</router-link></li><br>
+      <li><router-link to="/nonprofits/660548321">660548321</router-link></li>
       <li><router-link to="/nonprofits/660548326">660548326</router-link></li>
+      <li><router-link to="/nonprofits/43063409">43063409</router-link></li>
+      <li><router-link to="/nonprofits/43177990">43177990</router-link></li>
+      <li><router-link to="/nonprofits/43178037">43178037</router-link></li>
     </ul>
   </div>
 </template>
@@ -77,6 +81,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style scoped lang="stylus">
+a
+  color: orange
 </style>
