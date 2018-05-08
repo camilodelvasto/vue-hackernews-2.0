@@ -1,6 +1,12 @@
-# vue-hackernews-2.0
+# vue-ssr
 
-HackerNews clone built with Vue 2.0 + vue-router + vuex, with server-side rendering.
+Vue-powered template featuring SSR and tests, based on Evan You's [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)
+
+1. Remove Firebase DONE.
+2. Add Axios using demo data
+3. Add fake server data
+4. Add tests
+5. Remove HN stuff
 
 <p align="center">
   <a href="https://vue-hn.now.sh" target="_blank">
@@ -20,7 +26,8 @@ HackerNews clone built with Vue 2.0 + vue-router + vuex, with server-side render
   - Client-side state & DOM hydration
   - Automatically inlines CSS used by rendered components only
   - Preload / prefetch resource hints
-  - Route-level code splitting
+  - Tests
+  - Vue meta
 - Progressive Web App
   - App manifest
   - Service worker
