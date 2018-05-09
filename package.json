@@ -14,8 +14,8 @@
     "test:unit": "rimraf src/tests/unit/coverage && cross-env NODE_ENV=testing karma start src/tests/unit/karma.conf.js --single-run --display-error-details"
   },
   "engines": {
-    "node": ">=7.0",
-    "npm": ">=4.0"
+    "node": "9.11.1",
+    "npm": "5.6.0"
   },
   "dependencies": {
     "axios": "^0.18.0",
