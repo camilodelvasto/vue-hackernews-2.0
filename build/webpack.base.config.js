@@ -17,9 +17,15 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'public': path.resolve(__dirname, '../public')
+      'public': path.resolve(__dirname, '../public'),
+      'Components': path.resolve(__dirname, '../src/components')
     }
   },
+  resolveLoader: {
+    alias: {
+      'scss-loader': 'sass-loader'
+    }
+  },  
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
@@ -60,6 +66,13 @@ module.exports = {
             })
           : ['vue-style-loader', 'css-loader', 'stylus-loader']
       },
+      {
+        test: /\.scss$/,
+        use: [
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS
+        ]
+      }
     ]
   },
   performance: {

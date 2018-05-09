@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <AppHeader></AppHeader>
     <h1>{{ nonprofitName }}</h1>
     <h2>Basic data</h2>
     <ul>
@@ -28,11 +29,13 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueMeta from 'vue-meta'
+import AppHeader from '../components/AppHeader.vue'
 
 Vue.use(VueMeta)
 
 export default {
   name: 'About',
+  components: { AppHeader },
   data () {
     return {
       nonprofitName: 'Generic Nonprofit',
