@@ -16,7 +16,7 @@
     </ul>
     <h2>Other nonprofits:</h2>
     <ul>
-      <li><router-link to="/nonprofits/660548321">660548321</router-link></li>
+      <li><router-link to="/nonprofits/43138428">43138428 (non-generic)</router-link></li>
       <li><router-link to="/nonprofits/660548326">660548326</router-link></li>
       <li><router-link to="/nonprofits/43063409">43063409</router-link></li>
       <li><router-link to="/nonprofits/43177990">43177990</router-link></li>

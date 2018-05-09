@@ -13,7 +13,8 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
-      'process.env.BASE_API': JSON.stringify(process.env.BASE_API)
+      'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
+      'process.env.IRS_SEARCH_API_URL': JSON.stringify(process.env.IRS_SEARCH_API_URL)
     }),
     // extract vendor chunks for better caching
     new webpack.optimize.CommonsChunkPlugin({

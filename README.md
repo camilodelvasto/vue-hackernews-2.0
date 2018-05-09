@@ -1,12 +1,6 @@
 # vue-ssr
 
-Vue-powered template featuring SSR and tests, based on Evan You's [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)
-
-1. Remove Firebase DONE.
-2. Add Axios using demo data
-3. Add fake server data
-4. Add tests
-5. Remove HN stuff
+Vue-powered template featuring SSR, hot reloading, linting, and tests, based on Evan You's [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)
 
 <p align="center">
   <a href="https://vue-hn.now.sh" target="_blank">

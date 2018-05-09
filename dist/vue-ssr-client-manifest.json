@@ -3,14 +3,14 @@
   "all": [
     "0.a9e58f81ac9ad0185a55.js",
     "vendor.0a2b0d82cf66d25cf892.js",
-    "app.28cedcebe927d2c6dee5.js",
+    "app.673e1f1d69dd7676d5d2.js",
     "manifest.7bdc4a35ac7373a5ebdf.js",
-    "common.28cedcebe927d2c6dee5.css"
+    "common.673e1f1d69dd7676d5d2.css"
   ],
   "initial": [
     "manifest.7bdc4a35ac7373a5ebdf.js",
     "vendor.0a2b0d82cf66d25cf892.js",
-    "app.28cedcebe927d2c6dee5.js"
+    "app.673e1f1d69dd7676d5d2.js"
   ],
   "async": [
     "0.a9e58f81ac9ad0185a55.js"
