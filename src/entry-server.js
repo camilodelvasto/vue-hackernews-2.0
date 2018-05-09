@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import { createApp } from "./app"
 
 const isDev = process.env.NODE_ENV !== "production"
@@ -51,3 +52,4 @@ export default context => {
 		}, reject)
 	})
 }
+/* eslint-enable prefer-promise-reject-errors */

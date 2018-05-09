@@ -27,7 +27,6 @@
 
 <script>
 import Vue from "vue"
-import axios from "axios"
 import VueMeta from "vue-meta"
 import AppHeader from "../components/AppHeader.vue"
 

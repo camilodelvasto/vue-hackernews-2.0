@@ -8,6 +8,7 @@ module.exports = {
   plugins: [
     "html"
   ],
+  parser: "babel-eslint",
   settings: {
     "import/resolver": {
       "webpack": {
@@ -16,6 +17,8 @@ module.exports = {
     }
   },
   "env": {
+    "browser": true,
+    "node": true,
     "mocha": true
   },
   // add your custom rules here

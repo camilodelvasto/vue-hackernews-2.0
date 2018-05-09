@@ -1,26 +1,26 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Meta from 'vue-meta'
+import Vue from "vue"
+import Router from "vue-router"
+import Meta from "vue-meta"
 
 Vue.use(Router)
 Vue.use(Meta, {
-  ssrAttribute: 'data-vue-meta-server-rendered'  
+	ssrAttribute: "data-vue-meta-server-rendered"
 })
 
 // route-level code splitting
-const GenericNonprofit = () => import('../views/GenericNonprofit.vue')
+const GenericNonprofit = () => import("../views/GenericNonprofit.vue")
 
 export function createRouter () {
-  return new Router({
-    mode: 'history',
-    fallback: false,
-    scrollBehavior: () => ({ y: 0 }),
-    routes: [
-      {
-        path: '/nonprofits/:ein',
-        name: 'home',
-        component: GenericNonprofit
-      }
-    ]
-  })
+	return new Router({
+		mode: "history",
+		fallback: false,
+		scrollBehavior: () => ({ y: 0 }),
+		routes: [
+			{
+				path: "/nonprofits/:ein",
+				name: "home",
+				component: GenericNonprofit
+			}
+		]
+	})
 }
