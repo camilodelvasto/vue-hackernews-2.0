@@ -1,12 +1,12 @@
 import {
-  fetchNonprofit
-} from '../api'
+	fetchNonprofit
+} from "../api"
 
 export default {
-  FETCH_NONPROFIT: ({ commit, dispatch, state }, { ein }) => {
-    return fetchNonprofit(ein)
-      .then(data => {
-        commit('SET_NONPROFIT', { nonprofit: data })
-      })
-  }
+	FETCH_NONPROFIT: ({ commit, dispatch, state }, { ein }) => {
+		return fetchNonprofit(ein)
+			.then(data => {
+				commit("SET_NONPROFIT", { nonprofit: data })
+			})
+	}
 }

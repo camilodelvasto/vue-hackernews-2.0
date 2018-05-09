@@ -21,23 +21,23 @@
 <script>
 
 export default {
-  name: 'user-view',
+	name: "user-view",
 
-  computed: {
-    user () {
-      return this.$store.state.users[this.$route.params.id]
-    }
-  },
+	computed: {
+		user () {
+			return this.$store.state.users[this.$route.params.id]
+		}
+	},
 
-  asyncData ({ store, route: { params: { id }}}) {
-    return store.dispatch('FETCH_USER', { id })
-  },
+	asyncData ({ store, route: { params: { id } } }) {
+		return store.dispatch("FETCH_USER", { id })
+	},
 
-  title () {
-    return this.user
-      ? this.user.id
-      : 'User not found'
-  }
+	title () {
+		return this.user
+			? this.user.id
+			: "User not found"
+	}
 }
 </script>
 

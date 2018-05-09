@@ -27,15 +27,15 @@
 </template>
 
 <script>
-import { timeAgo } from '../util/filters'
+import { timeAgo } from "../util/filters"
 
 export default {
-  name: 'news-item',
-  props: ['item'],
-  // http://ssr.vuejs.org/en/caching.html#component-level-caching
-  serverCacheKey: ({ item: { id, __lastUpdated, time }}) => {
-    return `${id}::${__lastUpdated}::${timeAgo(time)}`
-  }
+	name: "news-item",
+	props: ["item"],
+	// http://ssr.vuejs.org/en/caching.html#component-level-caching
+	serverCacheKey: ({ item: { id, __lastUpdated, time } }) => {
+		return `${id}::${__lastUpdated}::${timeAgo(time)}`
+	}
 }
 </script>
 

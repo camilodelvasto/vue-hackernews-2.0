@@ -1,6 +1,6 @@
 import { mount } from "avoriaz"
 import { expect } from "chai"
-import AppHeader from 'Components/AppHeader.vue'
+import AppHeader from "Components/AppHeader.vue"
 
 describe("AppHeader", () => {
 	it("renders a header", () => {

@@ -1,6 +1,5 @@
-var merge = require('webpack-merge');
-var baseConfig = require('../../../build/webpack.base.config.js');
-var webpack = require('webpack');
+var merge = require("webpack-merge")
+var baseConfig = require("../../../build/webpack.base.config.js")
 
 var webpackConfig = merge(baseConfig, {
 	devtool: "#inline-source-map"
@@ -15,24 +14,24 @@ module.exports = function (config) {
 		// 1. install corresponding karma launcher
 		//    http://karma-runner.github.io/0.13/config/browsers.html
 		// 2. add it to the `browsers` array below.
-		browsers: ['PhantomJS'],
-		frameworks: ['mocha', 'sinon-chai'],
-		reporters: ['spec', 'coverage'],
-		files: ['./index.js'],
+		browsers: ["PhantomJS"],
+		frameworks: ["mocha", "sinon-chai"],
+		reporters: ["spec", "coverage"],
+		files: ["./index.js"],
 		coverageReporter: {
-			dir: './coverage',
+			dir: "./coverage",
 			reporters: [
-				{ type: 'lcov', subdir: '.' },
-				{ type: 'text-summary' }
+				{ type: "lcov", subdir: "." },
+				{ type: "text-summary" }
 			]
 		},
 		preprocessors: {
-			'./index.js': ['webpack', 'sourcemap']
+			"./index.js": ["webpack", "sourcemap"]
 		},
 		webpack: webpackConfig,
 		webpackMiddleware: {
-				noInfo: true,
-				quiet: true
-			},
-		})
+			noInfo: true,
+			quiet: true
+		}
+	})
 }
