@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <AppHeader></AppHeader>
-    <h1>{{ nonprofitName }}</h1>
     <h2>Basic data</h2>
     <ul>
       <li><strong>EIN</strong>: {{nonprofit.EIN}}</li>
@@ -37,7 +36,6 @@ export default {
 	components: { AppHeader },
 	data () {
 		return {
-			nonprofitName: "Generic Nonprofit",
 			title: "",
 			fields: []
 		}

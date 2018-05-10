@@ -1,0 +1,4 @@
+{
+  "/nonprofits/:EIN": "/nonprofits?EIN=:EIN"
+}
+
