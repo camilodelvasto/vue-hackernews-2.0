@@ -9,7 +9,7 @@
 import AppHeader from "../components/AppHeader.vue"
 
 export default {
-	name: "Default404",
+	name: "*",
 	components: { AppHeader }
 }
 </script>

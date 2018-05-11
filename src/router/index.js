@@ -26,7 +26,7 @@ export function createRouter () {
 			},
 			{
 				path: "/404",
-				name: "Default404",
+				name: "*",
 				component: Default404
 			}
 		]
