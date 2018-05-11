@@ -48,7 +48,9 @@ export default context => {
 				context.state = store.state
 				context.meta = meta
 				resolve(app)
-			}).catch(reject)
+			}).catch(err => {
+        reject(err)
+      })
 		}, reject)
 	})
 }

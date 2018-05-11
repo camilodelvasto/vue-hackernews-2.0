@@ -50,6 +50,9 @@ npm install # or yarn
 # serve in dev mode, with hot reload at localhost:8080
 npm run dev
 
+# start the fake json server at localhost:3004 (for testing or dev)
+npm run demodata
+
 # build for production
 npm run build
 

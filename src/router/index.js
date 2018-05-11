@@ -1,6 +1,8 @@
 import Vue from "vue"
 import Router from "vue-router"
 import Meta from "vue-meta"
+//import { Store } from "../store"
+//const store = Store()
 
 Vue.use(Router)
 Vue.use(Meta, {
@@ -9,6 +11,7 @@ Vue.use(Meta, {
 
 // route-level code splitting
 const GenericNonprofit = () => import("../views/GenericNonprofit.vue")
+const Default404 = () => import("../views/Default404.vue")
 
 export function createRouter () {
 	return new Router({
@@ -16,10 +19,15 @@ export function createRouter () {
 		fallback: false,
 		scrollBehavior: () => ({ y: 0 }),
 		routes: [
+      {
+        path: "/nonprofits/:ein",
+        name: "nonprofits",
+        component: GenericNonprofit
+      },
 			{
-				path: "/nonprofits/:ein",
-				name: "home",
-				component: GenericNonprofit
+				path: "/404",
+				name: "Default404",
+				component: Default404
 			}
 		]
 	})

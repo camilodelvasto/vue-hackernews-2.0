@@ -15,7 +15,14 @@ Vue.mixin({
 			asyncData({
 				store: this.$store,
 				route: to
-			}).then(next).catch(next)
+			})
+      .then(() => {
+        next()
+      })
+      .catch(err => {
+        // TODO: redirect depending on the error. For now, redirect to 404.
+        next('/404')
+      })
 		} else {
 			next()
 		}

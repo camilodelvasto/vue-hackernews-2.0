@@ -20,11 +20,13 @@
       <li><router-link to="/nonprofits/43063409">43063409</router-link></li>
       <li><router-link to="/nonprofits/43177990">43177990</router-link></li>
       <li><router-link to="/nonprofits/43178037">43178037</router-link></li>
+      <li><router-link to="/nonprofits/9999999943178037">99999999943178037</router-link></li>
     </ul>
   </div>
 </template>
 
 <script>
+import axios from "axios"
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "../components/AppHeader.vue"
@@ -32,7 +34,7 @@ import AppHeader from "../components/AppHeader.vue"
 Vue.use(VueMeta)
 
 export default {
-	name: "About",
+	name: "nonprofit",
 	components: { AppHeader },
 	data () {
 		return {
@@ -64,18 +66,22 @@ export default {
 		}
 	},
 
-	// We only fetch the item itself before entering the view, because
-	// it might take a long time to load threads with hundreds of comments
-	// due to how the HN Firebase API works.
-
+	// We only fetch the item itself before entering the view
 	asyncData ({ store, route: { params: { ein } } }) {
-		return store.dispatch("FETCH_NONPROFIT", { ein })
-	},
+    return new Promise((resolve, reject) => {
+      return store.dispatch("FETCH_NONPROFIT", { ein })
+        .then(data => {
+          resolve(data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
 
 	beforeMount () {
 		// const ein = this.$route.params.ein
 		// this.$store.dispatch('FETCH_NONPROFIT', { ein })
-		console.log("this.$store.state.nonprofit: ", this.$store.state.nonprofit)
 	}
 }
 </script>
