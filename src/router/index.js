@@ -1,8 +1,8 @@
 import Vue from "vue"
 import Router from "vue-router"
 import Meta from "vue-meta"
-//import { Store } from "../store"
-//const store = Store()
+// import { Store } from "../store"
+// const store = Store()
 
 Vue.use(Router)
 Vue.use(Meta, {
@@ -19,11 +19,11 @@ export function createRouter () {
 		fallback: false,
 		scrollBehavior: () => ({ y: 0 }),
 		routes: [
-      {
-        path: "/nonprofits/:ein",
-        name: "nonprofits",
-        component: GenericNonprofit
-      },
+			{
+				path: "/nonprofits/:ein",
+				name: "nonprofits",
+				component: GenericNonprofit
+			},
 			{
 				path: "/404",
 				name: "Default404",

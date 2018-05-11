@@ -14,9 +14,9 @@ export function fetchNonprofit (ein) {
 						.then(res => {
 							if (res.data.length) {
 								resolve(res.data[0])
-              } else {
-                reject({ code: 404 })
-              }
+							} else {
+								reject({ code: 404 })
+							}
 						})
 						.catch(err => {
 							reject(err)

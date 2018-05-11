@@ -52,6 +52,8 @@ module.exports = {
 
     "require-jsdoc": 0,
 
+    "prefer-promise-reject-errors": 1,
+
     "new-cap": ["error", { "capIsNew": false }]
   }
 }

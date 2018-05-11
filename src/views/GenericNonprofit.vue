@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from "axios"
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "../components/AppHeader.vue"
@@ -68,16 +67,16 @@ export default {
 
 	// We only fetch the item itself before entering the view
 	asyncData ({ store, route: { params: { ein } } }) {
-    return new Promise((resolve, reject) => {
-      return store.dispatch("FETCH_NONPROFIT", { ein })
-        .then(data => {
-          resolve(data)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  },
+		return new Promise((resolve, reject) => {
+			return store.dispatch("FETCH_NONPROFIT", { ein })
+				.then(data => {
+					resolve(data)
+				})
+				.catch(err => {
+					reject(err)
+				})
+		})
+	},
 
 	beforeMount () {
 		// const ein = this.$route.params.ein

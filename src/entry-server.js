@@ -49,8 +49,8 @@ export default context => {
 				context.meta = meta
 				resolve(app)
 			}).catch(err => {
-        reject(err)
-      })
+				reject(err)
+			})
 		}, reject)
 	})
 }

@@ -16,13 +16,14 @@ Vue.mixin({
 				store: this.$store,
 				route: to
 			})
-      .then(() => {
-        next()
-      })
-      .catch(err => {
-        // TODO: redirect depending on the error. For now, redirect to 404.
-        next('/404')
-      })
+				.then(() => {
+					next()
+				})
+				.catch(err => {
+					console.log(err, to)
+					// TODO: redirect depending on the error. For now, redirect to 404.
+					next("/404")
+				})
 		} else {
 			next()
 		}
