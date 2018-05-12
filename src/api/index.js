@@ -31,7 +31,6 @@ export function fetchNonprofit (ein) {
 
 export function fetchCampaign (id) {
 	return new Promise((resolve, reject) => {
-    console.log(`${baseURL}/campaigns/${id}`)
 		axios.get(`${baseURL}/campaigns/${id}`)
 			.then(response => {
 				if (response.data.length) {

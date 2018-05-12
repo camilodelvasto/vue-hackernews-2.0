@@ -16,7 +16,9 @@
       <li><strong>currentStats.daysLeft</strong>: {{campaign.currentStats.daysLeft}}</li>
     </ul>
 
-    <li><router-link to="/campaigns/255">255 (non-existent campaign)</router-link></li>
+    <li><router-link to="/nonprofits/43138428">43138428 (nonprofit)</router-link></li>
+    <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
+    <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
     {{nonprofit.NAME}}
   </div>

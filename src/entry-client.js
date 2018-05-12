@@ -17,16 +17,13 @@ Vue.mixin({
 				route: to
 			})
 				.then(() => {
-          console.log('to: ', to)
 					next()
 				})
 				.catch(err => {
-					console.log(err, to)
 					// TODO: redirect depending on the error. For now, redirect to 404.
 					next("/404")
 				})
 		} else {
-      console.log('else: ', to)
 			next()
 		}
 	}

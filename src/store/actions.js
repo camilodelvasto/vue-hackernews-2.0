@@ -21,11 +21,9 @@ export default {
 			return fetchCampaign(id)
 				.then(data => {
 					commit("SET_CAMPAIGN", { campaign: data })
-          console.log('setting campaign: ', data)
 					resolve(data)
 				})
 				.catch(err => {
-          console.log('rejecting campaign: ', err)
 					reject(err)
 				})
 		})
