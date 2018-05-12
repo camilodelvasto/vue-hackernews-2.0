@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export function createStore () {
 	return new Vuex.Store({
 		state: {
-			nonprofit: {/* [ein: number] */}
+			nonprofit: {/* [ein: number] */},
+      campaign: {/* [id: number] */}
 		},
 		actions,
 		mutations

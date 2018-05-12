@@ -1,4 +1,5 @@
 {
-  "/nonprofits/:EIN": "/nonprofits?EIN=:EIN"
+  "/nonprofits/:EIN": "/nonprofits?EIN=:EIN",
+  "/campaigns/:id": "/campaigns?id=:id"
 }
 

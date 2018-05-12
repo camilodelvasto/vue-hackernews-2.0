@@ -17,6 +17,7 @@ Vue.mixin({
 				route: to
 			})
 				.then(() => {
+          console.log('to: ', to)
 					next()
 				})
 				.catch(err => {
@@ -25,6 +26,7 @@ Vue.mixin({
 					next("/404")
 				})
 		} else {
+      console.log('else: ', to)
 			next()
 		}
 	}
