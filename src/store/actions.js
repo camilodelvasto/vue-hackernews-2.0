@@ -1,6 +1,7 @@
 import {
-	fetchNonprofit,
-  fetchCampaign
+  fetchCampaign,
+  fetchNonprofit,
+	fetchUpdates
 } from "../api"
 
 export default {
@@ -16,11 +17,23 @@ export default {
         })
     })
   },
-	FETCH_CAMPAIGN: ({ commit, dispatch, state }, { id }) => {
+  FETCH_CAMPAIGN: ({ commit, dispatch, state }, { id }) => {
+    return new Promise((resolve, reject) => {
+      return fetchCampaign(id)
+        .then(data => {
+          commit("SET_CAMPAIGN", { campaign: data })
+          resolve(data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
+	FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id }) => {
 		return new Promise((resolve, reject) => {
-			return fetchCampaign(id)
+			return fetchUpdates(campaign_id)
 				.then(data => {
-					commit("SET_CAMPAIGN", { campaign: data })
+					commit("SET_UPDATES", { updates: data })
 					resolve(data)
 				})
 				.catch(err => {

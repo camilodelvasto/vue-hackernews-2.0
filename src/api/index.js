@@ -30,11 +30,27 @@ export function fetchNonprofit (ein) {
 }
 
 export function fetchCampaign (id) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${baseURL}/campaigns/${id}`)
+      .then(response => {
+        if (response.data.length) {
+          resolve(response.data[0])
+        } else {
+          reject({ code: 404 })
+        }
+      })
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
+export function fetchUpdates (campaign_id) {
 	return new Promise((resolve, reject) => {
-		axios.get(`${baseURL}/campaigns/${id}`)
+		axios.get(`${baseURL}/updates/?campaign_id=${campaign_id}`)
 			.then(response => {
 				if (response.data.length) {
-					resolve(response.data[0])
+					resolve(response.data)
 				} else {
 					reject({ code: 404 })
 				}

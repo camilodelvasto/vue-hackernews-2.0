@@ -20,14 +20,22 @@
     <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
     <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
-    {{nonprofit.NAME}}
+    <no-ssr>
+      <div>
+        <div v-for="update in updates">
+          <update :update="update"></update>
+        </div>
+      </div>
+    </no-ssr>
   </div>
 </template>
 
 <script>
 import Vue from "vue"
+import NoSSR from "vue-no-ssr"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/AppHeader.vue"
+import Update from "Components/Update.vue"
 
 Vue.use(VueMeta)
 
@@ -49,11 +57,16 @@ load async after the user has entered the route:
 
 export default {
 	name: "campaign",
-	components: { AppHeader },
+	components: {
+    AppHeader,
+    'no-ssr': NoSSR,
+    Update
+  },
 	data () {
 		return {
 			title: "",
-			fields: []
+			fields: [],
+      updates: []
 		}
 	},
 	metaInfo () {
@@ -80,14 +93,10 @@ export default {
 	computed: {
     campaign () {
       return this.$store.state.campaign
-    },
-		nonprofit () {
-			return this.$store.state.nonprofit
 		}
 	},
 
 	// We only fetch the item itself before entering the view
-
 	asyncData ({ store, route: { params: { id } } }) {
 		return new Promise((resolve, reject) => {
 			return store.dispatch("FETCH_CAMPAIGN", { id })
@@ -101,15 +110,19 @@ export default {
 	},
 
   // Data to be fetched asynchronously, only in the client.
-  beforeMount () {
-    const ein = 43138428
-    return this.$store.dispatch("FETCH_NONPROFIT", { ein })
-      .then(data => {
-        console.log(data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
+  mounted () {
+    setTimeout(() => {
+      const campaign_id = this.$route.params.id
+      return this.$store.dispatch("FETCH_UPDATES", { campaign_id })
+        .then(data => {
+          this.updates = data
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }, 5000)
   }
 }
 </script>
