@@ -45,9 +45,9 @@ export function fetchCampaign (id) {
   })
 }
 
-export function fetchUpdates (campaign_id) {
+export function fetchUpdates (campaign_id, page, limit) {
 	return new Promise((resolve, reject) => {
-		axios.get(`${baseURL}/updates/?campaign_id=${campaign_id}`)
+		axios.get(`${baseURL}/updates/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
 			.then(response => {
 				if (response.data.length) {
 					resolve(response.data)

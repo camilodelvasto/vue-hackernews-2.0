@@ -20,19 +20,17 @@
     <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
     <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
-    <no-ssr>
-      <div>
-        <div v-for="update in updates">
-          <update :update="update"></update>
-        </div>
+    <div>
+      <div v-for="update in updates">
+        <update :update="update"></update>
       </div>
-    </no-ssr>
+      <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more</button>
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue"
-import NoSSR from "vue-no-ssr"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/AppHeader.vue"
 import Update from "Components/Update.vue"
@@ -59,7 +57,6 @@ export default {
 	name: "campaign",
 	components: {
     AppHeader,
-    'no-ssr': NoSSR,
     Update
   },
 	data () {
@@ -93,7 +90,10 @@ export default {
 	computed: {
     campaign () {
       return this.$store.state.campaign
-		}
+		},
+    moreUpdates () {
+      return this.$store.state.updates.max !== this.$store.state.updates.current
+    }
 	},
 
 	// We only fetch the item itself before entering the view
@@ -113,16 +113,21 @@ export default {
   // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
   mounted () {
     setTimeout(() => {
+      this.loadMoreUpdates()  
+    }, 5000)
+  },
+
+  methods: {
+    loadMoreUpdates () {
       const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_UPDATES", { campaign_id })
+      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id })
         .then(data => {
-          this.updates = data
-          console.log(data)
+          this.updates = this.$store.state.updates.data
         })
         .catch(err => {
           console.log(err)
         })
-      }, 5000)
+    }
   }
 }
 </script>

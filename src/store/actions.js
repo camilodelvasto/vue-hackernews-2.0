@@ -29,16 +29,16 @@ export default {
         })
     })
   },
-	FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id }) => {
-		return new Promise((resolve, reject) => {
-			return fetchUpdates(campaign_id)
-				.then(data => {
-					commit("SET_UPDATES", { updates: data })
-					resolve(data)
-				})
-				.catch(err => {
-					reject(err)
-				})
-		})
+  FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id }) => {
+    return new Promise((resolve, reject) => {
+      return fetchUpdates(campaign_id, state.updates.current, state.updates.limit)
+        .then(data => {
+          commit("ADD_UPDATES", { updates: data })
+          resolve(data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
 	}
 }

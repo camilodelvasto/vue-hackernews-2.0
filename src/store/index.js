@@ -10,7 +10,12 @@ export function createStore () {
 		state: {
 			nonprofit: {/* [ein: number] */},
       campaign: {/* [id: number] */},
-      updates: []
+      updates: {
+        data: [],
+        current: 1,
+        limit: 1,
+        max: 1000
+      }
 		},
 		actions,
 		mutations

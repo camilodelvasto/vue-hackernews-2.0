@@ -5,7 +5,12 @@ export default {
   SET_CAMPAIGN: (state, { campaign }) => {
     state.campaign = campaign
   },
-	SET_UPDATES: (state, { updates }) => {
-		state.updates = updates
+	ADD_UPDATES: (state, { updates }) => {
+    if (!updates.length) {
+      state.updates.max = state.updates.current
+    } else {
+      state.updates.data = state.updates.data.concat(updates)
+      state.updates.current++
+    }
 	}
 }
