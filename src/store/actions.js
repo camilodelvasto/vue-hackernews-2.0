@@ -1,5 +1,6 @@
 import {
   fetchCampaign,
+  fetchComments,
   fetchNonprofit,
 	fetchUpdates
 } from "../api"
@@ -29,15 +30,28 @@ export default {
         })
     })
   },
-  FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id, fromPage1 }) => {
+  FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id, paginated }) => {
     return new Promise((resolve, reject) => {
-      return fetchUpdates(campaign_id, state.updates.current, state.updates.limit, fromPage1)
+      return fetchUpdates(campaign_id, state.updates.current, state.updates.limit, paginated)
         .then(data => {
           commit("ADD_UPDATES", { updates: data })
           resolve(data)
         })
         .catch(err => {
           commit("ADD_UPDATES", { updates: [] })
+          reject(err)
+        })
+    })
+  },
+  FETCH_COMMENTS: ({ commit, dispatch, state }, { campaign_id, paginated }) => {
+    return new Promise((resolve, reject) => {
+      return fetchComments(campaign_id, state.comments.current, state.comments.limit, paginated)
+        .then(data => {
+          commit("ADD_COMMENTS", { comments: data })
+          resolve(data)
+        })
+        .catch(err => {
+          commit("ADD_COMMENTS", { comments: [] })
           reject(err)
         })
     })

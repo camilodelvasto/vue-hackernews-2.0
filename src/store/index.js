@@ -15,6 +15,12 @@ export function createStore () {
         current: 1,
         limit: 1,
         max: 1000
+      },
+      comments: {
+        data: [],
+        current: 1,
+        limit: 6,
+        max: 1000
       }
 		},
 		actions,

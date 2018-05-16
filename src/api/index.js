@@ -45,12 +45,31 @@ export function fetchCampaign (id) {
   })
 }
 
-export function fetchUpdates (campaign_id, page, limit, fromPage1 = false) {
-	return new Promise((resolve, reject) => {
-    if (fromPage1) {
+export function fetchUpdates (campaign_id, page, limit, paginated = true) {
+  return new Promise((resolve, reject) => {
+    if (!paginated) {
       page = 1
     }
-		axios.get(`${baseURL}/updates/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+    axios.get(`${baseURL}/updates/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+      .then(response => {
+        if (response.data.length) {
+          resolve(response.data)
+        } else {
+          reject({ code: 404 })
+        }
+      })
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
+export function fetchComments (campaign_id, page, limit, paginated = true) {
+	return new Promise((resolve, reject) => {
+    if (!paginated) {
+      page = 1
+    }
+		axios.get(`${baseURL}/comments/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
 			.then(response => {
 				if (response.data.length) {
 					resolve(response.data)

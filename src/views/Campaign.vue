@@ -20,10 +20,17 @@
     <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
     <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
+    <h2>Updates</h2>
     <div v-for="update in updates">
       <update :update="update"></update>
     </div>
-    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more</button>
+    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
+
+    <h2>Comments</h2>
+    <div v-for="comment in comments">
+      <comment :comment="comment"></comment>
+    </div>
+    <button @click="loadMoreComments()" v-if="moreComments">Load more comments</button>
   </div>
 </template>
 
@@ -32,6 +39,7 @@ import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/AppHeader.vue"
 import Update from "Components/Update.vue"
+import Comment from "Components/Comment.vue"
 
 Vue.use(VueMeta)
 
@@ -55,12 +63,14 @@ export default {
 	name: "campaign",
 	components: {
     AppHeader,
+    Comment,
     Update
   },
 	data () {
 		return {
 			title: "",
 			fields: [],
+      comments: [],
       updates: []
 		}
 	},
@@ -91,6 +101,9 @@ export default {
 		},
     moreUpdates () {
       return this.$store.state.updates.max !== this.$store.state.updates.current
+    },
+    moreComments () {
+      return this.$store.state.comments.max !== this.$store.state.comments.current
     }
 	},
 
@@ -111,16 +124,27 @@ export default {
   // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
   mounted () {
     setTimeout(() => {
-      this.loadMoreUpdates(true)  
+      this.loadMoreUpdates(false)
+      this.loadMoreComments(false)
     }, 5000)
   },
 
   methods: {
-    loadMoreUpdates (fromPage1 = false) {
+    loadMoreUpdates (paginated = true) {
       const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, fromPage1: fromPage1 })
+      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
         .then(data => {
           this.updates = this.$store.state.updates.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadMoreComments (paginated = true) {
+      const campaign_id = this.$route.params.id
+      return this.$store.dispatch("FETCH_COMMENTS", { campaign_id: campaign_id, paginated: paginated })
+        .then(data => {
+          this.comments = this.$store.state.comments.data
         })
         .catch(err => {
           console.log(err)
