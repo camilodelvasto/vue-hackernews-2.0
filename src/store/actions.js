@@ -29,14 +29,15 @@ export default {
         })
     })
   },
-  FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id }) => {
+  FETCH_UPDATES: ({ commit, dispatch, state }, { campaign_id, fromPage1 }) => {
     return new Promise((resolve, reject) => {
-      return fetchUpdates(campaign_id, state.updates.current, state.updates.limit)
+      return fetchUpdates(campaign_id, state.updates.current, state.updates.limit, fromPage1)
         .then(data => {
           commit("ADD_UPDATES", { updates: data })
           resolve(data)
         })
         .catch(err => {
+          commit("ADD_UPDATES", { updates: [] })
           reject(err)
         })
     })

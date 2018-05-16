@@ -2,7 +2,7 @@
   <li v-if="update" class="update">
     <div class="by">
       <router-link :to="'/user/' + update.name">{{ update.name }}</router-link>
-      {{ update.time | timeAgo }} ago
+      {{ update.timestamp | timeAgo }} ago
     </div>
     <div class="text" v-html="update.title"></div>
     <div class="text" v-html="update.content"></div>

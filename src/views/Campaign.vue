@@ -20,12 +20,10 @@
     <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
     <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
-    <div>
-      <div v-for="update in updates">
-        <update :update="update"></update>
-      </div>
-      <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more</button>
+    <div v-for="update in updates">
+      <update :update="update"></update>
     </div>
+    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more</button>
   </div>
 </template>
 
@@ -113,14 +111,14 @@ export default {
   // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
   mounted () {
     setTimeout(() => {
-      this.loadMoreUpdates()  
+      this.loadMoreUpdates(true)  
     }, 5000)
   },
 
   methods: {
-    loadMoreUpdates () {
+    loadMoreUpdates (fromPage1 = false) {
       const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id })
+      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, fromPage1: fromPage1 })
         .then(data => {
           this.updates = this.$store.state.updates.data
         })
