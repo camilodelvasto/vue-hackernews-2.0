@@ -6,6 +6,16 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 const isProd = process.env.NODE_ENV === 'production'
 
+const sassResourcesLoader = {
+  loader: 'sass-resources-loader',
+  options: {
+    resources: [
+      path.resolve(__dirname, '../src/scss/base.scss')
+    ]
+  }
+}
+
+
 module.exports = {
   devtool: isProd
     ? false
@@ -35,6 +45,14 @@ module.exports = {
         options: {
           compilerOptions: {
             preserveWhitespace: false
+          },
+          loaders: {
+            sass: {
+              sassResourcesLoader
+            },
+            scss: {
+              sassResourcesLoader
+            }
           }
         }
       },
@@ -69,9 +87,18 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
+          'vue-style-loader',
           "css-loader", // translates CSS into CommonJS
-          "sass-loader" // compiles Sass to CSS
-        ]
+          "sass-loader", // compiles Sass to CSS
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                path.resolve(__dirname, '../src/scss/base.scss')
+              ]
+            }
+          }
+        ],
       }
     ]
   },

@@ -28,9 +28,11 @@
     <button @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
 
     <h2>Updates</h2>
-    <div v-for="update in updates">
-      <update :update="update"></update>
-    </div>
+    <ul>
+      <li v-for="update in updates" v-bind:key="update.id">
+        <update :update="update"></update>
+      </li>
+    </ul>
     <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
 
     <h2>Comments</h2>
@@ -202,7 +204,9 @@ function showMoreButton (state, arg) {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus">
-a
-  color: orange
+<style scoped lang="scss">
+a {
+  color: orange;
+  font-family: $font-primary;
+}
 </style>
