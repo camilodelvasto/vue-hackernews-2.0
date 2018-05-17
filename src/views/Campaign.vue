@@ -109,13 +109,17 @@ export default {
       return this.$store.state.campaign
 		},
     moreComments () {
-      return this.$store.state.comments.max !== this.$store.state.comments.current
+      return this.$store.state.campaign.comments_count !== this.$store.state.comments.current
     },
     moreDonations () {
-      return this.$store.state.donations.max !== this.$store.state.donations.current
+      return this.$store.state.campaign.donations_count !== this.$store.state.donations.current
     },
     moreUpdates () {
-      return this.$store.state.updates.max !== this.$store.state.updates.current
+      const limit = this.$store.state.updates.limit
+      const current = this.$store.state.updates.current
+      const count = this.$store.state.campaign.updates_count
+      const totalPages = Math.ceil(count/limit)
+      return totalPages >= current
     }
 	},
 
@@ -135,12 +139,6 @@ export default {
   // Data to be fetched asynchronously, only in the client.
   // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
   mounted () {
-    setTimeout(() => {
-      this.loadMoreComments(false)
-      this.loadMoreDonations(false)
-      this.loadMoreUpdates(false)
-    }, 50000000)
-
     window.addEventListener('scroll', () => {
       this.bottom = this.bottomVisible()
     })
@@ -177,18 +175,24 @@ export default {
     },
     loadMoreUpdates (paginated = true) {
       const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
-        .then(data => {
-          this.updates = this.$store.state.updates.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      if (this.moreUpdates) {
+        return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
+          .then(data => {
+            this.updates = this.$store.state.updates.data
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('no more updates to fetch')
+      }
     }
   },
   watch: {
     bottom(bottom) {
       if (bottom && this.moreUpdates) {
+        this.loadMoreComments()
+        this.loadMoreDonations()
         this.loadMoreUpdates()
       }
     }

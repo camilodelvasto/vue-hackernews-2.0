@@ -13,20 +13,17 @@ export function createStore () {
       updates: {
         data: [],
         current: 1,
-        limit: 1,
-        max: 1000
+        limit: 2
       },
       comments: {
         data: [],
         current: 1,
-        limit: 6,
-        max: 1000
+        limit: 6
       },
       donations: {
         data: [],
         current: 1,
-        limit: 6,
-        max: 1000
+        limit: 6
       }
 		},
 		actions,
