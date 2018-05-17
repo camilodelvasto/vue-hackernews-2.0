@@ -6,27 +6,23 @@ export default {
     state.campaign = campaign
   },
   ADD_UPDATES: (state, { updates }) => {
-    if (!updates.length) {
-      state.updates.max = state.updates.current
-    } else {
-      state.updates.data = state.updates.data.concat(updates)
-      state.updates.current++
-    }
+    state.updates.data = state.updates.data.concat(updates)
+    state.updates.current++
+  },
+  RESET_NONPROFIT: (state) => {
+    state.updates.current = 1
+    state.donations.current = 1
+    state.comments.current = 1
   },
   ADD_COMMENTS: (state, { comments }) => {
-    if (!comments.length) {
-      state.comments.max = state.comments.current
-    } else {
-      state.comments.data = state.comments.data.concat(comments)
-      state.comments.current++
-    }
+    state.comments.data = state.comments.data.concat(comments)
+    state.comments.current++
   },
-	ADD_DONATIONS: (state, { donations }) => {
-    if (!donations.length) {
-      state.donations.max = state.donations.current
-    } else {
-      state.donations.data = state.donations.data.concat(donations)
-      state.donations.current++
-    }
+  ADD_DONATIONS: (state, { donations }) => {
+    state.donations.data = state.donations.data.concat(donations)
+    state.donations.current++
+  },
+	SET_CAMPAIGNS: (state, { campaigns }) => {
+    state.campaigns.data = campaigns
 	}
 }

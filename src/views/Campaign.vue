@@ -109,17 +109,13 @@ export default {
       return this.$store.state.campaign
 		},
     moreComments () {
-      return this.$store.state.campaign.comments_count !== this.$store.state.comments.current
+      return findTotalPages(this.$store.state, 'comments')
     },
     moreDonations () {
-      return this.$store.state.campaign.donations_count !== this.$store.state.donations.current
+      return findTotalPages(this.$store.state, 'donations')
     },
     moreUpdates () {
-      const limit = this.$store.state.updates.limit
-      const current = this.$store.state.updates.current
-      const count = this.$store.state.campaign.updates_count
-      const totalPages = Math.ceil(count/limit)
-      return totalPages >= current
+      return findTotalPages(this.$store.state, 'updates')
     }
 	},
 
@@ -154,24 +150,32 @@ export default {
     },
 
     loadMoreComments (paginated = true) {
-      const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_COMMENTS", { campaign_id: campaign_id, paginated: paginated })
-        .then(data => {
-          this.comments = this.$store.state.comments.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      if (this.moreComments) {
+        const campaign_id = this.$route.params.id
+        return this.$store.dispatch("FETCH_COMMENTS", { campaign_id: campaign_id, paginated: paginated })
+          .then(data => {
+            this.comments = this.$store.state.comments.data
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('no more comments to fetch')
+      }
     },
     loadMoreDonations (paginated = true) {
-      const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_DONATIONS", { campaign_id: campaign_id, paginated: paginated })
-        .then(data => {
-          this.donations = this.$store.state.donations.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      if (this.moreDonations) {
+        const campaign_id = this.$route.params.id
+        return this.$store.dispatch("FETCH_DONATIONS", { campaign_id: campaign_id, paginated: paginated })
+          .then(data => {
+            this.donations = this.$store.state.donations.data
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('no more donations to fetch')
+      }
     },
     loadMoreUpdates (paginated = true) {
       const campaign_id = this.$route.params.id
@@ -197,6 +201,14 @@ export default {
       }
     }
   }  
+}
+
+function findTotalPages(state, arg) {
+  const limit = state[arg].limit
+  const current = state[arg].current
+  const count = state.campaign[`${arg}_count`]
+  const totalPages = Math.ceil(count/limit)
+  return totalPages >= current
 }
 </script>
 

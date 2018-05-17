@@ -45,6 +45,25 @@ export function fetchCampaign (id) {
   })
 }
 
+export function fetchCampaigns (campaign_id, page, limit, paginated = true) {
+  return new Promise((resolve, reject) => {
+    if (!paginated) {
+      page = 1
+    }
+    axios.get(`${baseURL}/campaigns/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+      .then(response => {
+        if (response.data.length) {
+          resolve(response.data)
+        } else {
+          reject({ code: 404 })
+        }
+      })
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
 export function fetchUpdates (campaign_id, page, limit, paginated = true) {
   return new Promise((resolve, reject) => {
     if (!paginated) {

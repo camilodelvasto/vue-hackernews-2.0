@@ -10,6 +10,11 @@ export function createStore () {
 		state: {
 			nonprofit: {/* [ein: number] */},
       campaign: {/* [id: number] */},
+      campaigns: {
+        data: [],
+        current: 1,
+        limit: 6
+      },
       updates: {
         data: [],
         current: 1,

@@ -25,7 +25,7 @@
     <h2>Volunteerathons for this nonprofit:</h2>
     <ul>
       <li v-for="campaign in campaigns">
-        <router-link :to="`/campaigns/${campaign.id}`">{{campaign.name}}</router-link>
+        <router-link :to="`/campaigns/${campaign.campaign_id}`">{{campaign.name}}</router-link>
       </li>
     </ul>
   </div>
@@ -44,7 +44,8 @@ export default {
 	data () {
 		return {
 			title: "",
-			fields: []
+			fields: [],
+      campaigns: []
 		}
 	},
 	metaInfo () {
@@ -68,9 +69,6 @@ export default {
 	computed: {
     nonprofit () {
       return this.$store.state.nonprofit
-    },
-		campaigns () {
-			return this.$store.state.nonprofit.campaigns
 		}
 	},
 
@@ -87,10 +85,20 @@ export default {
 		})
 	},
 
-	beforeMount () {
-		// const ein = this.$route.params.ein
-		// this.$store.dispatch('FETCH_NONPROFIT', { ein })
-	}
+	mounted () {
+    const ein = this.$route.params.ein
+    console.log(this.$route.params)
+    return this.$store.dispatch("FETCH_CAMPAIGNS", { ein: ein })
+      .then(data => {
+        this.campaigns = this.$store.state.campaigns.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+	},
+  destroyed () {
+    this.$store.commit("RESET_NONPROFIT")
+  }
 }
 </script>
 
