@@ -21,6 +21,12 @@ export function createStore () {
         current: 1,
         limit: 6,
         max: 1000
+      },
+      donations: {
+        data: [],
+        current: 1,
+        limit: 6,
+        max: 1000
       }
 		},
 		actions,

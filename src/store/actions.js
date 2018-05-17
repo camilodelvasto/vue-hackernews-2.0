@@ -1,6 +1,7 @@
 import {
   fetchCampaign,
   fetchComments,
+  fetchDonations,
   fetchNonprofit,
 	fetchUpdates
 } from "../api"
@@ -52,6 +53,19 @@ export default {
         })
         .catch(err => {
           commit("ADD_COMMENTS", { comments: [] })
+          reject(err)
+        })
+    })
+  },
+  FETCH_DONATIONS: ({ commit, dispatch, state }, { campaign_id, paginated }) => {
+    return new Promise((resolve, reject) => {
+      return fetchDonations(campaign_id, state.donations.current, state.donations.limit, paginated)
+        .then(data => {
+          commit("ADD_DONATIONS", { donations: data })
+          resolve(data)
+        })
+        .catch(err => {
+          commit("ADD_DONATIONS", { donations: [] })
           reject(err)
         })
     })

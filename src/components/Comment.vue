@@ -6,6 +6,7 @@
     </div>
     <div class="text" v-html="comment.fullname"></div>
     <div class="text" v-html="comment.comment"></div>
+    <img :src="comment.avatar">
   </li>
 </template>
 

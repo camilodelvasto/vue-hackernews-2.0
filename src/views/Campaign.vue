@@ -20,6 +20,13 @@
     <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
     <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
+    <h2>Donations</h2>
+    <div v-for="donation in donations">
+      <div>{{donation.donorName}}</div>
+      <div>{{donation.amount}}</div>
+    </div>
+    <button @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
+
     <h2>Updates</h2>
     <div v-for="update in updates">
       <update :update="update"></update>
@@ -68,9 +75,11 @@ export default {
   },
 	data () {
 		return {
+      bottom: false,
 			title: "",
 			fields: [],
       comments: [],
+      donations: [],
       updates: []
 		}
 	},
@@ -99,11 +108,14 @@ export default {
     campaign () {
       return this.$store.state.campaign
 		},
-    moreUpdates () {
-      return this.$store.state.updates.max !== this.$store.state.updates.current
-    },
     moreComments () {
       return this.$store.state.comments.max !== this.$store.state.comments.current
+    },
+    moreDonations () {
+      return this.$store.state.donations.max !== this.$store.state.donations.current
+    },
+    moreUpdates () {
+      return this.$store.state.updates.max !== this.$store.state.updates.current
     }
 	},
 
@@ -124,22 +136,25 @@ export default {
   // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
   mounted () {
     setTimeout(() => {
-      this.loadMoreUpdates(false)
       this.loadMoreComments(false)
-    }, 5000)
+      this.loadMoreDonations(false)
+      this.loadMoreUpdates(false)
+    }, 50000000)
+
+    window.addEventListener('scroll', () => {
+      this.bottom = this.bottomVisible()
+    })
   },
 
   methods: {
-    loadMoreUpdates (paginated = true) {
-      const campaign_id = this.$route.params.id
-      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
-        .then(data => {
-          this.updates = this.$store.state.updates.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    bottomVisible() {
+      const scrollY = window.scrollY
+      const visible = document.documentElement.clientHeight
+      const pageHeight = document.documentElement.scrollHeight
+      const bottomOfPage = visible + scrollY >= pageHeight
+      return bottomOfPage || pageHeight < visible
     },
+
     loadMoreComments (paginated = true) {
       const campaign_id = this.$route.params.id
       return this.$store.dispatch("FETCH_COMMENTS", { campaign_id: campaign_id, paginated: paginated })
@@ -149,8 +164,35 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    loadMoreDonations (paginated = true) {
+      const campaign_id = this.$route.params.id
+      return this.$store.dispatch("FETCH_DONATIONS", { campaign_id: campaign_id, paginated: paginated })
+        .then(data => {
+          this.donations = this.$store.state.donations.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadMoreUpdates (paginated = true) {
+      const campaign_id = this.$route.params.id
+      return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
+        .then(data => {
+          this.updates = this.$store.state.updates.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-  }
+  },
+  watch: {
+    bottom(bottom) {
+      if (bottom && this.moreUpdates) {
+        this.loadMoreUpdates()
+      }
+    }
+  }  
 }
 </script>
 
