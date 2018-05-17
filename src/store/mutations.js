@@ -11,8 +11,11 @@ export default {
   },
   RESET_NONPROFIT: (state) => {
     state.updates.current = 1
+    state.updates.data = []
     state.donations.current = 1
+    state.donations.data = []
     state.comments.current = 1
+    state.comments.data = []
   },
   ADD_COMMENTS: (state, { comments }) => {
     state.comments.data = state.comments.data.concat(comments)

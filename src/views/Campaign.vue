@@ -50,22 +50,6 @@ import Comment from "Components/Comment.vue"
 
 Vue.use(VueMeta)
 
-/*
-load before entering the route:
-- campaign main details: name, campaign details
-- donated amount
-- campaign description
-
-load async after the user has entered the route:
- - updates
- - comments
- - donors?
- - recent donations
- - raised through sharing
-
-
-*/
-
 export default {
 	name: "campaign",
 	components: {
@@ -159,8 +143,6 @@ export default {
           .catch(err => {
             console.log(err)
           })
-      } else {
-        console.log('no more comments to fetch')
       }
     },
     loadMoreDonations (paginated = true) {
@@ -173,8 +155,6 @@ export default {
           .catch(err => {
             console.log(err)
           })
-      } else {
-        console.log('no more donations to fetch')
       }
     },
     loadMoreUpdates (paginated = true) {
@@ -187,14 +167,14 @@ export default {
           .catch(err => {
             console.log(err)
           })
-      } else {
-        console.log('no more updates to fetch')
       }
     }
   },
+
+  // Load these items only when the user has scrolled down.
   watch: {
     bottom(bottom) {
-      if (bottom && this.moreUpdates) {
+      if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
         this.loadMoreComments()
         this.loadMoreDonations()
         this.loadMoreUpdates()
