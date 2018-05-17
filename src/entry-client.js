@@ -20,6 +20,7 @@ Vue.mixin({
 					next()
 				})
 				.catch(err => {
+					console.log(err)
 					// TODO: redirect depending on the error. For now, redirect to 404.
 					next("/404")
 				})
@@ -45,7 +46,7 @@ router.onReady(() => {
 	// the data that we already have. Using router.beforeResolve() so that all
 	// async components are resolved.
 	router.beforeResolve((to, from, next) => {
-    store.commit("RESET_CAMPAIGN")
+		store.commit("RESET_CAMPAIGN")
 		const matched = router.getMatchedComponents(to)
 		const prevMatched = router.getMatchedComponents(from)
 		let diffed = false
@@ -63,7 +64,10 @@ router.onReady(() => {
 				bar.finish()
 				next()
 			})
-			.catch(next)
+			.catch(err => {
+				console.log(err)
+				next()
+			})
 	})
 
 	// actually mount to DOM

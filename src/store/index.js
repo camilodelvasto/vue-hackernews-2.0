@@ -9,27 +9,27 @@ export function createStore () {
 	return new Vuex.Store({
 		state: {
 			nonprofit: {/* [ein: number] */},
-      campaign: {/* [id: number] */},
-      campaigns: {
-        data: [],
-        current: 1,
-        limit: 6
-      },
-      updates: {
-        data: [],
-        current: 1,
-        limit: 2
-      },
-      comments: {
-        data: [],
-        current: 1,
-        limit: 6
-      },
-      donations: {
-        data: [],
-        current: 1,
-        limit: 6
-      }
+			campaign: {/* [id: number] */},
+			campaigns: {
+				data: [],
+				current: 1,
+				limit: 6
+			},
+			updates: {
+				data: [],
+				current: 1,
+				limit: 2
+			},
+			comments: {
+				data: [],
+				current: 1,
+				limit: 6
+			},
+			donations: {
+				data: [],
+				current: 1,
+				limit: 6
+			}
 		},
 		actions,
 		mutations

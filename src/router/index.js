@@ -20,11 +20,11 @@ export function createRouter () {
 		fallback: false,
 		scrollBehavior: () => ({ y: 0 }),
 		routes: [
-      {
-        path: "/nonprofits/:ein",
-        name: "nonprofit",
-        component: Nonprofit
-      },
+			{
+				path: "/nonprofits/:ein",
+				name: "nonprofit",
+				component: Nonprofit
+			},
 			{
 				path: "/campaigns/:id",
 				name: "campaign",

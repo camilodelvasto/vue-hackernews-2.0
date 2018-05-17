@@ -53,13 +53,13 @@ Vue.use(VueMeta)
 export default {
 	name: "campaign",
 	components: {
-    AppHeader,
-    Comment,
-    Update
-  },
+		AppHeader,
+		Comment,
+		Update
+	},
 	data () {
 		return {
-      bottom: false,
+			bottom: false,
 			title: "",
 			fields: []
 		}
@@ -69,7 +69,7 @@ export default {
 			title: this.title,
 			// override the parent template and just use the above title only
 			titleTemplate: null
-      /*
+			/*
       TODO: design meta for this type of content.
 			meta: [
 				{ vmid: "description", name: "description", content: this.nonprofit.ACTIVITY },
@@ -86,27 +86,27 @@ export default {
 		}
 	},
 	computed: {
-    campaign () {
-      return this.$store.state.campaign
+		campaign () {
+			return this.$store.state.campaign
 		},
-    moreComments () {
-      return showMoreButton(this.$store.state, 'comments')
-    },
-    moreDonations () {
-      return showMoreButton(this.$store.state, 'donations')
-    },
-    moreUpdates () {
-      return showMoreButton(this.$store.state, 'updates')
-    },
-    donations () {
-      return this.$store.state.donations.data
-    },
-    updates () {
-      return this.$store.state.updates.data
-    },
-    comments () {
-      return this.$store.state.comments.data
-    }
+		moreComments () {
+			return showMoreButton(this.$store.state, "comments")
+		},
+		moreDonations () {
+			return showMoreButton(this.$store.state, "donations")
+		},
+		moreUpdates () {
+			return showMoreButton(this.$store.state, "updates")
+		},
+		donations () {
+			return this.$store.state.donations.data
+		},
+		updates () {
+			return this.$store.state.updates.data
+		},
+		comments () {
+			return this.$store.state.comments.data
+		}
 	},
 
 	// We only fetch the item itself before entering the view
@@ -122,82 +122,82 @@ export default {
 		})
 	},
 
-  // Data to be fetched asynchronously, only in the client.
-  // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
-  mounted () {
-    window.addEventListener('scroll', () => {
-      this.bottom = this.bottomVisible()
-    })
-  },
+	// Data to be fetched asynchronously, only in the client.
+	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
+	mounted () {
+		window.addEventListener("scroll", () => {
+			this.bottom = this.bottomVisible()
+		})
+	},
 
-  methods: {
-    bottomVisible() {
-      const scrollY = window.scrollY
-      const visible = document.documentElement.clientHeight
-      const pageHeight = document.documentElement.scrollHeight
-      const bottomOfPage = visible + scrollY >= pageHeight
-      return bottomOfPage || pageHeight < visible
-    },
+	methods: {
+		bottomVisible () {
+			const scrollY = window.scrollY
+			const visible = document.documentElement.clientHeight
+			const pageHeight = document.documentElement.scrollHeight
+			const bottomOfPage = visible + scrollY >= pageHeight
+			return bottomOfPage || pageHeight < visible
+		},
 
-    loadMoreComments (paginated = true) {
-      if (this.moreComments) {
-        const campaign_id = this.$route.params.id
-        return this.$store.dispatch("FETCH_COMMENTS", { campaign_id: campaign_id, paginated: paginated })
-          .then(data => {
-            return data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-    },
-    loadMoreDonations (paginated = true) {
-      if (this.moreDonations) {
-        const campaign_id = this.$route.params.id
-        return this.$store.dispatch("FETCH_DONATIONS", { campaign_id: campaign_id, paginated: paginated })
-          .then(data => {
-            return data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-    },
-    loadMoreUpdates (paginated = true) {
-      const campaign_id = this.$route.params.id
-      if (this.moreUpdates) {
-        return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
-          .then(data => {
-            return data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-    }
-  },
+		loadMoreComments (paginated = true) {
+			if (this.moreComments) {
+				const campaignId = this.$route.params.id
+				return this.$store.dispatch("FETCH_COMMENTS", { campaignId: campaignId, paginated: paginated })
+					.then(data => {
+						return data
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		},
+		loadMoreDonations (paginated = true) {
+			if (this.moreDonations) {
+				const campaignId = this.$route.params.id
+				return this.$store.dispatch("FETCH_DONATIONS", { campaignId: campaignId, paginated: paginated })
+					.then(data => {
+						return data
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		},
+		loadMoreUpdates (paginated = true) {
+			const campaignId = this.$route.params.id
+			if (this.moreUpdates) {
+				return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
+					.then(data => {
+						return data
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		}
+	},
 
-  // Load these items only when the user has scrolled down.
-  watch: {
-    bottom(bottom) {
-      if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
-        this.loadMoreComments()
-        this.loadMoreDonations()
-        this.loadMoreUpdates()
-      }
-    }
-  },
-  destroyed () {
-    this.$store.commit("RESET_CAMPAIGN")
-  }
+	// Load these items only when the user has scrolled down.
+	watch: {
+		bottom (bottom) {
+			if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
+				this.loadMoreComments()
+				this.loadMoreDonations()
+				this.loadMoreUpdates()
+			}
+		}
+	},
+	destroyed () {
+		this.$store.commit("RESET_CAMPAIGN")
+	}
 }
 
-function showMoreButton(state, arg) {
-  const limit = state[arg].limit
-  const current = state[arg].current
-  const count = state.campaign[`${arg}_count`]
-  const totalPages = Math.ceil(count/limit)
-  return totalPages >= current
+function showMoreButton (state, arg) {
+	const limit = state[arg].limit
+	const current = state[arg].current
+	const count = state.campaign[`${arg}_count`]
+	const totalPages = Math.ceil(count / limit)
+	return totalPages >= current
 }
 </script>
 
