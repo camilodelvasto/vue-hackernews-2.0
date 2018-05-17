@@ -44,8 +44,7 @@ export default {
 	data () {
 		return {
 			title: "",
-			fields: [],
-      campaigns: []
+			fields: []
 		}
 	},
 	metaInfo () {
@@ -69,6 +68,9 @@ export default {
 	computed: {
     nonprofit () {
       return this.$store.state.nonprofit
+    },
+    campaigns () {
+      return this.$store.state.campaigns.data
 		}
 	},
 
@@ -77,6 +79,7 @@ export default {
 		return new Promise((resolve, reject) => {
 			return store.dispatch("FETCH_NONPROFIT", { ein })
 				.then(data => {
+          loadCampaigns(store, ein)
 					resolve(data)
 				})
 				.catch(err => {
@@ -86,19 +89,21 @@ export default {
 	},
 
 	mounted () {
-    const ein = this.$route.params.ein
-    console.log(this.$route.params)
-    return this.$store.dispatch("FETCH_CAMPAIGNS", { ein: ein })
-      .then(data => {
-        this.campaigns = this.$store.state.campaigns.data
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    loadCampaigns(this.$store, this.$route.params.ein)
 	},
   destroyed () {
-    this.$store.commit("RESET_NONPROFIT")
+    this.$store.commit("RESET_CAMPAIGNS")
   }
+}
+function loadCampaigns (store, ein, paginated = true) {
+  return store.dispatch("FETCH_CAMPAIGNS", { ein: ein })
+    .then(data => {
+      return data
+    })
+    .catch(err => {
+      store.commit("RESET_CAMPAIGNS")
+      return err
+    })
 }
 </script>
 

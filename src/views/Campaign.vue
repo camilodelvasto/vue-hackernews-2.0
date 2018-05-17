@@ -61,10 +61,7 @@ export default {
 		return {
       bottom: false,
 			title: "",
-			fields: [],
-      comments: [],
-      donations: [],
-      updates: []
+			fields: []
 		}
 	},
 	metaInfo () {
@@ -93,13 +90,22 @@ export default {
       return this.$store.state.campaign
 		},
     moreComments () {
-      return findTotalPages(this.$store.state, 'comments')
+      return showMoreButton(this.$store.state, 'comments')
     },
     moreDonations () {
-      return findTotalPages(this.$store.state, 'donations')
+      return showMoreButton(this.$store.state, 'donations')
     },
     moreUpdates () {
-      return findTotalPages(this.$store.state, 'updates')
+      return showMoreButton(this.$store.state, 'updates')
+    },
+    donations () {
+      return this.$store.state.donations.data
+    },
+    updates () {
+      return this.$store.state.updates.data
+    },
+    comments () {
+      return this.$store.state.comments.data
     }
 	},
 
@@ -138,7 +144,7 @@ export default {
         const campaign_id = this.$route.params.id
         return this.$store.dispatch("FETCH_COMMENTS", { campaign_id: campaign_id, paginated: paginated })
           .then(data => {
-            this.comments = this.$store.state.comments.data
+            return data
           })
           .catch(err => {
             console.log(err)
@@ -150,7 +156,7 @@ export default {
         const campaign_id = this.$route.params.id
         return this.$store.dispatch("FETCH_DONATIONS", { campaign_id: campaign_id, paginated: paginated })
           .then(data => {
-            this.donations = this.$store.state.donations.data
+            return data
           })
           .catch(err => {
             console.log(err)
@@ -162,7 +168,7 @@ export default {
       if (this.moreUpdates) {
         return this.$store.dispatch("FETCH_UPDATES", { campaign_id: campaign_id, paginated: paginated })
           .then(data => {
-            this.updates = this.$store.state.updates.data
+            return data
           })
           .catch(err => {
             console.log(err)
@@ -180,10 +186,13 @@ export default {
         this.loadMoreUpdates()
       }
     }
-  }  
+  },
+  destroyed () {
+    this.$store.commit("RESET_CAMPAIGN")
+  }
 }
 
-function findTotalPages(state, arg) {
+function showMoreButton(state, arg) {
   const limit = state[arg].limit
   const current = state[arg].current
   const count = state.campaign[`${arg}_count`]

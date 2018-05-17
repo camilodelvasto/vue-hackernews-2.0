@@ -9,7 +9,10 @@ export default {
     state.updates.data = state.updates.data.concat(updates)
     state.updates.current++
   },
-  RESET_NONPROFIT: (state) => {
+  RESET_CAMPAIGNS: (state) => {
+    state.campaigns.data = []
+  },
+  RESET_CAMPAIGN: (state) => {
     state.updates.current = 1
     state.updates.data = []
     state.donations.current = 1

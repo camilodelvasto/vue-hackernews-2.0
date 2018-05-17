@@ -31,7 +31,7 @@ export function fetchNonprofit (ein) {
 
 export function fetchCampaign (id) {
   return new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/campaigns/${id}`)
+    axios.get(`${baseURL}/campaigns?campaign_id=${id}`)
       .then(response => {
         if (response.data.length) {
           resolve(response.data[0])
@@ -45,12 +45,12 @@ export function fetchCampaign (id) {
   })
 }
 
-export function fetchCampaigns (campaign_id, page, limit, paginated = true) {
+export function fetchCampaigns (ein, page, limit, paginated = true) {
   return new Promise((resolve, reject) => {
     if (!paginated) {
       page = 1
     }
-    axios.get(`${baseURL}/campaigns/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+    axios.get(`${baseURL}/campaigns?nonprofit_ein=${ein}&_limit=${limit}&_page=${page++}`)
       .then(response => {
         if (response.data.length) {
           resolve(response.data)
@@ -69,7 +69,7 @@ export function fetchUpdates (campaign_id, page, limit, paginated = true) {
     if (!paginated) {
       page = 1
     }
-    axios.get(`${baseURL}/updates/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+    axios.get(`${baseURL}/updates?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
       .then(response => {
         if (response.data.length) {
           resolve(response.data)
@@ -88,7 +88,7 @@ export function fetchComments (campaign_id, page, limit, paginated = true) {
     if (!paginated) {
       page = 1
     }
-    axios.get(`${baseURL}/comments/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+    axios.get(`${baseURL}/comments?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
       .then(response => {
         if (response.data.length) {
           resolve(response.data)
@@ -107,7 +107,7 @@ export function fetchDonations (campaign_id, page, limit, paginated = true) {
     if (!paginated) {
       page = 1
     }
-		axios.get(`${baseURL}/donations/?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
+		axios.get(`${baseURL}/donations?campaign_id=${campaign_id}&_limit=${limit}&_page=${page++}`)
 			.then(response => {
 				if (response.data.length) {
 					resolve(response.data)
