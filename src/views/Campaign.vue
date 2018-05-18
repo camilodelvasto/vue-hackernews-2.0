@@ -182,10 +182,14 @@ export default {
 	// Load these items only when the user has scrolled down.
 	watch: {
 		bottom (bottom) {
-			if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
-				this.loadMoreComments()
+      if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
+        this.loadMoreUpdates()
+      }
+      if (bottom && this.moreComments && this.$store.state.comments.current === 1) {
+        this.loadMoreComments()
+      }
+			if (bottom && this.moreDonations && this.$store.state.donations.current === 1) {
 				this.loadMoreDonations()
-				this.loadMoreUpdates()
 			}
 		}
 	},
