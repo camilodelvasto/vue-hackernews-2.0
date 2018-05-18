@@ -131,3 +131,9 @@ function fetchComments (store, item) {
     h1
       font-size 1.25em
 </style>
+
+<style lang="scss">
+body {
+  font-family: $font-primary;
+}
+</style>

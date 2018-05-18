@@ -16,7 +16,7 @@
 	background-color: whitesmoke;
 
 	&__link {
-		color: black;
+		color: green;
 	}
 
 	&__logo {
@@ -38,6 +38,10 @@
 	&__title {
 		margin-right: 0.5rem;
 	}
+
+  &__weird {
+    color: violet;
+  }
 }
 </style>
 
