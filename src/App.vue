@@ -13,11 +13,12 @@
   </div>
 </template>
 
+<style src='./assets/scss/main.scss'></style>
+
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
-require('./assets/scss/main.scss')
 
 Vue.use(VueMeta)
 

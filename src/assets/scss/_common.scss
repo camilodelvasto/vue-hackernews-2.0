@@ -1,0 +1,197 @@
+body {
+  background: red;
+}
+.unselectable {
+  user-select: none;
+}
+
+.is-success {
+  background-color: $color-emphasis-alt !important;
+
+  &:hover {
+    background-color: $color-emphasis-alt-modified !important;
+  }
+}
+
+.hide-on-load {
+  display: none;
+}
+
+.hide-me-but-leave-me {
+  display: none !important;
+
+  @include breakpoint($bulma) {
+    display: block !important;
+    visibility: hidden;
+  }
+}
+
+.page-wrapper {
+  padding: 40px 0;
+  position: relative;
+
+  &.secondary-section {
+    padding-top: 30px;
+  }
+}
+
+blockquote {
+  font-size: 24px;
+  font-style: italic;
+}
+
+.container {
+  margin: 0 20px !important;
+
+  @include breakpoint($sm) {
+    margin: auto !important;
+  }
+
+  @include breakpoint($lg) {
+    margin: auto !important;
+    width: 1182px !important;
+  }
+
+  &.is-fluid {
+    width: 97% !important;
+
+    @include breakpoint($lg) {
+      width: 1182px !important;
+    }
+    @include breakpoint($xg) {
+      width: 1280px !important;
+    }
+  }
+
+}
+
+.content-container {
+  position: static !important;
+}
+
+.navbar >.container .navbar-brand {
+  margin-left: 0 !important;
+}
+
+.label {
+  font-weight: 400 !important;
+}
+
+.logo-badge {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  h3 {
+    color: $color-text;
+    font-size: 18px;
+    padding-bottom: 0;
+  }
+}
+
+
+/* cards */
+.card {
+  padding: 0;
+  margin: 10px;
+  border: none !important;
+
+  .card-content {
+    padding: 10px;
+    height: calc(80vw - 30px);
+    border: none;
+    background-size: cover;
+    background-position: center;
+
+    &.bg-position-right {
+      background-position: right center;
+    }
+
+    @include breakpoint($sm) {
+      height: calc(255px);
+    }
+
+    @include breakpoint($xg) {
+      height: calc(325px);
+    }
+
+    &.card-taller {
+      @include breakpoint($sm) {
+        height: 275px;
+      }
+      @include breakpoint($xg) {
+        height: 325px;
+      }
+    }
+
+  }
+
+  &.card-loop {
+    position: relative;
+    height: calc(80vw - 30px);
+
+    @include breakpoint($sm) {
+      height: calc(299px);
+    }
+
+    @include breakpoint($xg) {
+      height: calc(349px);
+    }
+
+    .card-content {
+      position: absolute;
+      width: calc(100% - 24px);
+
+      @include breakpoint($xs) {
+        height: calc(80vw - 56px);
+      }
+    }
+  }
+}
+
+.select {
+  select {
+    width: 100%;
+  }
+}
+
+*:focus {
+  outline: none;
+}
+
+.share-button {
+  height: 23px;
+  width: 129px;
+}
+
+.tabs.is-toggle li.is-active a {
+  background-color: $color-medium-gray !important;
+  border-color: $color-medium-gray !important;
+}
+
+.flickity-page-dots {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    margin: 0 3px;
+    border-radius: 12px;
+    background: $color-light-gray;
+    color: transparent;
+    text-indent: -10000px;
+    transition: background-color 0.2s ease-in-out;
+
+    &.is-selected {
+      background: $color-medium-gray;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

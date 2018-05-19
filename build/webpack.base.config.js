@@ -91,10 +91,11 @@ module.exports = {
               use: [
                 {
                   loader: 'css-loader',
-                  options: { minimize: true }
+                  options: {
+                    indentedSyntax: true,
+                    minimize: true
+                  }
                 },
-                'vue-style-loader',
-                "css-loader", // translates CSS into CommonJS
                 "sass-loader", // compiles Sass to CSS
                 sassResourcesLoader
               ],
