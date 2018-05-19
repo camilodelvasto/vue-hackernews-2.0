@@ -1,6 +1,3 @@
-body {
-  background: red;
-}
 .unselectable {
   user-select: none;
 }
@@ -20,7 +17,7 @@ body {
 .hide-me-but-leave-me {
   display: none !important;
 
-  @include breakpoint($bulma) {
+  @include breakpoint($desktop) {
     display: block !important;
     visibility: hidden;
   }
@@ -43,11 +40,11 @@ blockquote {
 .container {
   margin: 0 20px !important;
 
-  @include breakpoint($sm) {
+  @include breakpoint($tablet) {
     margin: auto !important;
   }
 
-  @include breakpoint($lg) {
+  @include breakpoint($tablet) {
     margin: auto !important;
     width: 1182px !important;
   }
@@ -55,10 +52,10 @@ blockquote {
   &.is-fluid {
     width: 97% !important;
 
-    @include breakpoint($lg) {
+    @include breakpoint($tablet) {
       width: 1182px !important;
     }
-    @include breakpoint($xg) {
+    @include breakpoint($widescreen) {
       width: 1280px !important;
     }
   }
@@ -108,19 +105,19 @@ blockquote {
       background-position: right center;
     }
 
-    @include breakpoint($sm) {
+    @include breakpoint($tablet) {
       height: calc(255px);
     }
 
-    @include breakpoint($xg) {
+    @include breakpoint($widescreen) {
       height: calc(325px);
     }
 
     &.card-taller {
-      @include breakpoint($sm) {
+      @include breakpoint($tablet) {
         height: 275px;
       }
-      @include breakpoint($xg) {
+      @include breakpoint($widescreen) {
         height: 325px;
       }
     }
@@ -131,11 +128,11 @@ blockquote {
     position: relative;
     height: calc(80vw - 30px);
 
-    @include breakpoint($sm) {
+    @include breakpoint($tablet) {
       height: calc(299px);
     }
 
-    @include breakpoint($xg) {
+    @include breakpoint($widescreen) {
       height: calc(349px);
     }
 
@@ -143,7 +140,7 @@ blockquote {
       position: absolute;
       width: calc(100% - 24px);
 
-      @include breakpoint($xs) {
+      @include breakpoint($mobile) {
         height: calc(80vw - 56px);
       }
     }
