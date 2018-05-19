@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <AppHeader></AppHeader>
     <h2>Basic data</h2>
     <ul>
       <li><strong>EIN</strong>: {{nonprofit.EIN}}</li>
@@ -34,13 +33,11 @@
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
-import AppHeader from "Components/AppHeader.vue"
 
 Vue.use(VueMeta)
 
 export default {
 	name: "nonprofit",
-	components: { AppHeader },
 	data () {
 		return {
 			title: "",

@@ -1,16 +1,12 @@
 <template>
   <div class="hello">
-    <AppHeader></AppHeader>
     <h1>404 - not found.</h1>
   </div>
 </template>
 
 <script>
-import AppHeader from "../components/AppHeader.vue"
-
 export default {
-	name: "Default",
-	components: { AppHeader }
+	name: "Default"
 }
 </script>
 

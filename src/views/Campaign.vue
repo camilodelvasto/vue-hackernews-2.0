@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <AppHeader></AppHeader>
     <h2>Basic data</h2>
     <h2>This campaign:</h2>
     {{campaign.name}}
@@ -46,7 +45,6 @@
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
-import AppHeader from "Components/AppHeader.vue"
 import Update from "Components/Update.vue"
 import Comment from "Components/Comment.vue"
 
@@ -55,7 +53,6 @@ Vue.use(VueMeta)
 export default {
 	name: "campaign",
 	components: {
-		AppHeader,
 		Comment,
 		Update
 	},

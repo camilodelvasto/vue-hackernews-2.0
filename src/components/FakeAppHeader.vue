@@ -47,6 +47,6 @@
 
 <script>
 export default {
-	name: "AppHeader"
+	name: "FakeAppHeader"
 }
 </script>

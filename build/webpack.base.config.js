@@ -85,7 +85,7 @@ module.exports = {
           : ['vue-style-loader', 'css-loader', 'stylus-loader']
       },
       {
-        test: /\.scss$/,
+        test: /\.(sass|scss)$/,
         use: isProd
           ? ExtractTextPlugin.extract({
               use: [
