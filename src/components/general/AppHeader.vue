@@ -128,7 +128,11 @@
   justify-content: center;
   align-items: center;
   padding: 5px 0;
+  width: 100%;
 
+  @include breakpoint($tablet) {
+    width: auto;
+  }
   .small {
     padding-right: 10px;
     font-size: 13px;

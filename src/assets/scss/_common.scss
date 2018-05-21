@@ -54,7 +54,7 @@ blockquote {
   }
 
   &.is-fluid {
-    @include breakpoint($desktop) {
+    @include breakpoint($widescreen) {
       width: 1152px !important;
     }
   }
