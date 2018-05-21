@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <AppHeader></AppHeader>
     <h2>Basic data</h2>
     <h2>This campaign:</h2>
     {{campaign.name}}
@@ -47,12 +48,14 @@ import Vue from "vue"
 import VueMeta from "vue-meta"
 import Update from "Components/Update.vue"
 import Comment from "Components/Comment.vue"
+import AppHeader from "Components/general/AppHeader.vue"
 
 Vue.use(VueMeta)
 
 export default {
 	name: "campaign",
 	components: {
+    AppHeader,
 		Comment,
 		Update
 	},

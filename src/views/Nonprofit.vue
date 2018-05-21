@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <AppHeader></AppHeader>
     <section class="nonprofit-hero">
       <div class="hero is-medium nonprofit-hero__hero-wrapper" :style="{backgroundImage: `url(${nonprofit.data.hero})`}">
         <div class="container nonprofit-hero__hero-container">
@@ -60,11 +61,15 @@
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
+import AppHeader from "Components/general/AppHeader.vue"
 
 Vue.use(VueMeta)
 
 export default {
 	name: "nonprofit",
+  components: {
+    AppHeader
+  },
 	data () {
 		return {
 			title: "",

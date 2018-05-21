@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <AppHeader></AppHeader>
-    <header class="header">
-      <nav class="inner">
-        <router-link to="/nonprofits/43178037">Nonprofit (Generic)</router-link>
-        <router-link to="/nonprofits/43138428">Nonprofit (Claimed)</router-link>
-      </nav>
-    </header>
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
+    <nav class="fake-menu">
+      <router-link to="/nonprofits/43178037">Nonprofit (Generic)</router-link>
+      <router-link to="/nonprofits/43138428">Nonprofit (Claimed)</router-link>
+    </nav>
   </div>
 </template>
 
@@ -54,3 +51,11 @@ export default {
 	})
 }
 </script>
+
+<style scoped lang="scss">
+.fake-menu {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+}
+</style>
