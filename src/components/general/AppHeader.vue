@@ -1,41 +1,45 @@
 <template>
   <div class="header__wrapper">
-    <div class="user-space__search">
-      <div class="user-space__search-wrapper">
-        <div class="user-space__search-trigger" @click="showSearchBar = !showSearchBar">
-          <Icons iconwidth="24px" iconheight="24px" icon="search" color="#999999" class=""/>
+    <div class="container is-fluid">
+      <div class="header__inner">
+        <div class="user-space__search">
+          <div class="user-space__search-wrapper">
+            <div class="user-space__search-trigger" @click="showSearchBar = !showSearchBar">
+              <Icons iconwidth="24px" iconheight="24px" icon="search" color="#999999" class=""/>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="random-words">
-      Explore
-    </div>
-    <div class="random-words">
-      Volunteer
-    </div>
-    <div class="logo__wrapper">
-      <img class="logo" src="~public/logo-272x49.png" alt="logo" width="272" height="49">
-    </div>
-    <div class="logo__wrapper centered">
-      <img class="logo" src="~public/logo-272x49.png" alt="logo" width="272" height="49">
-    </div>
-    <div class="user-space__logged--in">
-      hmdewolf »
-    </div>
-    <div class="max-good" @click="toggleOtherMaxGoodSites()">
-      <span class="small">Powered by </span>
-      <div class="max-good__submenu-wrapper">
-        <img src="~public/max-good-logo-180x22.png" width="150" height="14">
-        <ul class="other-max-good-sites">
-          <li>
-            <span class="other-sites-arrow" :class="{ 'turn': showingMaxGoodSites }">
-              <Icons iconwidth="24px" iconheight="24px" icon="chevron-down" color="#999999" />
-            </span>
-            <ul class="sub" :class="{ 'active': showingMaxGoodSites }">
-              <li v-for="site in maxGoodSites"><a :href="site.href" target="_blank">{{ site.name }}</a></li>
+        <div class="random-words">
+          Explore
+        </div>
+        <div class="random-words">
+          Volunteer
+        </div>
+        <div class="logo__wrapper">
+          <img class="logo" src="~public/logo-272x49.png" alt="logo" width="272" height="49">
+        </div>
+        <div class="logo__wrapper centered">
+          <img class="logo" src="~public/logo-272x49.png" alt="logo" width="272" height="49">
+        </div>
+        <div class="user-space__logged--in">
+          hmdewolf »
+        </div>
+        <div class="max-good" @click="toggleOtherMaxGoodSites()">
+          <span class="small">Powered by </span>
+          <div class="max-good__submenu-wrapper">
+            <img src="~public/max-good-logo-180x22.png" width="150" height="14">
+            <ul class="other-max-good-sites">
+              <li>
+                <span class="other-sites-arrow" :class="{ 'turn': showingMaxGoodSites }">
+                  <Icons iconwidth="24px" iconheight="24px" icon="chevron-down" color="#999999" />
+                </span>
+                <ul class="sub" :class="{ 'active': showingMaxGoodSites }">
+                  <li v-for="site in maxGoodSites"><a :href="site.href" target="_blank">{{ site.name }}</a></li>
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -159,14 +163,18 @@
 }
 
 .header__wrapper {
+  border-bottom: 2px solid $color-emphasis-alt;
+}
+
+.header__inner {
   display: flex;
   text-align: center;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 5px 0;
-  border-bottom: 2px solid $color-emphasis-alt;
   align-items: center;
   position: relative;
+  font-size: 16px;
 
   @include breakpoint($desktop) {
     flex-direction: row;
@@ -177,6 +185,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
     order: -100;
+    opacity: 1;
 
     @include breakpoint($desktop) {
       width: auto;
@@ -187,9 +196,10 @@
     &.centered {
       position: absolute;
       margin: 0 auto;
+      opacity: 0;
 
       @include breakpoint($desktop) {
-        width: auto;
+        width: 100%;
         order: unset;
         padding-top: 5px;
         opacity: 1;

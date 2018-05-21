@@ -1,5 +1,32 @@
 <template>
-  <div class="hello">
+  <div class="">
+    <section class="nonprofit-hero">
+      <div class="hero is-medium nonprofit-hero__hero-wrapper" :style="{backgroundImage: `url(${nonprofit.data.hero})`}">
+        <div class="container nonprofit-hero__hero-container">
+          <div class="nonprofit-hero__logo-wrapper" :style="{backgroundImage: `url(${nonprofit.data.logo})`}" v-if="nonprofit.data.logo"></div>
+          <div class="nonprofit-hero__claim__cta" v-if="!nonprofit.data.about">
+            <div class="button is-pulled-right is-small is-centered is-rounded">Manage this nonprofit</div>
+          </div>
+        </div>
+      </div>
+      <div class="container columns">
+        <div class="nonprofit-hero__nonprofit-name column is-7" :class="{'not-claimed': !nonprofit.data.logo}">{{nonprofit.name}}</div>
+        <div class="nonprofit-hero__cta-wrapper column is-5" v-if="nonprofit.data.description">
+          <div class="button nonprofit-hero__cta-fundraise">Fundraise</div>
+          <div class="button nonprofit-hero__cta-donate">Donate</div>
+          <div class="button nonprofit-hero__cta-share">
+            <Icons iconwidth="16px" iconheight="16px" icon="share" color="#ffffff" class="icon" />
+            Share
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="nonprofit-description" v-if="nonprofit.data.description">
+          {{nonprofit.data.description}}
+        </div>
+      </div>
+    </section>
+
     <h2>Basic data</h2>
     <ul>
       <li><strong>EIN</strong>: {{nonprofit.EIN}}</li>
@@ -105,7 +132,172 @@ function loadCampaigns (store, ein, paginated = true) {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus">
-a
-  color: orange
+<style scoped lang="scss">
+.nonprofit-hero {
+  &__hero-wrapper {
+    background-size: cover;
+    background-position: bottom center;
+    position: relative;
+    max-height: 390px;
+  }
+
+  &__hero-container {
+    min-height: 390px;
+    padding: 0;
+    min-width: 90%;
+
+    @include breakpoint($tablet) {
+      min-width: 0;
+      width: 100vw;
+    }
+  }
+
+  &__logo-wrapper {
+    position: absolute;
+    background-size: cover;
+    width: 140px;
+    height: 140px;
+    top: 20px;
+
+    @include breakpoint($tablet) {
+      left: 20px;
+    }
+    @include breakpoint($desktop) {
+      top: unset;
+      left: unset;
+      bottom: -80px;
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  &__claim__cta {
+    position: absolute;
+    top: 20px;
+
+    .button {
+      border-color: white !important;
+      background-color: transparent !important;
+      color: $white !important;
+      transition: color 0.6s ease-in-out, background-color 0.2s ease-in-out;
+      font-size: 1.0rem;
+
+      &:hover {
+        background-color: $color-light-gray !important;
+        color: $color-dark-gray !important;
+      }
+    }
+
+    @include breakpoint($tablet) {
+      top: unset;
+      bottom: 20px;
+      right: 0;
+    }
+  }
+
+  &__nonprofit-name {
+    font-size: 30px;
+    color: $color-text;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    padding: 0;
+
+    @include breakpoint($desktop) {
+      padding-left: 220px;
+      margin-bottom: 30px;
+
+      &.not-claimed {
+        padding-left: 0;
+      }
+    }
+    @include breakpoint($widescreen) {
+      width: 58.33333%;
+    }
+  }
+
+  &__cta-wrapper {
+    text-align: center;
+    position: absolute;
+    top: -200px;
+    text-align: right;
+
+    @include breakpoint($mobile) {
+      right: 10px;
+      top: unset;
+      bottom: 60px;
+    }
+    @include breakpoint($tablet) {
+      margin-top: 10px;
+      text-align: right;
+      position: static;
+      padding-right: 0;
+    }
+    @include breakpoint($widescreen) {
+      margin-top: 10px;
+      text-align: right;
+      position: static;
+    }
+
+    .button {
+      text-transform: uppercase;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 10px;
+      padding: 20px 10px;
+      min-width: 40vw;
+      color: $white;
+      border: none;
+      box-shadow: 1px 1px 10px rgba($color-text, 0.5);
+      transition: background-color 0.2s ease-in-out;
+
+      @include breakpoint($mobile) {
+        min-width: 20vw;
+        margin-left: 10px;
+        padding: 15px 20px;
+      }
+      @include breakpoint($tablet) {
+        min-width: unset;
+        margin-left: 10px;
+        padding: 15px 20px;
+      }
+      @include breakpoint($widescreen) {
+        margin-left: 10px;
+        padding: 15px 20px;
+      }
+    }
+  }
+
+  &__cta-donate {
+    background-color: rgba($color-emphasis-alt, 0.9);
+
+    &:hover {
+      background-color: rgba($color-emphasis-alt, 1);
+    }
+  }
+
+  &__cta-fundraise {
+    background-color: rgba($color-emphasis, 0.9);
+
+    &:hover {
+      background-color: rgba($color-emphasis, 1);
+    }
+  }
+
+  &__cta-share {
+    background-color: rgba($color-text, 0.5);
+
+    .icon {
+      margin-right: 10px !important;
+      display: block;
+    }
+
+    &:hover {
+      background-color: rgba($color-text, 1);
+    }
+  }
+}
+
 </style>

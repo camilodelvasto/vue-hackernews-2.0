@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server",
     "start": "cross-env NODE_ENV=production node server",
-    "demodata": "json-server --watch ./src/demodata/db.json --port 3004 --routes ./src/demodata/routes.json",
+    "demodatax": "json-server --watch ./src/demodata/db.json --port 3004 --routes ./src/demodata/routes.json",
+    "demodata": "node ./src/demodata/server.js --watch",
     "postinstall": "npm run build",
     "build": "rimraf dist && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",

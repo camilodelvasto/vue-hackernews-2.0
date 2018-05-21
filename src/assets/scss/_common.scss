@@ -44,19 +44,18 @@ blockquote {
     margin: auto !important;
   }
 
-  @include breakpoint($tablet) {
+  @include breakpoint($desktop) {
     margin: auto !important;
-    width: 1182px !important;
+    width: 960px !important;
+  }
+
+  @include breakpoint($widescreen) {
+    width: 1344px !important;
   }
 
   &.is-fluid {
-    width: 97% !important;
-
-    @include breakpoint($tablet) {
-      width: 1182px !important;
-    }
-    @include breakpoint($widescreen) {
-      width: 1280px !important;
+    @include breakpoint($desktop) {
+      width: 1152px !important;
     }
   }
 

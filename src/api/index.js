@@ -8,16 +8,20 @@ export function fetchNonprofit (ein) {
 		axios.get(`${baseURL}/nonprofits/${ein}`)
 			.then(response => {
 				if (response.data.length) {
+          // Nonprofit was found in main system (nonprofit is not generic)
 					resolve(response.data[0])
 				} else {
-					axios.get(`${IRSSearchAPI}/nonprofits/${ein}`)
-						.then(res => {
-							if (res.data.length) {
-								resolve(res.data[0])
-							} else {
-								reject({ code: 404 })
-							}
-						})
+          // Nonprofit was not found in main system (nonprofit is generic)
+          // Fetch generic resources from main system and nonprofit data from the IRS service
+          let promises = []
+          promises.push(axios.get(`${IRSSearchAPI}/nonprofits/${ein}`))
+          promises.push(axios.get(`${baseURL}/default`))
+          axios.all(promises)
+            .then(result => {
+              var res = result[0].data[0]
+              res.data = result[1].data.data
+              resolve(res)
+            })
 						.catch(err => {
 							reject(err)
 						})
