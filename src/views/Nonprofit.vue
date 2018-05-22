@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="container columns">
-        <div class="nonprofit-hero__nonprofit-name column is-7" :class="{'not-claimed': !nonprofit.data.logo}">{{nonprofit.name}}</div>
-        <div class="nonprofit-hero__cta-wrapper column is-5" v-if="nonprofit.data.description">
+        <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop" :class="{'not-claimed': !nonprofit.data.logo}">{{nonprofit.NAME}}</div>
+        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop">
           <div class="button nonprofit-hero__cta-fundraise">Fundraise</div>
           <div class="button nonprofit-hero__cta-donate">Donate</div>
           <div class="button nonprofit-hero__cta-share">
@@ -62,13 +62,15 @@
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
+import Icons from "Components/general/Icons.vue"
 
 Vue.use(VueMeta)
 
 export default {
 	name: "nonprofit",
   components: {
-    AppHeader
+    AppHeader,
+    Icons
   },
 	data () {
 		return {
@@ -193,7 +195,7 @@ function loadCampaigns (store, ein, paginated = true) {
       }
     }
 
-    @include breakpoint($tablet) {
+    @include breakpoint($desktop) {
       top: unset;
       bottom: 20px;
       right: 0;
@@ -224,24 +226,21 @@ function loadCampaigns (store, ein, paginated = true) {
   &__cta-wrapper {
     text-align: center;
     position: absolute;
-    top: -200px;
+    top: -170px;
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    margin-right: 0;
 
-    @include breakpoint($mobile) {
-      right: 10px;
-      top: unset;
-      bottom: 60px;
-    }
     @include breakpoint($tablet) {
       margin-top: 10px;
       text-align: right;
       position: static;
       padding-right: 0;
-    }
-    @include breakpoint($widescreen) {
-      margin-top: 10px;
-      text-align: right;
-      position: static;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-end;
     }
 
     .button {
@@ -276,7 +275,7 @@ function loadCampaigns (store, ein, paginated = true) {
   }
 
   &__cta-donate {
-    background-color: rgba($color-emphasis-alt, 0.9);
+    background-color: rgba($color-emphasis-alt, 0.8);
 
     &:hover {
       background-color: rgba($color-emphasis-alt, 1);
@@ -284,7 +283,7 @@ function loadCampaigns (store, ein, paginated = true) {
   }
 
   &__cta-fundraise {
-    background-color: rgba($color-emphasis, 0.9);
+    background-color: rgba($color-emphasis, 0.8);
 
     &:hover {
       background-color: rgba($color-emphasis, 1);
@@ -300,7 +299,7 @@ function loadCampaigns (store, ein, paginated = true) {
     }
 
     &:hover {
-      background-color: rgba($color-text, 1);
+      background-color: rgba($color-text, 0.7);
     }
   }
 }

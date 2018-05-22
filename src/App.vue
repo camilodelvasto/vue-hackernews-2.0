@@ -55,7 +55,10 @@ export default {
 <style scoped lang="scss">
 .fake-menu {
   position: absolute;
-  top: 100px;
+  top: 140px;
   left: 20px;
+  a {
+    display: block;
+  }
 }
 </style>
