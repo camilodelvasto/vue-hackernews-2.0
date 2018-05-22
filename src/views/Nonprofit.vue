@@ -28,6 +28,10 @@
       </div>
     </section>
 
+    <div class="container">
+      <NonprofitForm submit-button-label="Submit" />
+    </div>
+
     <h2>Basic data</h2>
     <ul>
       <li><strong>EIN</strong>: {{nonprofit.EIN}}</li>
@@ -62,6 +66,7 @@
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
+import NonprofitForm from "Components/NonprofitForm.vue"
 import Icons from "Components/general/Icons.vue"
 
 Vue.use(VueMeta)
@@ -70,7 +75,8 @@ export default {
 	name: "nonprofit",
   components: {
     AppHeader,
-    Icons
+    Icons,
+    NonprofitForm
   },
 	data () {
 		return {

@@ -26,10 +26,9 @@ export default {
   },
   // We only fetch the item itself before entering the view
   beforeCreate () {
-    console.log('fetching data here')
     return this.$store.dispatch("FETCH_COMMON_DATA")
       .then(data => {
-        console.log(data)
+        return data
       })
       .catch(err => {
         console.log(err)
