@@ -32,18 +32,8 @@
       <NonprofitForm submit-button-label="Submit" />
     </div>
 
-    <h2>Basic data</h2>
-    <ul>
-      <li><strong>EIN</strong>: {{nonprofit.EIN}}</li>
-      <li><strong>NAME</strong>: {{nonprofit.NAME}}</li>
-      <li><strong>STREET</strong>: {{nonprofit.STREET}}</li>
-      <li><strong>CITY</strong>: {{nonprofit.CITY}}</li>
-      <li><strong>STATE</strong>: {{nonprofit.STATE}}</li>
-      <li><strong>ZIP</strong>: {{nonprofit.ZIP}}</li>
-      <li><strong>ACTIVITY</strong>: {{nonprofit.ACTIVITY}}</li>
-      <li><strong>NTEE_CD</strong>: {{nonprofit.NTEE_CD}}</li>
-      <li><strong>SORT_NAME</strong>: {{nonprofit.SORT_NAME}}</li>
-    </ul>
+    <NonprofitIRSData :nonprofit="nonprofit" />
+
     <h2>Other nonprofits:</h2>
     <ul>
       <li><router-link to="/nonprofits/43138428">43138428 (non-generic)</router-link></li>
@@ -66,7 +56,8 @@
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
-import NonprofitForm from "Components/NonprofitForm.vue"
+import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
+import NonprofitIRSData from "Components/nonprofit/NonprofitIRSData.vue"
 import Icons from "Components/general/Icons.vue"
 
 Vue.use(VueMeta)
@@ -76,7 +67,8 @@ export default {
   components: {
     AppHeader,
     Icons,
-    NonprofitForm
+    NonprofitForm,
+    NonprofitIRSData
   },
 	data () {
 		return {

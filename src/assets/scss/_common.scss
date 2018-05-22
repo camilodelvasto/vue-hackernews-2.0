@@ -57,6 +57,9 @@ blockquote {
     @include breakpoint($widescreen) {
       width: 1152px !important;
     }
+    @include breakpoint($fullhd) {
+      width: 1344px !important;
+    }
   }
 
 }
