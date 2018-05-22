@@ -3,6 +3,7 @@ import {
 	fetchCampaigns,
 	fetchComments,
 	fetchDonations,
+  fetchCommonData,
 	fetchNonprofit,
 	fetchUpdates
 } from "../api"
@@ -44,6 +45,18 @@ export default {
 				})
 		})
 	},
+  FETCH_COMMON_DATA: ({ commit, dispatch, state }) => {
+    return new Promise((resolve, reject) => {
+      return fetchCommonData()
+        .then(data => {
+          commit("SET_COMMON_DATA", { common: data })
+          resolve(data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
 	FETCH_UPDATES: ({ commit, dispatch, state }, { campaignId, paginated }) => {
 		return new Promise((resolve, reject) => {
 			return fetchUpdates(campaignId, state.updates.current, state.updates.limit, paginated)

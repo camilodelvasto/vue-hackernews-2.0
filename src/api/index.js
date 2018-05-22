@@ -68,6 +68,18 @@ export function fetchCampaigns (ein, page, limit, paginated = true) {
 	})
 }
 
+export function fetchCommonData (id) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${baseURL}/common`)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
 export function fetchUpdates (campaignId, page, limit, paginated = true) {
 	return new Promise((resolve, reject) => {
 		if (!paginated) {

@@ -24,6 +24,24 @@ export default {
   components: {
     AppHeader
   },
+  // We only fetch the item itself before entering the view
+  beforeCreate () {
+    console.log('fetching data here')
+    return this.$store.dispatch("FETCH_COMMON_DATA")
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+
+  computed: {
+    common () {
+      console.log('this.$store.state.common', this.$store.state.common)
+      return this.$store.state.common
+    },
+  },
 	metaInfo: () => ({
 		title: "Basic",
 		titleTemplate: "%s | DS SSR Test",
