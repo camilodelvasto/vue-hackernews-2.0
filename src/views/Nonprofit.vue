@@ -46,12 +46,6 @@
       <li><router-link to="/nonprofits/43178037">43178037</router-link></li>
       <li><router-link to="/nonprofits/9999999943178037">99999999943178037</router-link></li>
     </ul>
-    <h2>Volunteerathons for this nonprofit:</h2>
-    <ul>
-      <li v-for="campaign in campaigns">
-        <router-link :to="`/campaigns/${campaign.campaign_id}`">{{campaign.name}}</router-link>
-      </li>
-    </ul>
   </div>
 </template>
 

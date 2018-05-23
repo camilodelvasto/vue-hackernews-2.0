@@ -5,9 +5,11 @@
       <div class="volunteerathon__campaign-wrapper columns">
         <div class="volunteerathon__campaign-item column is-one-fifth" v-for="(campaign, index) in campaigns">
           <div class="volunteerathon__campaign-content">
-            <figure class="volunteerathon__campaign-image" :style="{backgroundImage: `url(${campaign.pictures[0]})`}">
-            </figure>
-            <h4>{{campaign.name}}</h4>
+            <router-link :to="`/campaigns/${campaign.campaign_id}`">
+              <figure class="volunteerathon__campaign-image" :style="{backgroundImage: `url(${campaign.pictures[0]})`}">
+              </figure>
+              <h4>{{campaign.name}}</h4>
+            </router-link>
             <p>
               By {{campaign.campaigner.fullname}}<br>
             </p>
@@ -41,10 +43,17 @@ export default {
     margin-bottom: 10px;
     padding-bottom: 75%;
     background-size: cover;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
   &__campaign-content {
     h4 {
       font-size: 18px;
+      transition: color 0.2s ease-in-out;
+
       @include breakpoint($desktop) {
         line-height: 18px;
         min-height: 38px;
@@ -52,6 +61,9 @@ export default {
         margin-bottom: 0;
         font-size: 18px;
         overflow: hidden;
+      }
+      &:hover {
+        color: $color-emphasis-alt;
       }
     }
     p {
