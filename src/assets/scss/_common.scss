@@ -38,27 +38,27 @@ blockquote {
 }
 
 .container {
-  margin: 0 20px !important;
+  margin: 0 20px;
 
   @include breakpoint($tablet) {
-    margin: auto !important;
+    margin: auto;
   }
 
   @include breakpoint($desktop) {
-    margin: auto !important;
-    width: 960px !important;
+    margin: auto;
+    width: $max-combo-wrapper-width; //960px
   }
 
-  @include breakpoint($widescreen) {
-    width: 1344px !important;
+  @include breakpoint($fullhd) {
+    width: $max-container-width; //1344px
   }
 
   &.is-fluid {
     @include breakpoint($widescreen) {
-      width: 1152px !important;
+      width: $max-fluid-container-width; //1152px
     }
     @include breakpoint($fullhd) {
-      width: 1344px !important;
+      width: $max-container-width; //1344px
     }
   }
 

@@ -2,9 +2,9 @@
   <div class="nonprofit-irs-data__wrapper">
     <div class="nonprofit-extended">
       <div class="container">
+        <h2>About <span class="all-caps">{{nonprofit.NAME}}</span></h2>
         <div class="columns">
           <div class="column is-7">
-            <h2>About <span class="all-caps">{{nonprofit.NAME}}</span></h2>
             <div class="nonprofit-data-section__irs-data">
               <div class="container">
                 <div class="columns">

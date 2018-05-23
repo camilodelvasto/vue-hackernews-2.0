@@ -161,7 +161,7 @@ h1 {
 
 .combo-wrapper {
   justify-content: center;
-  max-width: 960px;
+  max-width: $max-combo-wrapper-width;
   margin: 0 auto;
 
   @include breakpoint($tablet) {

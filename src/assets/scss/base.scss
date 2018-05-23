@@ -41,3 +41,8 @@ $fullhd: ( min:  1408px );
   @if map-has-key($map, max) { $query: append($query, "(max-width: #{map-get($map, max)})") }
   @media screen and #{$query} { @content; }
 }
+
+// Widths and containers
+$max-container-width: 1344px;
+$max-fluid-container-width: 1152px;
+$max-combo-wrapper-width: 960px;
