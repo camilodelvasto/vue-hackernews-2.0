@@ -23,7 +23,7 @@ export function fetchNonprofit (ein) {
               resolve(res)
             })
 						.catch(err => {
-							reject(err)
+							reject({ code: 404 })
 						})
 				}
 			})
