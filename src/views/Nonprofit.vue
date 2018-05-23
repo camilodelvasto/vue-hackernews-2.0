@@ -34,6 +34,8 @@
 
     <NonprofitIRSData :nonprofit="nonprofit" />
 
+    <NonprofitCampaigns :campaigns="campaigns" />
+
     <h2>Other nonprofits:</h2>
     <ul>
       <li><router-link to="/nonprofits/43138428">43138428 (non-generic)</router-link></li>
@@ -58,6 +60,7 @@ import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
 import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
 import NonprofitIRSData from "Components/nonprofit/NonprofitIRSData.vue"
+import NonprofitCampaigns from "Components/nonprofit/NonprofitCampaigns.vue"
 import Icons from "Components/general/Icons.vue"
 
 Vue.use(VueMeta)
@@ -67,6 +70,7 @@ export default {
   components: {
     AppHeader,
     Icons,
+    NonprofitCampaigns,
     NonprofitForm,
     NonprofitIRSData
   },
