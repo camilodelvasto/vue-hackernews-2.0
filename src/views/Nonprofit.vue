@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="container columns">
-        <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop" :class="{'not-claimed': !nonprofit.data.logo}">{{nonprofit.NAME}}</div>
-        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop">
+        <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop is-8-widescreen is-9-fullhd" :class="{'not-claimed': !nonprofit.data.about}">{{nonprofit.NAME}}</div>
+        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop is-4-widescreen is-3-fullhd">
           <div class="button nonprofit-hero__cta-fundraise">Fundraise</div>
           <div class="button nonprofit-hero__cta-donate">Donate</div>
           <div class="button nonprofit-hero__cta-share">
@@ -37,6 +37,8 @@
 
     <NonprofitCampaigns :campaigns="campaigns" />
 
+    <DonorsList :donations="donations" />
+
     <h2>Other nonprofits:</h2>
     <ul>
       <li><router-link to="/nonprofits/43138428">43138428 (non-generic)</router-link></li>
@@ -53,6 +55,7 @@
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
+import DonorsList from "Components/general/DonorsList.vue"
 import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
 import NonprofitIRSData from "Components/nonprofit/NonprofitIRSData.vue"
 import NonprofitAbout from "Components/nonprofit/NonprofitAbout.vue"
@@ -65,6 +68,7 @@ export default {
 	name: "nonprofit",
   components: {
     AppHeader,
+    DonorsList,
     Icons,
     NonprofitAbout,
     NonprofitCampaigns,
@@ -73,6 +77,7 @@ export default {
   },
 	data () {
 		return {
+      bottom: false,
 			title: "",
 			fields: []
 		}
@@ -99,8 +104,11 @@ export default {
 		nonprofit () {
 			return this.$store.state.nonprofit
 		},
-		campaigns () {
-			return this.$store.state.campaigns.data
+    campaigns () {
+      return this.$store.state.campaigns.data
+    },
+		donations () {
+			return this.$store.state.donations.data
 		},
     common () {
       return this.$store.state.common
@@ -120,13 +128,43 @@ export default {
 				})
 		})
 	},
-
-	mounted () {
+  mounted () {
+    window.addEventListener("scroll", () => {
+      this.bottom = this.bottomVisible()
+    })
 		loadCampaigns(this.$store, this.$route.params.ein)
 	},
-	destroyed () {
-		this.$store.commit("RESET_CAMPAIGNS")
-	}
+  // Load these items only when the user has scrolled down.
+  watch: {
+    bottom (bottom) {
+      if (bottom && this.$store.state.donations.current === 1) {
+        this.loadMoreDonations()
+      }
+    }
+  },
+  destroyed () {
+    this.$store.commit("RESET_CAMPAIGN")
+		this.$store.commit("RESET_DONATIONS")
+	},
+  methods: {
+    loadMoreDonations (paginated = true) {
+      const nonprofitEIN = this.$route.params.ein
+      return this.$store.dispatch("FETCH_DONATIONS", { nonprofitEIN: nonprofitEIN, paginated: paginated })
+        .then(data => {
+          return data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    bottomVisible () {
+      const scrollY = window.scrollY
+      const visible = document.documentElement.clientHeight
+      const pageHeight = document.documentElement.scrollHeight
+      const bottomOfPage = visible + scrollY >= pageHeight
+      return bottomOfPage || pageHeight < visible
+    }
+  }
 }
 function loadCampaigns (store, ein, paginated = true) {
 	return store.dispatch("FETCH_CAMPAIGNS", { ein: ein })
@@ -171,7 +209,7 @@ function loadCampaigns (store, ein, paginated = true) {
     @include breakpoint($tablet) {
       left: 20px;
     }
-    @include breakpoint($desktop) {
+    @include breakpoint($widescreen) {
       top: unset;
       left: unset;
       bottom: -80px;
@@ -212,16 +250,18 @@ function loadCampaigns (store, ein, paginated = true) {
     padding-bottom: 20px;
     padding: 0;
 
-    @include breakpoint($desktop) {
+    @include breakpoint($widescreen) {
+      padding-left: 140px;
+      margin-bottom: 30px;
+    }
+
+    @include breakpoint($fullhd) {
       padding-left: 220px;
       margin-bottom: 30px;
-
-      &.not-claimed {
-        padding-left: 0;
-      }
     }
-    @include breakpoint($widescreen) {
-      width: 58.33333%;
+
+    &.not-claimed {
+      padding-left: 0;
     }
   }
 

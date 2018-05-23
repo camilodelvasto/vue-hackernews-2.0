@@ -17,6 +17,8 @@ export function timeAgo (timestamp) {
 }
 
 export function usd (amount) {
-  var newValue = amount.toLocaleString('en-US')
-  return `$${newValue}`
+  if (!isNaN(amount)) {
+    var newValue = amount.toLocaleString('en-US')
+    return `$${newValue}`
+  }
 }

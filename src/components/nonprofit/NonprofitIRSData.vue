@@ -2,7 +2,7 @@
   <div class="nonprofit-irs-data__wrapper">
     <div class="nonprofit-extended">
       <div class="container">
-        <h2>About <span class="all-caps">{{nonprofit.NAME}}</span></h2>
+        <h2>About <span class="all-caps" v-html="nonprofit.NAME"></span></h2>
         <div class="columns">
           <div class="column is-7">
             <div class="nonprofit-data-section__irs-data">
@@ -17,7 +17,7 @@
                         </tr>
                         <tr>
                           <th><p>Classification:</p></th>
-                          <td><p>{{nonprofit.CLASSIFICATION}}</p></td>
+                          <td><p v-html="nonprofit.CLASSIFICATION"></p></td>
                         </tr>
                         <tr>
                           <th><p>Type/Activity:</p></th>
@@ -50,17 +50,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="nonprofit-extended__media column is-5-desktop" v-if="nonprofit.data.about">
-            <div class="nonprofit-extended__icon">
-              <Icons iconwidth="24px" iconheight="24px" icon="camera" color="#f0f0f0" class="icon"/>
-              <span><a>{{nonprofit.data.media.length}} Photos and videos</a></span>
-            </div>
-            <flickity ref="main-carousel" class="nonprofit-extended__media-wrapper" :options="nonprofitMediaCarouselOptions">
-              <div class="nonprofit-extended__media-item" v-for="(item, index) in nonprofit.data.media"
-                :style="`background-image: url(${item.src})`" v-if="item.type === 'image'">
-              </div>
-            </flickity>
           </div>
         </div>
         <SharingIconsRow />

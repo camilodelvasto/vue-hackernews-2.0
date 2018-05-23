@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="campaigns.length">
     <div class="container">
       <h2>Volunteerathons to raise money for this nonprofit</h2>
       <div class="volunteerathon__campaign-wrapper columns">
@@ -8,10 +8,10 @@
             <router-link :to="`/campaigns/${campaign.campaign_id}`">
               <figure class="volunteerathon__campaign-image" :style="{backgroundImage: `url(${campaign.pictures[0]})`}">
               </figure>
-              <h4>{{campaign.name}}</h4>
+              <h4 v-html="campaign.name"></h4>
             </router-link>
             <p>
-              By {{campaign.campaigner.fullname}}<br>
+              By <span v-html="campaign.campaigner.fullname"></span><br>
             </p>
             <ProgressBar :campaign="campaign" />
           </div>

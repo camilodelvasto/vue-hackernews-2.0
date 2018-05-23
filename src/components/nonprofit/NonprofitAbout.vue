@@ -4,7 +4,7 @@
       <div class="nonprofit-extended__separator"></div>
       <div class="columns">
         <div class="column is-12">
-          <h2 ref="aboutHeading">About {{nonprofit.data.name}}</h2>
+          <h2 ref="aboutHeading">About <span v-html="nonprofit.data.name"></span></h2>
           <div NonprofitShareToolbar />
           <div class="columns">
             <div class="nonprofit-extended__about column is-8-desktop">
@@ -12,17 +12,17 @@
               <div class="helper-text" v-if="nonprofit.EIN">EMPLOYER ID NUMBER (EIN): {{nonprofit.EIN}}</div>
             </div>
             <div class="nonprofit-extended__icons column is-4-desktop">
-              <div class="nonprofit-extended__icon">
+              <div class="nonprofit-extended__icon" v-if="nonprofit.data.city">
                 <Icons iconwidth="24px" iconheight="24px" icon="location" color="#f0f0f0" class="icon"/>
-                <span>{{nonprofit.data.city}}</span>
+                <span v-html="nonprofit.data.city"></span>
               </div>
-              <div class="nonprofit-extended__icon">
+              <div class="nonprofit-extended__icon" v-if="nonprofit.data.website">
                 <Icons iconwidth="24px" iconheight="24px" icon="link" color="#f0f0f0" class="icon"/>
-                <span>{{nonprofit.data.website}}</span>
+                <span v-html="nonprofit.data.website"></span>
               </div>
-              <div class="nonprofit-extended__icon">
+              <div class="nonprofit-extended__icon" v-if="nonprofit.data.email">
                 <Icons iconwidth="24px" iconheight="24px" icon="email" color="#f0f0f0" class="icon"/>
-                <span>{{nonprofit.data.email}}</span>
+                <span v-html="nonprofit.data.email"></span>
               </div>
               <button class="button is-success nonprofit-extended__donate" type="submit">Donate</button>
             </div>

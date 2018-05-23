@@ -118,12 +118,12 @@ export function fetchComments (campaignId, page, limit, paginated = true) {
 	})
 }
 
-export function fetchDonations (campaignId, page, limit, paginated = true) {
+export function fetchDonations (query, page, limit, paginated = true) {
 	return new Promise((resolve, reject) => {
 		if (!paginated) {
 			page = 1
 		}
-		axios.get(`${baseURL}/donations?campaign_id=${campaignId}&_limit=${limit}&_page=${page++}`)
+		axios.get(`${baseURL}/donations?${query}&_limit=${limit}&_page=${page++}`)
 			.then(response => {
 				if (response.data.length) {
 					resolve(response.data)

@@ -83,9 +83,16 @@ export default {
 				})
 		})
 	},
-	FETCH_DONATIONS: ({ commit, dispatch, state }, { campaignId, paginated }) => {
+	FETCH_DONATIONS: ({ commit, dispatch, state }, { campaignId, nonprofitEIN, paginated }) => {
 		return new Promise((resolve, reject) => {
-			return fetchDonations(campaignId, state.donations.current, state.donations.limit, paginated)
+      var query = ''
+      if (campaignId) {
+        query = `campaign_id=${campaignId}`        
+      }
+      if (nonprofitEIN) {
+        query = `nonprofit_ein=${nonprofitEIN}`
+      }
+			return fetchDonations(query, state.donations.current, state.donations.limit, paginated)
 				.then(data => {
 					commit("ADD_DONATIONS", { donations: data })
 					resolve(data)
