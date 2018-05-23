@@ -70,8 +70,13 @@
 </template>
 
 <script>
+import SharingIconsRow from 'Components/general/SharingIconsRow.vue'
+
 export default {
-  props: [ 'nonprofit' ]
+  props: [ 'nonprofit' ],
+  components: {
+    SharingIconsRow
+  }
 }
 </script>
 
@@ -168,5 +173,27 @@ export default {
     padding-right: 20px;
   }
 }
+
+.nonprofit-description {
+  margin-bottom: 30px;
+  font-size: 20px;
+  line-height: 1.5;
+
+  @include breakpoint($tablet) {
+    padding: 0 70px;
+  }
+
+  &__manage-cta {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    button {
+      font-size: 1.1rem;
+    }
+  }
+}
+
 
 </style>

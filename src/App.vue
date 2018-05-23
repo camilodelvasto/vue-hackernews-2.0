@@ -41,6 +41,9 @@ export default {
       return this.$store.state.common
     },
   },
+  mounted () {
+    require("Components/plugins/FacebookSDK.js")
+  },
 	metaInfo: () => ({
 		title: "Basic",
 		titleTemplate: "%s | DS SSR Test",

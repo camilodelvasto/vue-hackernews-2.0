@@ -14,6 +14,7 @@ const config = merge(base, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
       'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
+      'process.env.FB_APP_ID': JSON.stringify(process.env.FB_APP_ID),
       'process.env.IRS_SEARCH_API_URL': JSON.stringify(process.env.IRS_SEARCH_API_URL)
     }),
     // extract vendor chunks for better caching
