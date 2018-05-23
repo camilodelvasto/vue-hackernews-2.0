@@ -37,7 +37,9 @@
 
     <NonprofitCampaigns :campaigns="campaigns" />
 
-    <DonorsList :donations="donations" />
+    <DonorsList :donations="donations" title="Top Donors"/>
+
+    <DonorsList :donations="donations" title="Top Fundraisers" />
 
     <h2>Other nonprofits:</h2>
     <ul>

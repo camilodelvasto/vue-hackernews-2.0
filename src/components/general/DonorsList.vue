@@ -1,7 +1,7 @@
 <template>
   <section class="donors-list" v-if="donations.length">
     <div class="container">
-      <h2>Top Donors</h2>
+      <h2 v-html="title"></h2>
       <div class="donors-list__wrapper columns is-mobile is-multiline">
         <div class="donors-list__donor column is-2-desktop is-6-mobile" v-for="donor in donations">
           <p>{{donor.amount | usd}}</p>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  props: ['donations']
+  props: ['donations', 'title']
 }
 </script>
 
