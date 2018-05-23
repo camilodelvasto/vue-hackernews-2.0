@@ -22,28 +22,28 @@ Vue.use(VueMeta)
 
 export default {
 	name: "App",
-  components: {
-    AppHeader
-  },
-  // We only fetch the item itself before entering the view
-  beforeCreate () {
-    return this.$store.dispatch("FETCH_COMMON_DATA")
-      .then(data => {
-        return data
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  },
+	components: {
+		AppHeader
+	},
+	// We only fetch the item itself before entering the view
+	beforeCreate () {
+		return this.$store.dispatch("FETCH_COMMON_DATA")
+			.then(data => {
+				return data
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	},
 
-  computed: {
-    common () {
-      return this.$store.state.common
-    },
-  },
-  mounted () {
-    require("Components/plugins/FacebookSDK.js")
-  },
+	computed: {
+		common () {
+			return this.$store.state.common
+		}
+	},
+	mounted () {
+		require("Components/plugins/FacebookSDK.js")
+	},
 	metaInfo: () => ({
 		title: "Basic",
 		titleTemplate: "%s | DS SSR Test",

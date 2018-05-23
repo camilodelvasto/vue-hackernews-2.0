@@ -44,6 +44,6 @@ p {
 
 <script>
 export default {
-  props: [ 'campaign' ]
+	props: [ "campaign" ]
 }
 </script>

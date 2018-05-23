@@ -3,7 +3,7 @@ import {
 	fetchCampaigns,
 	fetchComments,
 	fetchDonations,
-  fetchCommonData,
+	fetchCommonData,
 	fetchNonprofit,
 	fetchUpdates
 } from "../api"
@@ -45,18 +45,18 @@ export default {
 				})
 		})
 	},
-  FETCH_COMMON_DATA: ({ commit, dispatch, state }) => {
-    return new Promise((resolve, reject) => {
-      return fetchCommonData()
-        .then(data => {
-          commit("SET_COMMON_DATA", { common: data })
-          resolve(data)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  },
+	FETCH_COMMON_DATA: ({ commit, dispatch, state }) => {
+		return new Promise((resolve, reject) => {
+			return fetchCommonData()
+				.then(data => {
+					commit("SET_COMMON_DATA", { common: data })
+					resolve(data)
+				})
+				.catch(err => {
+					reject(err)
+				})
+		})
+	},
 	FETCH_UPDATES: ({ commit, dispatch, state }, { campaignId, paginated }) => {
 		return new Promise((resolve, reject) => {
 			return fetchUpdates(campaignId, state.updates.current, state.updates.limit, paginated)
@@ -85,13 +85,13 @@ export default {
 	},
 	FETCH_DONATIONS: ({ commit, dispatch, state }, { campaignId, nonprofitEIN, paginated }) => {
 		return new Promise((resolve, reject) => {
-      var query = ''
-      if (campaignId) {
-        query = `campaign_id=${campaignId}`        
-      }
-      if (nonprofitEIN) {
-        query = `nonprofit_ein=${nonprofitEIN}`
-      }
+			var query = ""
+			if (campaignId) {
+				query = `campaign_id=${campaignId}`
+			}
+			if (nonprofitEIN) {
+				query = `nonprofit_ein=${nonprofitEIN}`
+			}
 			return fetchDonations(query, state.donations.current, state.donations.limit, paginated)
 				.then(data => {
 					commit("ADD_DONATIONS", { donations: data })

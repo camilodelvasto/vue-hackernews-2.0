@@ -68,18 +68,18 @@ Vue.use(VueMeta)
 
 export default {
 	name: "nonprofit",
-  components: {
-    AppHeader,
-    DonorsList,
-    Icons,
-    NonprofitAbout,
-    NonprofitCampaigns,
-    NonprofitForm,
-    NonprofitIRSData
-  },
+	components: {
+		AppHeader,
+		DonorsList,
+		Icons,
+		NonprofitAbout,
+		NonprofitCampaigns,
+		NonprofitForm,
+		NonprofitIRSData
+	},
 	data () {
 		return {
-      bottom: false,
+			bottom: false,
 			title: "",
 			fields: []
 		}
@@ -106,15 +106,15 @@ export default {
 		nonprofit () {
 			return this.$store.state.nonprofit
 		},
-    campaigns () {
-      return this.$store.state.campaigns.data
-    },
+		campaigns () {
+			return this.$store.state.campaigns.data
+		},
 		donations () {
 			return this.$store.state.donations.data
 		},
-    common () {
-      return this.$store.state.common
-    }
+		common () {
+			return this.$store.state.common
+		}
 	},
 
 	// We only fetch the item itself before entering the view
@@ -130,43 +130,43 @@ export default {
 				})
 		})
 	},
-  mounted () {
-    window.addEventListener("scroll", () => {
-      this.bottom = this.bottomVisible()
-    })
+	mounted () {
+		window.addEventListener("scroll", () => {
+			this.bottom = this.bottomVisible()
+		})
 		loadCampaigns(this.$store, this.$route.params.ein)
 	},
-  // Load these items only when the user has scrolled down.
-  watch: {
-    bottom (bottom) {
-      if (bottom && this.$store.state.donations.current === 1) {
-        this.loadMoreDonations()
-      }
-    }
-  },
-  destroyed () {
-    this.$store.commit("RESET_CAMPAIGN")
+	// Load these items only when the user has scrolled down.
+	watch: {
+		bottom (bottom) {
+			if (bottom && this.$store.state.donations.current === 1) {
+				this.loadMoreDonations()
+			}
+		}
+	},
+	destroyed () {
+		this.$store.commit("RESET_CAMPAIGN")
 		this.$store.commit("RESET_DONATIONS")
 	},
-  methods: {
-    loadMoreDonations (paginated = true) {
-      const nonprofitEIN = this.$route.params.ein
-      return this.$store.dispatch("FETCH_DONATIONS", { nonprofitEIN: nonprofitEIN, paginated: paginated })
-        .then(data => {
-          return data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    bottomVisible () {
-      const scrollY = window.scrollY
-      const visible = document.documentElement.clientHeight
-      const pageHeight = document.documentElement.scrollHeight
-      const bottomOfPage = visible + scrollY >= pageHeight
-      return bottomOfPage || pageHeight < visible
-    }
-  }
+	methods: {
+		loadMoreDonations (paginated = true) {
+			const nonprofitEIN = this.$route.params.ein
+			return this.$store.dispatch("FETCH_DONATIONS", { nonprofitEIN: nonprofitEIN, paginated: paginated })
+				.then(data => {
+					return data
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		},
+		bottomVisible () {
+			const scrollY = window.scrollY
+			const visible = document.documentElement.clientHeight
+			const pageHeight = document.documentElement.scrollHeight
+			const bottomOfPage = visible + scrollY >= pageHeight
+			return bottomOfPage || pageHeight < visible
+		}
+	}
 }
 function loadCampaigns (store, ein, paginated = true) {
 	return store.dispatch("FETCH_CAMPAIGNS", { ein: ein })

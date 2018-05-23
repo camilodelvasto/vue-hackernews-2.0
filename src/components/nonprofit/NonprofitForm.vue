@@ -79,19 +79,19 @@
 </template>
 
 <script>
-import ComboBox from 'Components/general/ComboBox.vue'
+import ComboBox from "Components/general/ComboBox.vue"
 
 export default {
-  props: ['submitButtonLabel'],
-  components: {
-    ComboBox
-  },
-  data () {
-    return {
-      volunteerFor: '',
-      nonprofitIs: ''
-    }
-  }
+	props: ["submitButtonLabel"],
+	components: {
+		ComboBox
+	},
+	data () {
+		return {
+			volunteerFor: "",
+			nonprofitIs: ""
+		}
+	}
 }
 </script>
 

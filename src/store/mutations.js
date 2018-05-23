@@ -28,9 +28,9 @@ export default {
 		state.donations.data = state.donations.data.concat(donations)
 		state.donations.current++
 	},
-  SET_CAMPAIGNS: (state, { campaigns }) => {
-    state.campaigns.data = campaigns
-  },
+	SET_CAMPAIGNS: (state, { campaigns }) => {
+		state.campaigns.data = campaigns
+	},
 	SET_COMMON_DATA: (state, { common }) => {
 		state.common = common
 	}

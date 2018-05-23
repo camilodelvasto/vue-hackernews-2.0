@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import SharingIconsRow from 'Components/general/SharingIconsRow.vue'
+import SharingIconsRow from "Components/general/SharingIconsRow.vue"
 
 export default {
-  props: [ 'nonprofit' ],
-  components: {
-    SharingIconsRow
-  }
+	props: [ "nonprofit" ],
+	components: {
+		SharingIconsRow
+	}
 }
 </script>
 

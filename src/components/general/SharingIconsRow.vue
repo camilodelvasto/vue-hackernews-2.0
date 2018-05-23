@@ -137,17 +137,17 @@
 }
 </style>
 <script>
-import Icons from 'Components/general/Icons.vue'
+import Icons from "Components/general/Icons.vue"
 
 export default {
-  components: {
-    Icons
-  },
-  props: [ 'campaignName', 'campaignUrl' ],
-  mounted () {
-    if (typeof window !== 'undefined' && window.FB) {
-      window.FB.XFBML.parse()
-    }
-  }
+	components: {
+		Icons
+	},
+	props: [ "campaignName", "campaignUrl" ],
+	mounted () {
+		if (typeof window !== "undefined" && window.FB) {
+			window.FB.XFBML.parse()
+		}
+	}
 }
 </script>

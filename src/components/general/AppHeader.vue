@@ -218,44 +218,44 @@
 </style>
 
 <script>
-import Icons from 'Components/general/Icons.vue'
+import Icons from "Components/general/Icons.vue"
 
 export default {
-  name: "AppHeader",
-  components: {
-    Icons
-  },
-  data () {
-    return {
-      showSearchBar: false,
-      shareButtonImgSrc: '/share-button.png',
-      showingMaxGoodSites: false,
-      maxGoodSites: [
-        { name: 'Volunteerathon', href: '#' },
-        { name: 'Quitathon', href: '#' },
-        { name: 'Loseathon', href: '#' },
-        { name: 'Give it up for Good', href: '#' },
-        { name: 'Vacation for Good', href: '#' },
-        { name: 'Waterathon', href: '#' },
-        { name: 'Christmas for Good', href: '#' },
-        { name: 'MLK Day for Good', href: '#' },
-        { name: 'The Lent Site', href: '#' },
-        { name: 'Valentines for Good', href: '#' },
-        { name: 'Fools for Good', href: '#' },
-        { name: 'Resolutions for Good', href: '#' },
-        { name: 'Run for good', href: '#' },
-        { name: 'Bike for Good', href: '#' },
-        { name: 'Walk for Good', href: '#' },
-        { name: 'Birthdays for Good', href: '#' },
-        { name: 'Polar Plunge for Good', href: '#' },
-        { name: 'Bake for Good', href: '#' }
-      ]
-    }
-  },
-  methods: {
-    toggleOtherMaxGoodSites () {
-      this.showingMaxGoodSites = !this.showingMaxGoodSites
-    }
-  }
+	name: "AppHeader",
+	components: {
+		Icons
+	},
+	data () {
+		return {
+			showSearchBar: false,
+			shareButtonImgSrc: "/share-button.png",
+			showingMaxGoodSites: false,
+			maxGoodSites: [
+				{ name: "Volunteerathon", href: "#" },
+				{ name: "Quitathon", href: "#" },
+				{ name: "Loseathon", href: "#" },
+				{ name: "Give it up for Good", href: "#" },
+				{ name: "Vacation for Good", href: "#" },
+				{ name: "Waterathon", href: "#" },
+				{ name: "Christmas for Good", href: "#" },
+				{ name: "MLK Day for Good", href: "#" },
+				{ name: "The Lent Site", href: "#" },
+				{ name: "Valentines for Good", href: "#" },
+				{ name: "Fools for Good", href: "#" },
+				{ name: "Resolutions for Good", href: "#" },
+				{ name: "Run for good", href: "#" },
+				{ name: "Bike for Good", href: "#" },
+				{ name: "Walk for Good", href: "#" },
+				{ name: "Birthdays for Good", href: "#" },
+				{ name: "Polar Plunge for Good", href: "#" },
+				{ name: "Bake for Good", href: "#" }
+			]
+		}
+	},
+	methods: {
+		toggleOtherMaxGoodSites () {
+			this.showingMaxGoodSites = !this.showingMaxGoodSites
+		}
+	}
 }
 </script>

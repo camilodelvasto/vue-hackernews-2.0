@@ -130,6 +130,6 @@
 
 <script>
 export default {
-  props: [ 'iconsrc', 'duplicate', 'layout', 'reverse', 'large' ]
+	props: [ "iconsrc", "duplicate", "layout", "reverse", "large" ]
 }
 </script>

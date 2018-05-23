@@ -8,21 +8,21 @@ export function fetchNonprofit (ein) {
 		axios.get(`${baseURL}/nonprofits/${ein}`)
 			.then(response => {
 				if (response.data.length) {
-          // Nonprofit was found in main system (nonprofit is not generic)
+					// Nonprofit was found in main system (nonprofit is not generic)
 					resolve(response.data[0])
 				} else {
-          // Nonprofit was not found in main system (nonprofit is generic)
-          // Fetch generic resources from main system and nonprofit data from the IRS service
-          let promises = []
-          promises.push(axios.get(`${IRSSearchAPI}/nonprofits/${ein}`))
-          promises.push(axios.get(`${baseURL}/default`))
-          axios.all(promises)
-            .then(result => {
-              var res = result[0].data[0]
-              res.data = result[1].data.data
-              resolve(res)
-            })
-						.catch(err => {
+					// Nonprofit was not found in main system (nonprofit is generic)
+					// Fetch generic resources from main system and nonprofit data from the IRS service
+					let promises = []
+					promises.push(axios.get(`${IRSSearchAPI}/nonprofits/${ein}`))
+					promises.push(axios.get(`${baseURL}/default`))
+					axios.all(promises)
+						.then(result => {
+							var res = result[0].data[0]
+							res.data = result[1].data.data
+							resolve(res)
+						})
+						.catch(() => {
 							reject({ code: 404 })
 						})
 				}
@@ -69,15 +69,15 @@ export function fetchCampaigns (ein, page, limit, paginated = true) {
 }
 
 export function fetchCommonData (id) {
-  return new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/common`)
-      .then(response => {
-        resolve(response.data)
-      })
-      .catch(e => {
-        reject(e)
-      })
-  })
+	return new Promise((resolve, reject) => {
+		axios.get(`${baseURL}/common`)
+			.then(response => {
+				resolve(response.data)
+			})
+			.catch(e => {
+				reject(e)
+			})
+	})
 }
 
 export function fetchUpdates (campaignId, page, limit, paginated = true) {

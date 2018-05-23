@@ -11,14 +11,14 @@ export function host (url) {
 }
 
 export function timeAgo (timestamp) {
-  const timeAgo = new TimeAgo("en-US")
-  var formedString = timeAgo.format(timestamp)
-  return formedString
+	const timeAgo = new TimeAgo("en-US")
+	var formedString = timeAgo.format(timestamp)
+	return formedString
 }
 
 export function usd (amount) {
-  if (!isNaN(amount)) {
-    var newValue = amount.toLocaleString('en-US')
-    return `$${newValue}`
-  }
+	if (!isNaN(amount)) {
+		var newValue = amount.toLocaleString("en-US")
+		return `$${newValue}`
+	}
 }

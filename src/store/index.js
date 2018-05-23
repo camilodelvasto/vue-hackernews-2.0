@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export function createStore () {
 	return new Vuex.Store({
 		state: {
-      common: {},
+			common: {},
 			nonprofit: {/* [ein: number] */},
 			campaign: {/* [id: number] */},
 			campaigns: {

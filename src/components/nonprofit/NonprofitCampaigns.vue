@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import ProgressBar from 'Components/general/ProgressBar.vue'
+import ProgressBar from "Components/general/ProgressBar.vue"
 
 export default {
-  props: ['campaigns'],
-  components: {
-    ProgressBar
-  }
+	props: ["campaigns"],
+	components: {
+		ProgressBar
+	}
 }
 </script>
 

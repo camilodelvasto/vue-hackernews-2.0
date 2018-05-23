@@ -50,28 +50,28 @@
 </template>
 
 <script>
-import SharingIconsRow from 'Components/general/SharingIconsRow.vue'
-import Icons from 'Components/general/Icons.vue'
-import Flickity from 'Components/plugins/Flickity.vue'
+import SharingIconsRow from "Components/general/SharingIconsRow.vue"
+import Icons from "Components/general/Icons.vue"
+import Flickity from "Components/plugins/Flickity.vue"
 
 export default {
-  props: [ 'nonprofit' ],
-  components: {
-    Icons,
-    Flickity,
-    SharingIconsRow
-  },
-  data () {
-    return {
-      nonprofitMediaCarouselOptions: {
-        initialIndex: 0,
-        prevNextButtons: false,
-        pageDots: false,
-        wrapAround: true,
-        autoPlay: 3500
-      }
-    }
-  }
+	props: [ "nonprofit" ],
+	components: {
+		Icons,
+		Flickity,
+		SharingIconsRow
+	},
+	data () {
+		return {
+			nonprofitMediaCarouselOptions: {
+				initialIndex: 0,
+				prevNextButtons: false,
+				pageDots: false,
+				wrapAround: true,
+				autoPlay: 3500
+			}
+		}
+	}
 }
 </script>
 
