@@ -38,7 +38,6 @@ export default {
 
   computed: {
     common () {
-      console.log('this.$store.state.common', this.$store.state.common)
       return this.$store.state.common
     },
   },

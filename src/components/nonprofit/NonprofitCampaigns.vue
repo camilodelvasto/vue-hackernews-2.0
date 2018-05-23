@@ -26,9 +26,6 @@ export default {
   props: ['campaigns'],
   components: {
     ProgressBar
-  },
-  mounted () {
-    console.log('this.campaigns', this.campaigns)
   }
 }
 </script>

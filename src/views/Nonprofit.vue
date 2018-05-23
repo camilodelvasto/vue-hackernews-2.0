@@ -32,7 +32,8 @@
       <NonprofitForm submit-button-label="Submit" />
     </div>
 
-    <NonprofitIRSData :nonprofit="nonprofit" />
+    <NonprofitIRSData :nonprofit="nonprofit" v-if="!nonprofit.data.about" />
+    <NonprofitAbout :nonprofit="nonprofit" v-else />
 
     <NonprofitCampaigns :campaigns="campaigns" />
 
@@ -60,6 +61,7 @@ import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
 import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
 import NonprofitIRSData from "Components/nonprofit/NonprofitIRSData.vue"
+import NonprofitAbout from "Components/nonprofit/NonprofitAbout.vue"
 import NonprofitCampaigns from "Components/nonprofit/NonprofitCampaigns.vue"
 import Icons from "Components/general/Icons.vue"
 
@@ -70,6 +72,7 @@ export default {
   components: {
     AppHeader,
     Icons,
+    NonprofitAbout,
     NonprofitCampaigns,
     NonprofitForm,
     NonprofitIRSData
