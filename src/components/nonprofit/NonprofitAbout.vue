@@ -4,25 +4,25 @@
       <div class="nonprofit-extended__separator"></div>
       <div class="columns">
         <div class="column is-12">
-          <h2 ref="aboutHeading">About {{nonprofit.name}}</h2>
+          <h2 ref="aboutHeading">About {{nonprofit.data.name}}</h2>
           <div NonprofitShareToolbar />
           <div class="columns">
             <div class="nonprofit-extended__about column is-8-desktop">
               <p>{{nonprofit.data.about}}</p>
-              <div class="helper-text" v-if="nonprofit.ein">EMPLOYER ID NUMBER (EIN): {{nonprofit.ein}}</div>
+              <div class="helper-text" v-if="nonprofit.EIN">EMPLOYER ID NUMBER (EIN): {{nonprofit.EIN}}</div>
             </div>
             <div class="nonprofit-extended__icons column is-4-desktop">
               <div class="nonprofit-extended__icon">
                 <Icons iconwidth="24px" iconheight="24px" icon="location" color="#f0f0f0" class="icon"/>
-                <span>{{nonprofit.city}}</span>
+                <span>{{nonprofit.data.city}}</span>
               </div>
               <div class="nonprofit-extended__icon">
                 <Icons iconwidth="24px" iconheight="24px" icon="link" color="#f0f0f0" class="icon"/>
-                <span>{{nonprofit.website}}</span>
+                <span>{{nonprofit.data.website}}</span>
               </div>
               <div class="nonprofit-extended__icon">
                 <Icons iconwidth="24px" iconheight="24px" icon="email" color="#f0f0f0" class="icon"/>
-                <span>{{nonprofit.email}}</span>
+                <span>{{nonprofit.data.email}}</span>
               </div>
               <button class="button is-success nonprofit-extended__donate" type="submit">Donate</button>
             </div>
@@ -78,7 +78,6 @@ export default {
 <style scoped lang="scss">
 .nonprofit-extended {
   background-color: rgba($color-light-gray, 0.35);
-  padding-top: 40px;
   padding-bottom: 20px;
   margin-bottom: 40px;
 
@@ -88,7 +87,6 @@ export default {
 
   &__separator {
     padding-top: 60px;
-    border-top: 1px solid $color-light-gray;
     max-width: 60%;
     margin: auto;
   }
@@ -101,13 +99,6 @@ export default {
       width: 30px;
       text-align: center;
       display: block;
-    }
-  }
-  &__media {
-    margin-bottom: 20px;
-
-    .icon {
-      margin-bottom: 20px;
     }
   }
   &__about {
@@ -126,6 +117,13 @@ export default {
       width: 33.33333%;
     }
   }
+  &__media {
+    margin-bottom: 20px;
+
+    .icon {
+      margin-bottom: 20px;
+    }
+  }
   &__media-wrapper {
     width: calc(100vw);
     height: calc(100vw*3/4);
@@ -134,9 +132,16 @@ export default {
 
     @include breakpoint($tablet) {
       transform: translateX(0);
-      width: calc(100%);
+      width: 100%;
       height: 0;
-      padding-bottom: 25%;
+      padding-bottom: 21%;
+      text-align: left;
+    }
+    &.short-wrapper {
+      @include breakpoint($tablet) {
+        width: calc(990px*0.8/3);
+      }
+
     }
   }
   &__media-item {
@@ -146,26 +151,26 @@ export default {
     background-position: center;
 
     @include breakpoint($tablet) {
-      width: calc(990px*0.4166667/3);
-      height: calc(990px*0.4166667/3*3/4);
+      width: calc(990px*0.8/3);
+      height: calc(990px*0.8/3*3/4);
       border-right: 4px solid $white;
     }
-    @include breakpoint($widescreen) {
-      width: calc(1140px*0.4166667/3);
-      height: calc(1140px*0.4166667/3*3/4);
+    @include breakpoint($fullhd) {
+      width: calc(1140px*0.8/3);
+      height: calc(1140px*0.8/3*3/4);
       border-right: 4px solid $white;
     }
   }
   &__share-figure {
     margin: 30px 0;
-
-    img {
-      width: 100%;
-    }
   }
 
   th {
     padding-right: 20px;
+  }
+
+  &__donate {
+    margin-top: 10px;
   }
 }
 

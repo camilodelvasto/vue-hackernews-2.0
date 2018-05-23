@@ -91,12 +91,6 @@ export default {
     font-size: 12px;
   }
 
-  &__separator {
-    padding-top: 60px;
-    border-top: 1px solid $color-light-gray;
-    max-width: 60%;
-    margin: auto;
-  }
   &__icon {
     display: flex;
     flex-direction: row;
@@ -131,36 +125,7 @@ export default {
       width: 33.33333%;
     }
   }
-  &__media-wrapper {
-    width: calc(100vw);
-    height: calc(100vw*3/4);
-    overflow: hidden;
-    transform: translateX(-20px);
 
-    @include breakpoint($tablet) {
-      transform: translateX(0);
-      width: calc(100%);
-      height: 0;
-      padding-bottom: 25%;
-    }
-  }
-  &__media-item {
-    width: 100vw;
-    height: calc(100vw*3/4);
-    background-size: cover;
-    background-position: center;
-
-    @include breakpoint($tablet) {
-      width: calc(990px*0.4166667/3);
-      height: calc(990px*0.4166667/3*3/4);
-      border-right: 4px solid $white;
-    }
-    @include breakpoint($widescreen) {
-      width: calc(1140px*0.4166667/3);
-      height: calc(1140px*0.4166667/3*3/4);
-      border-right: 4px solid $white;
-    }
-  }
   &__share-figure {
     margin: 30px 0;
 
