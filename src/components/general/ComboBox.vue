@@ -1,5 +1,5 @@
 <template>
-  <div class="box-wrapper" v-bind:class="{ 'column vertical': layout !== 'row' }">
+  <div class="box-wrapper" v-bind:class="{ 'vertical': layout !== 'row' }">
     <div v-if="layout !== 'row'">
       <div class="icon-wrapper">
         <img class="icon-img" :src="iconsrc" v-bind:class="{ 'large': large }">
@@ -38,16 +38,17 @@
 
         @include breakpoint($tablet) {
           max-width: 180px;
-        }    
+        }
       }
     }
   }
 
   &.vertical {
     @include breakpoint($tablet) {
-      min-width: 30%;
+      min-width: 27%;
       max-width: 33%;
-    }    
+      margin-bottom: 20px;
+    }
   }
 
   h2 {

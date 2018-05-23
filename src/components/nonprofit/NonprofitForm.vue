@@ -14,78 +14,63 @@
     <div class="container">
       <div class="form-wrapper">
         <form method="post" action="/">
-          <div class="columns form-column__wrapper">
-            <div class="column is-5 is-5-tablet form-column__label-column"><label class="label">Number of hours I will volunteer:</label></div>
-            <div class="column is-5 form-column__input-column">
+          <div class="columns form-column__wrapper form-column__extra-padded">
+            <div class="column is-5 form-column__label-column"><label class="label">Donations will go to this nonprofit:</label></div>
+            <div class="column is-7 form-column__input-column">
               <div class="control">
-                <input class="input" type="number" min="0" name="action" placeholder="Enter the number of hours" value="">
+                <input class="input" type="text" name="action" placeholder="Enter name of a nonprofit" value="">
               </div>
             </div>
           </div>
           <div class="columns form-column__wrapper">
-            <div class="column is-5 form-column__label-column"><label class="label">The donations will go to:</label></div>
-            <div class="column is-5 form-column__input-column">
-              <div class="control">
-                <input class="input" type="text" name="action" placeholder="Enter a nonprofit or cause" value="">
-              </div>
-            </div>
-            <div class="column is-2 form-column__button-column"><button class="button is-info is-rounded" type="button">Search</button></div>
-          </div>
-          <p class="help">The nonprofit you donate to can be different than the nonprofit you volunteer for.</p>
-
-          <div class="columns form-column__wrapper">
-            <div class="field work volunteer-for column is-12">
-              <label class="label">I will volunteer for:</label>
-              <div class="control">
-                <label class="radio">
-                  <input type="radio" name="volunteer-for" v-model="volunteerFor" value="nonprofit">
-                  a nonprofit
-                </label>
-                <label class="radio">
-                  <input type="radio" name="volunteer-for" v-model="volunteerFor" value="independent">
-                  an independent service project
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="columns form-column__wrapper">
-            <transition name="fade">
-              <div class="field is-12 column" v-if="volunteerFor === 'independent'">
-                <div class="columns">
-                  <div class="column is-5 form-column__label-column"><label class="label">In my project I will be:</label></div>
-                  <div class="column is-5 form-column__input-column">
-                    <div class="control">
-                      <input class="input" type="text" name="project_action" placeholder="Enter what you will be doing" value="">
-                    </div>
-                  </div>
+            <div class="column form-column__label-column">
+              <label class="label">I will volunteer
+                <div class="control inline-field">
+                  <input class="input" type="number" min="0" max="9999" name="number-of-hours" placeholder="100" value="">
                 </div>
-              </div>
-              <div class="field column is-12 work" v-if="volunteerFor === 'nonprofit'">
-                <div class="columns is-multiline">
-                  <div class="column is-12 form-column__label-column"><label class="label">The nonprofit will be:</label></div>
-
-                  <div class="column is-12 form-column__label-column">
-                    <label class="radio">
-                      <input type="radio" name="non-profit-is" v-model="nonprofitIsSame" value="true">
-                      the same nonprofit that’s receiving the donations
-                    </label>
-                  </div>
-                  <div class="column is-5 form-column__label-column">
-                    <label class="radio">
-                      <input type="radio" name="non-profit-is" v-model="nonprofitIsSame" value="false">
-                      a different nonprofit:
-                    </label>
-                  </div>
-                  <div class="column is-5 form-column__input-column" v-if="nonprofitIsSame === 'false'" key="1">
-                    <div class="control">
-                      <input class="input" type="text" name="action" placeholder="Enter a nonprofit" value="">
-                    </div>
-                  </div>
+                hours for:
+              </label>
+            </div>
+          </div>
+          <div class="columns form-column__wrapper">
+            <div class="column is-12 form-column__label-column form-column__left-padded">
+              <label class="radio">
+                <input type="radio" name="non-profit-is" v-model="nonprofitIs" value="same">
+                same nonprofit as above
+              </label>
+            </div>
+          </div>
+          <div class="columns form-column__wrapper">
+            <div class="column is-5 form-column__label-column form-column__left-padded">
+              <label class="radio">
+                <input type="radio" name="non-profit-is" v-model="nonprofitIs" value="different">
+                a different nonprofit:
+              </label>
+            </div>
+            <transition name="fade">
+              <div class="column is-7 form-column__input-column">
+                <div class="control">
+                  <input class="input" type="text" name="project_action" placeholder="Enter name of a nonprofit" value="">
                 </div>
               </div>
             </transition>
           </div>
-          <p class="help pad-more" v-if="volunteerFor === 'nonprofit'">To find nonprofits to volunteer for, <a href="http://aqua.dailysource.org/donation/helpcreatethis" target="_blank">click here</a></p>
+          <div class="columns form-column__wrapper">
+            <div class="column is-5 form-column__label-column form-column__left-padded">
+              <label class="radio">
+                <input type="radio" name="non-profit-is" v-model="nonprofitIs" value="independent">
+                independent service:
+              </label>
+            </div>
+            <transition name="fade">
+              <div class="column is-7 form-column__input-column">
+                <div class="control">
+                  <input class="input" type="text" name="project_action" placeholder="Enter what you will be doing" value="">
+                </div>
+              </div>
+            </transition>
+          </div>
+          <p class="help pad-more">To find volunteer opportunities, <a href="http://aqua.dailysource.org/donation/helpcreatethis" target="_blank">click here</a></p>
           <button class="button is-success is-large" type="submit">{{submitButtonLabel}}</button>
         </form>
       </div>
@@ -104,7 +89,7 @@ export default {
   data () {
     return {
       volunteerFor: '',
-      nonprofitIsSame: ''
+      nonprofitIs: ''
     }
   }
 }
@@ -113,9 +98,9 @@ export default {
 <style scoped lang="scss">
 .form-column {
   &__wrapper {
-    margin-top: 40px;
+    margin-top: 0;
     @include breakpoint($tablet) {
-      line-height: 40px;
+      line-height: 42px;
     }
 
     .column {
@@ -132,18 +117,35 @@ export default {
     .label {
     }
   }
+  &__input-column {
+
+  }
   &__button-column {
     .button {
       display: block;
-      margin-top: 10px;
       width: 100%;
       border-radius: 20px !important;
-
-      @include breakpoint($tablet) {
-       margin-top: 0;
-     }
     }
   }
+  &__extra-padded {
+    margin-bottom: 35px;
+  }
+  &__left-padded {
+    padding-left: 80px;
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.inline-field {
+  display: inline-block;
+  margin: 0 5px 10px;
+  width: 65px;
+}
+
+.radio-fields {
+  display: block;
 }
 
 .page-wrapper {
@@ -159,6 +161,8 @@ h1 {
 
 .combo-wrapper {
   justify-content: center;
+  max-width: 960px;
+  margin: 0 auto;
 
   @include breakpoint($tablet) {
     display: flex;
@@ -167,11 +171,11 @@ h1 {
 }
 
 .form-wrapper {
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 760px;
+  margin: 20px auto 0;
 
   button[type=submit] {
-    margin: 50px 0 30px;
+    margin: 30px 0 30px;
   }
 
   label {
@@ -195,57 +199,6 @@ h1 {
   }
 }
 
-.work {
-  display: flex;
-  flex-direction: column;
-
-  @include breakpoint($tablet) {
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  label {
-    text-align: left;
-    margin-bottom: 0;
-    @include breakpoint($tablet) {
-      line-height: 40px;
-    }
-  }
-
-  @include breakpoint($tablet) {
-    .control {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    .control2 {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-left: 40px;
-    }
-  }
-}
-
-.volunteer-for {
-  @include breakpoint($tablet) {
-    display: flex;
-    flex-direction: row;
-
-    .control {
-      width: 70%;
-    }
-  }
-}
-
-.radio+.radio {
-  margin-left: 0;
-  display: block;
-
-  @include breakpoint($tablet) {
-    display: inline-block;
-  }
-}
 .pad-more {
   margin-top: 20px;
 }
