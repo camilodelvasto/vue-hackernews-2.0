@@ -32,6 +32,7 @@
       <NonprofitForm submit-button-label="Submit" />
     </div>
 
+    <FloatingShareTools />
     <NonprofitIRSData :nonprofit="nonprofit" v-if="!nonprofit.data.about" />
     <NonprofitAbout :nonprofit="nonprofit" v-else />
 
@@ -58,6 +59,7 @@ import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
 import DonorsList from "Components/general/DonorsList.vue"
+import FloatingShareTools from "Components/general/FloatingShareTools.vue"
 import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
 import NonprofitIRSData from "Components/nonprofit/NonprofitIRSData.vue"
 import NonprofitAbout from "Components/nonprofit/NonprofitAbout.vue"
@@ -71,6 +73,7 @@ export default {
 	components: {
 		AppHeader,
 		DonorsList,
+    FloatingShareTools,
 		Icons,
 		NonprofitAbout,
 		NonprofitCampaigns,
