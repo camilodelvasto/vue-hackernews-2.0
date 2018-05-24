@@ -244,6 +244,7 @@
       "created": 1526504944000,
       "updated": 1526504944000,
       "total_raised": 2445,
+      "amount": 2445,
       "campaigns": [
         {
           "campaign_id": 254,
@@ -276,6 +277,7 @@
       "updated": 1526504944000,
       "campaign_count": 1,
       "total_raised": 2325,
+      "amount": 2325,
       "campaigns": [
         {
           "campaign_id": 256,
