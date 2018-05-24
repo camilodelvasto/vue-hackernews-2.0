@@ -234,9 +234,77 @@
       "public": true
     }
   ],
+  "donors": [
+    {
+      "donor_id": 726,
+      "fullname": "Sandra Martignon",
+      "firstname": "Sandra",
+      "lastname": "Martignon",
+      "avatar": "http://localhost:3004/static/assets/images/donor-10.jpg",
+      "created": 1526504944000,
+      "updated": 1526504944000,
+      "total_raised": 2445,
+      "campaigns": [
+        {
+          "campaign_id": 254,
+          "started": 1526504944000,
+          "raised": 2325
+        },
+        {
+          "campaign_id": 255,
+          "started": 1526504944000,
+          "raised": 120
+        }
+      ],
+      "donations": [
+        {
+          "campaign_id": 254,
+          "nonprofit_ein": 43138427,
+          "amount": 625,
+          "timestamp": 1526504944000,
+          "public": true
+        }
+      ]
+    },
+    {
+      "donor_id": 721,
+      "fullname": "Francisca Morana",
+      "firstname": "Francisca",
+      "lastname": "Morana",
+      "avatar": "http://localhost:3004/static/assets/images/donor-1.jpg",
+      "created": 1526504944000,
+      "updated": 1526504944000,
+      "campaign_count": 1,
+      "total_raised": 2325,
+      "campaigns": [
+        {
+          "campaign_id": 256,
+          "started": 1526504944000,
+          "raised": 2325
+        }
+      ],
+      "donations": [
+        {
+          "campaign_id": 254,
+          "nonprofit_ein": 43138427,
+          "amount": 625,
+          "timestamp": 1526504944000,
+          "public": true
+        },
+        {
+          "campaign_id": 255,
+          "nonprofit_ein": 43138427,
+          "amount": 180,
+          "timestamp": 1526504944000,
+          "public": true
+        }
+      ]
+    }
+  ],
   "campaigns": [
     {
       "campaign_id": 254,
+      "fundraiser_id": 721,
       "nonprofit_ein": 43138428,
       "name": "Tutoring children for the future",
       "description": "Praesent bibendum gravida diam faucibus lobortis. Nulla a leo id mauris fringilla dictum dictum vitae ligula. Etiam maximus turpis vel dolor venenatis malesuada. Duis eget rutrum elit. Fusce elementum tempor condimentum. Cras feugiat consectetur sem, non scelerisque nisi. Donec eu magna a ante imperdiet accumsan. In tempus laoreet mi aliquet fermentum. Nullam nec cursus est. Nulla dapibus dolor fermentum hendrerit lobortis. ",
@@ -266,6 +334,7 @@
     {
       "campaign_id": 255,
       "nonprofit_ein": 43138428,
+      "fundraiser_id": 721,
       "name": "Etiam maximus turpis",
       "description": "Praesent bibendum gravida diam faucibus lobortis. Nulla a leo id mauris fringilla dictum dictum vitae ligula. Etiam maximus turpis vel dolor venenatis malesuada. Duis eget rutrum elit. Fusce elementum tempor condimentum. Cras feugiat consectetur sem, non scelerisque nisi. Donec eu magna a ante imperdiet accumsan. In tempus laoreet mi aliquet fermentum. Nullam nec cursus est. Nulla dapibus dolor fermentum hendrerit lobortis. ",
       "pictures": [
@@ -291,6 +360,7 @@
     {
       "campaign_id": 256,
       "nonprofit_ein": 43138428,
+      "fundraiser_id": 722,
       "name": "Cras feugiat consectetur sem",
       "description": "Praesent bibendum gravida diam faucibus lobortis. Nulla a leo id mauris fringilla dictum dictum vitae ligula. Etiam maximus turpis vel dolor venenatis malesuada. Duis eget rutrum elit. Fusce elementum tempor condimentum. Cras feugiat consectetur sem, non scelerisque nisi. Donec eu magna a ante imperdiet accumsan. In tempus laoreet mi aliquet fermentum. Nullam nec cursus est. Nulla dapibus dolor fermentum hendrerit lobortis. ",
       "pictures": [

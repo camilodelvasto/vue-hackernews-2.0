@@ -25,8 +25,13 @@ export function createStore () {
 				data: [],
 				current: 1,
 				limit: 6
+      },
+      donations: {
+        data: [],
+        current: 1,
+        limit: 6
 			},
-			donations: {
+			fundraisers: {
 				data: [],
 				current: 1,
 				limit: 6

@@ -5,6 +5,7 @@ import {
 	fetchDonations,
 	fetchCommonData,
 	fetchNonprofit,
+  fetchTopFundraisers,
 	fetchUpdates
 } from "../api"
 
@@ -83,22 +84,35 @@ export default {
 				})
 		})
 	},
-	FETCH_DONATIONS: ({ commit, dispatch, state }, { campaignId, nonprofitEIN, paginated }) => {
+  FETCH_DONATIONS: ({ commit, dispatch, state }, { campaignId, nonprofitEIN, paginated }) => {
+    return new Promise((resolve, reject) => {
+      var query = ""
+      if (campaignId) {
+        query = `campaign_id=${campaignId}`
+      }
+      if (nonprofitEIN) {
+        query = `nonprofit_ein=${nonprofitEIN}`
+      }
+      return fetchDonations(query, state.donations.current, state.donations.limit, paginated)
+        .then(data => {
+          commit("ADD_DONATIONS", { donations: data })
+          resolve(data)
+        })
+        .catch(err => {
+          commit("ADD_DONATIONS", { donations: [] })
+          reject(err)
+        })
+    })
+  },
+	FETCH_TOP_FUNDRAISERS: ({ commit, dispatch, state }, { paginated }) => {
 		return new Promise((resolve, reject) => {
-			var query = ""
-			if (campaignId) {
-				query = `campaign_id=${campaignId}`
-			}
-			if (nonprofitEIN) {
-				query = `nonprofit_ein=${nonprofitEIN}`
-			}
-			return fetchDonations(query, state.donations.current, state.donations.limit, paginated)
+			return fetchTopFundraisers(state.fundraisers.current, state.fundraisers.limit, paginated)
 				.then(data => {
-					commit("ADD_DONATIONS", { donations: data })
+					commit("ADD_TOP_FUNDRAISERS", { fundraisers: data })
 					resolve(data)
 				})
 				.catch(err => {
-					commit("ADD_DONATIONS", { donations: [] })
+					commit("ADD_TOP_FUNDRAISERS", { fundraisers: [] })
 					reject(err)
 				})
 		})
