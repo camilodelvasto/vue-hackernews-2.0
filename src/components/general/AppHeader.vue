@@ -79,6 +79,7 @@
       position: absolute;
       top: 35px;
       right: 0;
+      margin-top: -10px;
       background: rgba($white, 0.9);
       text-align: right;
       border: 1px solid $color-light-gray;
@@ -161,7 +162,6 @@
       ul.sub {
         opacity: 1;
         z-index: 24;
-        margin-top: -10px;
 
         &.active {
           opacity: 1;
