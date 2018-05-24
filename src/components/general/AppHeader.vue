@@ -64,8 +64,10 @@
 
       &.turn {
         svg {
-          transition: transform 0.2s ease-in-out;
-          transform: rotate(180deg);
+          @include breakpoint($mobile) {
+            transition: transform 0.2s ease-in-out;
+            transform: rotate(180deg);
+          }
         }
       }
     }
@@ -150,12 +152,16 @@
     &:hover {
       .other-sites-arrow {
         color: $color-light-gray;
+        svg {
+          transition: transform 0.2s ease-in-out;
+          transform: rotate(180deg);
+        }
       }
-
 
       ul.sub {
         opacity: 1;
         z-index: 24;
+        margin-top: -10px;
 
         &.active {
           opacity: 1;
@@ -228,7 +234,6 @@ export default {
 	data () {
 		return {
 			showSearchBar: false,
-			shareButtonImgSrc: "/share-button.png",
 			showingMaxGoodSites: false,
 			maxGoodSites: [
 				{ name: "Volunteerathon", href: "#" },

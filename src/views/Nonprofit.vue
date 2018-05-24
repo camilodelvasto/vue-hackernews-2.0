@@ -45,6 +45,7 @@
     <section>
       <button class="button is-large is-info is-centered fundraiser_cta">Create your own fundraiser</button>
     </section>
+    <AppFooter></AppFooter>
 
     <h2>Other nonprofits:</h2>
     <ul>
@@ -61,6 +62,7 @@
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
+import AppFooter from "Components/general/AppFooter.vue"
 import AppHeader from "Components/general/AppHeader.vue"
 import DonorsList from "Components/general/DonorsList.vue"
 import FloatingShareTools from "Components/general/FloatingShareTools.vue"
@@ -75,6 +77,7 @@ Vue.use(VueMeta)
 export default {
 	name: "nonprofit",
 	components: {
+    AppFooter,
 		AppHeader,
 		DonorsList,
     FloatingShareTools,
@@ -142,7 +145,7 @@ export default {
 	},
 	mounted () {
 		window.addEventListener("scroll", () => {
-			this.bottom = this.bottomVisible()
+			this.bottom = this.userHasScrolled()
 		})
 		loadCampaigns(this.$store, this.$route.params.ein)
 	},
@@ -157,7 +160,6 @@ export default {
 	},
 	destroyed () {
 		this.$store.commit("RESET_CAMPAIGN")
-		this.$store.commit("RESET_DONATIONS")
 	},
 	methods: {
     loadMoreDonations (paginated = true) {
@@ -179,12 +181,9 @@ export default {
 					console.log(err)
 				})
 		},
-		bottomVisible () {
+		userHasScrolled () {
 			const scrollY = window.scrollY
-			const visible = document.documentElement.clientHeight
-			const pageHeight = document.documentElement.scrollHeight
-			const bottomOfPage = visible + scrollY >= pageHeight
-			return bottomOfPage || pageHeight < visible
+      return scrollY > 0
 		}
 	}
 }
