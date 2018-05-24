@@ -1,14 +1,17 @@
 <template>
   <div class="sharing-icons-row__wrapper">
+    <div id="fb-root"></div>
     <div class="columns">
       <div class="column">
-        <div class="sharing-icons-row__share-item sharing-icons-row__share-facebook button is-white">
+        <div class="sharing-icons-row__share-item sharing-icons-row__share-facebook button is-white"
+          @click="shareFB()">
           <Icons iconwidth="20px" iconheight="20px" icon="facebook" color="#fff" class="icon" />
           <span>Share</span>
         </div>
       </div>
       <div class="column">
-        <div class="sharing-icons-row__share-item sharing-icons-row__share-twitter button is-white">
+        <div class="sharing-icons-row__share-item sharing-icons-row__share-twitter button is-white"
+          @click="shareTweet()">
           <Icons iconwidth="20px" iconheight="20px" icon="twitter" color="#fff" class="icon" />
           <span>Tweet</span>
         </div>
@@ -143,11 +146,31 @@ export default {
 	components: {
 		Icons
 	},
+  data () {
+    return {
+      fullURL: ''
+    }
+  },
 	props: [ "campaignName", "campaignUrl" ],
 	mounted () {
 		if (typeof window !== "undefined" && window.FB) {
 			window.FB.XFBML.parse()
 		}
-	}
+    this.fullURL = window.location.origin + this.$route.fullPath
+	},
+  methods: {
+    shareFB() {
+      window.FB.ui({
+        method: 'share',
+        href: this.fullURL,
+      }, function(response){
+        console.log(response)
+      })
+    },
+    shareTweet() {
+      console.log('encodeURI(this.fullURL): ', encodeURIComponent(this.fullURL))
+      window.open(`https://twitter.com/intent/tweet/?text=Check%20out%20this%20site!&url=${encodeURIComponent(this.fullURL)}&via=volunteerathon`, '_blank')
+    }
+  }
 }
 </script>
