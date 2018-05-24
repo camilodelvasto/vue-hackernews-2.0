@@ -146,31 +146,30 @@ export default {
 	components: {
 		Icons
 	},
-  data () {
-    return {
-      fullURL: ''
-    }
-  },
+	data () {
+		return {
+			fullURL: ""
+		}
+	},
 	props: [ "campaignName", "campaignUrl" ],
 	mounted () {
 		if (typeof window !== "undefined" && window.FB) {
 			window.FB.XFBML.parse()
 		}
-    this.fullURL = window.location.origin + this.$route.fullPath
+		this.fullURL = window.location.origin + this.$route.fullPath
 	},
-  methods: {
-    shareFB() {
-      window.FB.ui({
-        method: 'share',
-        href: this.fullURL,
-      }, function(response){
-        console.log(response)
-      })
-    },
-    shareTweet() {
-      console.log('encodeURI(this.fullURL): ', encodeURIComponent(this.fullURL))
-      window.open(`https://twitter.com/intent/tweet/?text=Check%20out%20this%20site!&url=${encodeURIComponent(this.fullURL)}&via=volunteerathon`, '_blank')
-    }
-  }
+	methods: {
+		shareFB () {
+			window.FB.ui({
+				method: "share",
+				href: this.fullURL
+			}, function (response) {
+				console.log(response)
+			})
+		},
+		shareTweet () {
+			window.open(`https://twitter.com/intent/tweet/?text=Check%20out%20this%20site!&url=${encodeURIComponent(this.fullURL)}&via=volunteerathon`, "_blank")
+		}
+	}
 }
 </script>

@@ -137,10 +137,10 @@
 
 <script>
 export default {
-  computed: {
-    footerMenuLinks () {
-      return this.$store.state.common.footerMenuLinks
-    }
-  }
+	computed: {
+		footerMenuLinks () {
+			return this.$store.state.common.footerMenuLinks
+		}
+	}
 }
 </script>

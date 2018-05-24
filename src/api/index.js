@@ -119,22 +119,22 @@ export function fetchComments (campaignId, page, limit, paginated = true) {
 }
 
 export function fetchDonations (query, page, limit, paginated = true) {
-  return new Promise((resolve, reject) => {
-    if (!paginated) {
-      page = 1
-    }
-    axios.get(`${baseURL}/donations?${query}&_limit=${limit}&_page=${page++}`)
-      .then(response => {
-        if (response.data.length) {
-          resolve(response.data)
-        } else {
-          reject({ code: 404 })
-        }
-      })
-      .catch(e => {
-        reject(e)
-      })
-  })
+	return new Promise((resolve, reject) => {
+		if (!paginated) {
+			page = 1
+		}
+		axios.get(`${baseURL}/donations?${query}&_limit=${limit}&_page=${page++}`)
+			.then(response => {
+				if (response.data.length) {
+					resolve(response.data)
+				} else {
+					reject({ code: 404 })
+				}
+			})
+			.catch(e => {
+				reject(e)
+			})
+	})
 }
 
 export function fetchTopFundraisers (page = 1, limit, paginated = true) {

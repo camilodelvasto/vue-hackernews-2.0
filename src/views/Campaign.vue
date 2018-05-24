@@ -135,7 +135,7 @@ export default {
 	methods: {
 		userHasScrolled () {
 			const scrollY = window.scrollY
-      return scrollY > 0;
+			return scrollY > 0
 		},
 
 		loadMoreComments (paginated = true) {

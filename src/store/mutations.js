@@ -24,10 +24,10 @@ export default {
 		state.comments.data = state.comments.data.concat(comments)
 		state.comments.current++
 	},
-  ADD_DONATIONS: (state, { donations }) => {
-    state.donations.data = state.donations.data.concat(donations)
-    state.donations.current++
-  },
+	ADD_DONATIONS: (state, { donations }) => {
+		state.donations.data = state.donations.data.concat(donations)
+		state.donations.current++
+	},
 	ADD_TOP_FUNDRAISERS: (state, { fundraisers }) => {
 		state.fundraisers.data = state.fundraisers.data.concat(fundraisers)
 		state.fundraisers.current++

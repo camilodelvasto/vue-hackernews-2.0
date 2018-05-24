@@ -77,10 +77,10 @@ Vue.use(VueMeta)
 export default {
 	name: "nonprofit",
 	components: {
-    AppFooter,
+		AppFooter,
 		AppHeader,
 		DonorsList,
-    FloatingShareTools,
+		FloatingShareTools,
 		Icons,
 		NonprofitAbout,
 		NonprofitCampaigns,
@@ -119,9 +119,9 @@ export default {
 		campaigns () {
 			return this.$store.state.campaigns.data
 		},
-    donations () {
-      return this.$store.state.donations.data
-    },
+		donations () {
+			return this.$store.state.donations.data
+		},
 		fundraisers () {
 			return this.$store.state.fundraisers.data
 		},
@@ -153,7 +153,7 @@ export default {
 	watch: {
 		bottom (bottom) {
 			if (bottom && this.$store.state.donations.current === 1) {
-        this.loadMoreDonations()
+				this.loadMoreDonations()
 				this.loadMoreTopFundraisers()
 			}
 		}
@@ -162,16 +162,16 @@ export default {
 		this.$store.commit("RESET_CAMPAIGN")
 	},
 	methods: {
-    loadMoreDonations (paginated = true) {
-      const nonprofitEIN = this.$route.params.ein
-      return this.$store.dispatch("FETCH_DONATIONS", { nonprofitEIN: nonprofitEIN, paginated: paginated })
-        .then(data => {
-          return data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
+		loadMoreDonations (paginated = true) {
+			const nonprofitEIN = this.$route.params.ein
+			return this.$store.dispatch("FETCH_DONATIONS", { nonprofitEIN: nonprofitEIN, paginated: paginated })
+				.then(data => {
+					return data
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		},
 		loadMoreTopFundraisers (paginated = true) {
 			return this.$store.dispatch("FETCH_TOP_FUNDRAISERS", { paginated: paginated })
 				.then(data => {
@@ -183,7 +183,7 @@ export default {
 		},
 		userHasScrolled () {
 			const scrollY = window.scrollY
-      return scrollY > 0
+			return scrollY > 0
 		}
 	}
 }

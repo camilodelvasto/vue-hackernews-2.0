@@ -81,34 +81,34 @@
 </style>
 
 <script>
-import Icons from 'Components/general/Icons.vue'
+import Icons from "Components/general/Icons.vue"
 
 export default {
-  components: {
-    Icons
-  },
-  data () {
-    return {
-      isFixed: false
-    }
-  },
-  methods: {
-    handleScroll () {
-      var nonpScrolltop = this.$refs.nonpToolbar.getBoundingClientRect()
-      var top = window.pageYOffset || document.documentElement.scrollTop
-      var docHeight = (document.height !== undefined) ? document.height : document.body.offsetHeight;
-      if (nonpScrolltop.y < 93 && top < docHeight - 1000) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
-    }
-  },
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
+	components: {
+		Icons
+	},
+	data () {
+		return {
+			isFixed: false
+		}
+	},
+	methods: {
+		handleScroll () {
+			var nonpScrolltop = this.$refs.nonpToolbar.getBoundingClientRect()
+			var top = window.pageYOffset || document.documentElement.scrollTop
+			var docHeight = (document.height !== undefined) ? document.height : document.body.offsetHeight
+			if (nonpScrolltop.y < 93 && top < docHeight - 1000) {
+				this.isFixed = true
+			} else {
+				this.isFixed = false
+			}
+		}
+	},
+	mounted () {
+		window.addEventListener("scroll", this.handleScroll)
+	},
+	destroyed () {
+		window.removeEventListener("scroll", this.handleScroll)
+	}
 }
 </script>
