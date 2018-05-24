@@ -17,7 +17,8 @@
         </div>
       </div>
       <div class="column">
-        <div class="sharing-icons-row__share-item sharing-icons-row__share-linkedin button is-white">
+        <div class="sharing-icons-row__share-item sharing-icons-row__share-linkedin button is-white"
+          @click="shareLinkedIn()">
           <Icons iconwidth="20px" iconheight="20px" icon="linkedin" color="#fff" class="icon" />
           <span>Share</span>
         </div>
@@ -148,7 +149,10 @@ export default {
 	},
 	data () {
 		return {
-			fullURL: ""
+			fullURL: "",
+      shareText: "Check out this website!",
+      siteName: "Volunteerathon",
+      shareWindowTitle: "Sharing"
 		}
 	},
 	props: [ "campaignName", "campaignUrl" ],
@@ -167,9 +171,18 @@ export default {
 				console.log(response)
 			})
 		},
-		shareTweet () {
-			window.open(`https://twitter.com/intent/tweet/?text=Check%20out%20this%20site!&url=${encodeURIComponent(this.fullURL)}&via=volunteerathon`, "_blank")
-		}
+    shareTweet () {
+      popUpWindow(`https://twitter.com/intent/tweet/?url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}&via=${encodeURI(this.siteName)}`, `${encodeURI(this.shareWindowTitle)}`, 450, 320)
+    },
+    shareLinkedIn () {
+      popUpWindow(`http://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}`, `${encodeURI(this.shareWindowTitle)}`, 650, 420)
+    },
 	}
+}
+
+function popUpWindow(url, title, w, h) {
+    var y = window.outerHeight / 2 + window.screenY - ( h / 2)
+    var x = window.outerWidth / 2 + window.screenX - ( w / 2)
+    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + y + ', left=' + x);
 }
 </script>
