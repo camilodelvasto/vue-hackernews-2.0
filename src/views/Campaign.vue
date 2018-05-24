@@ -128,17 +128,14 @@ export default {
 	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
 	mounted () {
 		window.addEventListener("scroll", () => {
-			this.bottom = this.bottomVisible()
+			this.bottom = this.userHasScrolled()
 		})
 	},
 
 	methods: {
-		bottomVisible () {
+		userHasScrolled () {
 			const scrollY = window.scrollY
-			const visible = document.documentElement.clientHeight
-			const pageHeight = document.documentElement.scrollHeight
-			const bottomOfPage = visible + scrollY >= pageHeight
-			return bottomOfPage || pageHeight < visible
+      return scrollY > 0;
 		},
 
 		loadMoreComments (paginated = true) {
