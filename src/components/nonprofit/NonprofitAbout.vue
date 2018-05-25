@@ -44,7 +44,7 @@
           </flickity>
         </div>
       </div>
-      <SharingIconsRow />
+      <SharingIconsRow :key="$route.fullPath" :route-path="$route.fullPath" />
     </div>
   </div>
 </template>

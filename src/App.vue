@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div id="fb-root"></div>
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>

@@ -1,6 +1,5 @@
 <template>
   <div class="sharing-icons-row__wrapper">
-    <div id="fb-root"></div>
     <div class="columns">
       <div class="column">
         <div class="sharing-icons-row__share-item sharing-icons-row__share-facebook button is-white"
@@ -47,7 +46,7 @@
     <div class="fb-like-follow__wrapper">
       <div class="fb-like-follow__fb-like">
         <div class="fb-like"
-          :data-href="campaignUrl"
+          :data-href="fullURL"
           data-layout="button_count"
           data-share="false"
           data-action="like"
@@ -162,25 +161,28 @@ export default {
 			shareWindowTitle: "Sharing"
 		}
 	},
-	props: [ "campaignName", "campaignUrl" ],
+	props: [ "routePath" ],
 	mounted () {
-		if (typeof window !== "undefined" && window.FB) {
-			window.FB.XFBML.parse()
-		}
-		this.fullURL = window.location.origin + this.fullPath
+		this.fullURL = window.location.origin + this.routePath
+		this.loadScripts()
 	},
 	computed: {
-		fullPath () {
-			return this.$store.state.fullPath || this.$route.fullPath
-		}
 	},
 	methods: {
+		loadScripts () {
+			if (typeof window !== "undefined" && window.FB) {
+				window.FB.XFBML.parse()
+			}
+			if (window.addthis.layers && typeof window.addthis.layers.refresh === "function") {
+				window.addthis.layers.refresh()
+			}
+		},
 		shareFB () {
 			window.FB.ui({
 				method: "share",
 				href: this.fullURL
 			}, function (response) {
-				console.log(response)
+				return response
 			})
 		},
 		shareTweet () {
