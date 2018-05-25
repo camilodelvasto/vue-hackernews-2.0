@@ -46,16 +46,6 @@
       <button class="button is-large is-info is-centered fundraiser_cta">Create your own fundraiser</button>
     </section>
     <AppFooter></AppFooter>
-
-    <h2>Other nonprofits:</h2>
-    <ul>
-      <li><router-link to="/nonprofits/43138428">43138428 (non-generic)</router-link></li>
-      <li><router-link to="/nonprofits/660548326">660548326</router-link></li>
-      <li><router-link to="/nonprofits/43063409">43063409</router-link></li>
-      <li><router-link to="/nonprofits/43177990">43177990</router-link></li>
-      <li><router-link to="/nonprofits/43178037">43178037</router-link></li>
-      <li><router-link to="/nonprofits/9999999943178037">99999999943178037</router-link></li>
-    </ul>
   </div>
 </template>
 
@@ -169,7 +159,7 @@ export default {
 					return data
 				})
 				.catch(err => {
-					console.log(err)
+					return err
 				})
 		},
 		loadMoreTopFundraisers (paginated = true) {
@@ -178,7 +168,7 @@ export default {
 					return data
 				})
 				.catch(err => {
-					console.log(err)
+					return err
 				})
 		},
 		userHasScrolled () {
