@@ -263,13 +263,14 @@ function loadCampaigns (store, ein, paginated = true) {
   &__cta-wrapper {
     text-align: center;
     position: absolute;
-    bottom: 150px;
+    bottom: 145px;
     text-align: right;
     display: flex;
     flex-direction: column;
     right: 0;
     margin-right: 0;
     flex-wrap: wrap;
+    padding-right: 0;
 
     &.not-claimed {
       bottom: 190px;
