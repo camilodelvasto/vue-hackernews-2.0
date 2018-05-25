@@ -11,6 +11,7 @@ Vue.use(Meta, {
 
 // route-level code splitting
 const Nonprofit = () => import("../views/Nonprofit.vue")
+const HomePage = () => import("../views/HomePage.vue")
 const Campaign = () => import("../views/Campaign.vue")
 const Default404 = () => import("../views/Default404.vue")
 
@@ -20,6 +21,11 @@ export function createRouter () {
 		fallback: false,
 		scrollBehavior: () => ({ y: 0 }),
 		routes: [
+			{
+				path: "/",
+				name: "home",
+				component: HomePage
+			},
 			{
 				path: "/nonprofits/:ein",
 				name: "nonprofit",

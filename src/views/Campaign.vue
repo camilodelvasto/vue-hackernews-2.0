@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <AppHeader></AppHeader>
+    <AppHeader layout="app"></AppHeader>
     <h2>Basic data</h2>
     <h2>This campaign:</h2>
     {{campaign.name}}

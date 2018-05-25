@@ -1,7 +1,13 @@
 <template>
-  <div class="header__wrapper">
+  <div class="header__wrapper" :class="{ 'page-layout': layout === 'page' }">
     <div class="container is-fluid">
       <div class="header__inner">
+        <div class="random-words">
+          Explore
+        </div>
+        <div class="random-words">
+          Volunteer
+        </div>
         <div class="user-space__search">
           <div class="user-space__search-wrapper">
             <div class="user-space__search-trigger" @click="showSearchBar = !showSearchBar">
@@ -9,20 +15,21 @@
             </div>
           </div>
         </div>
-        <div class="random-words">
-          Explore
-        </div>
-        <div class="random-words">
-          Volunteer
-        </div>
         <div class="logo__wrapper">
-          <img class="logo" src="~public/logo-272x49.png" alt="logo" width="272" height="49">
+          <router-link to="/" exact>
+            <img class="logo" src="~public/logo-300x53.png" alt="logo" width="300" height="53">
+          </router-link>
         </div>
         <div class="logo__wrapper centered">
-          <img class="logo" src="~public/logo-272x49.png" alt="logo" width="272" height="49">
+          <router-link to="/" exact>
+            <img class="logo" src="~public/logo-300x53.png" alt="logo" width="300" height="53">
+          </router-link>
         </div>
-        <div class="user-space__logged--in">
+        <div class="user-space__logged--in" v-if="layout === 'app'">
           hmdewolf »
+        </div>
+        <div class="user-space__logged--in" v-if="layout === 'page'">
+          Login | Register
         </div>
         <div class="max-good" @click="toggleOtherMaxGoodSites()" :class="{ 'active': showingMaxGoodSites }">
           <span class="small">Powered by </span>
@@ -201,6 +208,10 @@
     flex-direction: row;
   }
 
+  .user-space__search {
+    order: -3;
+  }
+
   .logo__wrapper {
     width: 100%;
     margin-top: 5px;
@@ -212,6 +223,11 @@
       width: auto;
       order: unset;
       opacity: 0;
+
+      img {
+        max-width: 272px;
+        max-height: 49px;        
+      }
     }
 
     &.centered {
@@ -232,6 +248,31 @@
 .random-words {
   padding: 0 5px;
 }
+
+.page-layout {
+  .header__inner {
+    .user-space__search {
+      order: unset;
+    }
+
+    .logo__wrapper {
+      opacity: 1;
+      order: -2;
+
+      img {
+        max-width: 300px;
+        max-height: 53px;        
+      }
+
+      &.centered {
+        opacity: 0;
+        display: none;
+      }
+    }
+  }
+}
+
+
 </style>
 
 <script>
@@ -242,6 +283,7 @@ export default {
 	components: {
 		Icons
 	},
+	props: ["layout"],
 	data () {
 		return {
 			showSearchBar: false,
