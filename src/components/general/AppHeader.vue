@@ -24,7 +24,7 @@
         <div class="user-space__logged--in">
           hmdewolf »
         </div>
-        <div class="max-good" @click="toggleOtherMaxGoodSites()">
+        <div class="max-good" @click="toggleOtherMaxGoodSites()" :class="{ 'active': showingMaxGoodSites }">
           <span class="small">Powered by </span>
           <div class="max-good__submenu-wrapper">
             <img src="~public/max-good-logo-180x22.png" width="150" height="14">
@@ -132,6 +132,14 @@
   align-items: center;
   padding: 5px 0;
   width: 100%;
+  max-height: 50px;
+  overflow: hidden;
+  z-index: 30;
+
+  &.active {
+    max-height: auto;
+    overflow: visible;    
+  }
 
   @include breakpoint($tablet) {
     width: auto;
@@ -151,6 +159,9 @@
   @include breakpoint($desktop) {
     flex-direction: column;
     &:hover {
+      max-height: auto;
+      overflow: visible;
+
       .other-sites-arrow {
         color: $color-light-gray;
         svg {

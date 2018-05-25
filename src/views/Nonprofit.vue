@@ -5,20 +5,18 @@
       <div class="hero is-medium nonprofit-hero__hero-wrapper" :style="{backgroundImage: `url(${nonprofit.data.hero})`}">
         <div class="container nonprofit-hero__hero-container">
           <div class="nonprofit-hero__logo-wrapper" :style="{backgroundImage: `url(${nonprofit.data.logo})`}" v-if="nonprofit.data.logo"></div>
-          <div class="nonprofit-hero__claim__cta" v-if="!nonprofit.data.about">
-            <div class="button is-pulled-right is-small is-centered is-rounded">Manage this nonprofit</div>
-          </div>
         </div>
       </div>
       <div class="container columns">
-        <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop is-8-widescreen is-9-fullhd" :class="{'not-claimed': !nonprofit.data.about}">{{nonprofit.NAME}}</div>
-        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop is-4-widescreen is-3-fullhd">
+        <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd" :class="{'not-claimed': !nonprofit.data.about}">{{nonprofit.NAME}}</div>
+        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop is-5-widescreen is-5-fullhd">
           <div class="button nonprofit-hero__cta-fundraise">Fundraise</div>
           <div class="button nonprofit-hero__cta-donate">Donate</div>
           <div class="button nonprofit-hero__cta-share">
             <Icons iconwidth="16px" iconheight="16px" icon="share" color="#ffffff" class="icon" />
             Share
           </div>
+          <div class="nonprofit-hero__cta-manage" v-if="!nonprofit.data.about"><a>Manage this nonprofit</a></div>
         </div>
       </div>
       <div class="container">
@@ -239,30 +237,6 @@ function loadCampaigns (store, ein, paginated = true) {
     }
   }
 
-  &__claim__cta {
-    position: absolute;
-    top: 20px;
-
-    .button {
-      border-color: white !important;
-      background-color: transparent !important;
-      color: $white !important;
-      transition: color 0.6s ease-in-out, background-color 0.2s ease-in-out;
-      font-size: 1.0rem;
-
-      &:hover {
-        background-color: $color-light-gray !important;
-        color: $color-dark-gray !important;
-      }
-    }
-
-    @include breakpoint($desktop) {
-      top: unset;
-      bottom: 20px;
-      right: 0;
-    }
-  }
-
   &__nonprofit-name {
     font-size: 30px;
     color: $color-text;
@@ -289,12 +263,13 @@ function loadCampaigns (store, ein, paginated = true) {
   &__cta-wrapper {
     text-align: center;
     position: absolute;
-    top: -170px;
+    top: -190px;
     text-align: right;
     display: flex;
     flex-direction: column;
     right: 0;
     margin-right: 0;
+    flex-wrap: wrap;
 
     @include breakpoint($tablet) {
       margin-top: 10px;
@@ -304,6 +279,10 @@ function loadCampaigns (store, ein, paginated = true) {
       flex-direction: row;
       align-items: flex-start;
       justify-content: flex-end;
+    }
+
+    @include breakpoint($desktop) {
+      height: 100%;
     }
 
     .button {
@@ -363,6 +342,14 @@ function loadCampaigns (store, ein, paginated = true) {
 
     &:hover {
       background-color: rgba($color-text, 0.7);
+    }
+  }
+  &__cta-manage {
+    font-size: 12px;
+
+    @include breakpoint($tablet) {
+      background: transparent;
+      width: 100%;
     }
   }
 }
