@@ -9,7 +9,7 @@
       </div>
       <div class="container columns">
         <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd" :class="{'not-claimed': !nonprofit.data.about}">{{nonprofit.NAME}}</div>
-        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop is-5-widescreen is-5-fullhd">
+        <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop is-5-widescreen is-5-fullhd" :class="{'not-claimed': !nonprofit.data.about}">
           <div class="button nonprofit-hero__cta-fundraise">Fundraise</div>
           <div class="button nonprofit-hero__cta-donate">Donate</div>
           <div class="button nonprofit-hero__cta-share">
@@ -263,13 +263,17 @@ function loadCampaigns (store, ein, paginated = true) {
   &__cta-wrapper {
     text-align: center;
     position: absolute;
-    top: -190px;
+    bottom: 150px;
     text-align: right;
     display: flex;
     flex-direction: column;
     right: 0;
     margin-right: 0;
     flex-wrap: wrap;
+
+    &.not-claimed {
+      bottom: 190px;
+    }
 
     @include breakpoint($tablet) {
       margin-top: 10px;
