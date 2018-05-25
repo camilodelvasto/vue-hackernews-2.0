@@ -1,4 +1,7 @@
 export default {
+	SET_CURRENT_PATH: (state, { fullPath }) => {
+		state.fullPath = fullPath
+	},
 	SET_NONPROFIT: (state, { nonprofit }) => {
 		state.nonprofit = nonprofit
 	},

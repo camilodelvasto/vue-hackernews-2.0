@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export function createStore () {
 	return new Vuex.Store({
 		state: {
+			fullPath: "",
 			common: {},
 			nonprofit: {/* [ein: number] */},
 			campaign: {/* [id: number] */},

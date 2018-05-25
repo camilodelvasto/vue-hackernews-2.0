@@ -24,9 +24,11 @@
         </div>
       </div>
       <div class="column">
-        <div class="sharing-icons-row__share-item sharing-icons-row__share-email button is-white">
+        <div class="sharing-icons-row__share-item sharing-icons-row__share-email button is-white"
+          @click="shareEmail()">
           <Icons iconwidth="20px" iconheight="20px" icon="email" color="#fff" class="icon" />
           <span>Email</span>
+          <div class="addthis_inline_share_toolbox"></div>
         </div>
       </div>
       <div class="column">
@@ -83,6 +85,7 @@
     border-radius: 5px;
     display: flex;
     flex-grow: 100;
+    position: relative;
   }
   &__share-item:not(.is-light) {
     color: $white;
@@ -139,6 +142,10 @@
     }
   }
 }
+.addthis_inline_share_toolbox {
+  opacity: 0;
+  position: absolute;
+}
 </style>
 <script>
 import Icons from "Components/general/Icons.vue"
@@ -150,9 +157,9 @@ export default {
 	data () {
 		return {
 			fullURL: "",
-      shareText: "Check out this website!",
-      siteName: "Volunteerathon",
-      shareWindowTitle: "Sharing"
+			shareText: "Check out this website!",
+			siteName: "Volunteerathon",
+			shareWindowTitle: "Sharing"
 		}
 	},
 	props: [ "campaignName", "campaignUrl" ],
@@ -160,7 +167,12 @@ export default {
 		if (typeof window !== "undefined" && window.FB) {
 			window.FB.XFBML.parse()
 		}
-		this.fullURL = window.location.origin + this.$route.fullPath
+		this.fullURL = window.location.origin + this.fullPath
+	},
+	computed: {
+		fullPath () {
+			return this.$store.state.fullPath || this.$route.fullPath
+		}
 	},
 	methods: {
 		shareFB () {
@@ -171,18 +183,34 @@ export default {
 				console.log(response)
 			})
 		},
-    shareTweet () {
-      popUpWindow(`https://twitter.com/intent/tweet/?url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}&via=${encodeURI(this.siteName)}`, `${encodeURI(this.shareWindowTitle)}`, 450, 320)
-    },
-    shareLinkedIn () {
-      popUpWindow(`http://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}`, `${encodeURI(this.shareWindowTitle)}`, 650, 420)
-    },
+		shareTweet () {
+			popUpWindow(`https://twitter.com/intent/tweet/?url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}&via=${encodeURI(this.siteName)}`, `${encodeURI(this.shareWindowTitle)}`, 450, 320)
+		},
+		shareLinkedIn () {
+			popUpWindow(`http://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}`, `${encodeURI(this.shareWindowTitle)}`, 650, 420)
+		},
+		shareEmail () {
+			document.querySelector(".at-share-btn").click()
+		}
 	}
 }
 
-function popUpWindow(url, title, w, h) {
-    var y = window.outerHeight / 2 + window.screenY - ( h / 2)
-    var x = window.outerWidth / 2 + window.screenX - ( w / 2)
-    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + y + ', left=' + x);
+function popUpWindow (url, title, w, h) {
+	// Credit goes to https://stackoverflow.com/a/16861050/1176464
+	// Fixes dual-screen position                         Most browsers      Firefox
+	var dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX
+	var dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY
+
+	var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
+	var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
+
+	var left = ((width / 2) - (w / 2)) + dualScreenLeft
+	var top = ((height / 2) - (h / 2)) + dualScreenTop
+	var newWindow = window.open(url, title, "scrollbars=yes, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left)
+
+	// Puts focus on the newWindow
+	if (window.focus) {
+		newWindow.focus()
+	}
 }
 </script>
