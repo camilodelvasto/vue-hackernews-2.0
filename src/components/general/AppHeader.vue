@@ -260,8 +260,15 @@
       order: -2;
 
       img {
-        max-width: 300px;
-        max-height: 53px;        
+        max-width: 272px;
+        max-height: 49px;        
+      }
+
+      @include breakpoint($tablet) {
+        img {
+          max-width: 300px;
+          max-height: 53px;        
+        }        
       }
 
       &.centered {
