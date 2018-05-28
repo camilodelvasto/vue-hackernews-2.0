@@ -14,6 +14,9 @@
       :boxes="home.section3.boxes"
       :bottomline="home.section3.bottomline"
       :results="home.section3.results"></HomeSection3>
+    <HomeSection4
+      :headline="home.section4.headline"
+      :boxes="home.section4.boxes"></HomeSection4>
     <AppFooter></AppFooter>
   </div>
 </template>
@@ -26,6 +29,7 @@ import AppHeader from "Components/general/AppHeader.vue"
 import HomeHero from "Components/home/HomeHero.vue"
 import HomeSection2 from "Components/home/HomeSection2.vue"
 import HomeSection3 from "Components/home/HomeSection3.vue"
+import HomeSection4 from "Components/home/HomeSection4.vue"
 import TopMenu from "Components/general/TopMenu.vue"
 
 Vue.use(VueMeta)
@@ -37,7 +41,8 @@ export default {
 		AppHeader,
     HomeHero,
     HomeSection2,
-		HomeSection3,
+    HomeSection3,
+		HomeSection4,
 		TopMenu
 	},
 	data () {
@@ -86,5 +91,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>

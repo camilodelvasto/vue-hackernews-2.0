@@ -72,7 +72,7 @@
     }
 
     @include breakpoint($widescreen) {
-      padding: 0 6%;
+      padding: 0 4%;
     }
 
     .icon-img {
@@ -116,10 +116,6 @@
       @include breakpoint($desktop) {
         font-size: 20px !important;
         text-align: left;
-      }
-
-      @include breakpoint($widescreen) {
-        font-size: 22px !important;
       }
     }
 

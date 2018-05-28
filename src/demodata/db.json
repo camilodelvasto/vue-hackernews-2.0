@@ -577,6 +577,31 @@
           }
         ],
         "bottomline": "That’s five wins instead of one for the same amount of effort"
+      },
+      "section4": {
+        "headline": "A big opportunity for good",
+        "boxes": [
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/s4-volunteers-red.jpg",
+            "tagline": "The average Volunteerathon&trade; raises $700, which is higher than the $600 the average walkathon/bikeathon raises. This is because people on average will donate more if your time is helping a nonprofit than if you're exercising.",
+            "reverse": false
+          },
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/s4-multiply-logo.jpg",
+            "tagline": "If you volunteer 60 hours, you save a nonprofit about $700. If you spend another hour emailing invites and raise the $700 average, you'll double your impact in only 1/60th of the time. Would you rather contribute $700 in 60 hours or $1,400 in 61 hours?",
+            "reverse": true
+          },
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/s4-spread-the-word.jpg",
+            "tagline": "A Volunteerathon&trade; also raises awareness about your cause. Some of the people you invite will be more likely to donate to or volunteer for that cause in the future. So the impact of doing a Volunteerathon&trade; over normal volunteering is more than double.",
+            "reverse": false
+          },
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/s4-money-stack-red.jpg",
+            "tagline": "100 million people volunteer each year. They’re putting in the same effort as a walkathon, but they’re not generating any donations from it. If even 10% make their next volunteering be a “Volunteerathon&trade;” and invite their friends to be sponsors and raise $700, that is $7 billion in donations per year.",
+            "reverse": true
+          }
+        ]
       }
     }
   ],
