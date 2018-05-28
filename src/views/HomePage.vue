@@ -3,6 +3,11 @@
     <AppHeader layout="page"></AppHeader>
     <TopMenu></TopMenu>
     <HomeHero :headline="home.hero.headline" :imgsrc="home.hero.imgsrc" :tagline="home.hero.tagline" :cta="home.hero.cta"/>
+    <HomeSection2
+      :headline="home.section2.headline"
+      :tagline="home.section2.tagline"
+      :boxes="home.section2.boxes"
+      :results="home.section2.results"></HomeSection2>
     <div style="height: 600px;"></div>
     <AppFooter></AppFooter>
   </div>
@@ -14,6 +19,7 @@ import VueMeta from "vue-meta"
 import AppFooter from "Components/general/AppFooter.vue"
 import AppHeader from "Components/general/AppHeader.vue"
 import HomeHero from "Components/home/HomeHero.vue"
+import HomeSection2 from "Components/home/HomeSection2.vue"
 import TopMenu from "Components/general/TopMenu.vue"
 
 Vue.use(VueMeta)
@@ -23,7 +29,8 @@ export default {
 	components: {
 		AppFooter,
 		AppHeader,
-		HomeHero,
+    HomeHero,
+		HomeSection2,
 		TopMenu
 	},
 	data () {

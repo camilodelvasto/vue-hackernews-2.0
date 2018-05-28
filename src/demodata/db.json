@@ -471,6 +471,31 @@
         "imgsrc": "http://localhost:3004/static/assets/images/home-hero.jpg",
         "cta": "Join NOW! It's FUN…",
         "tagline": "Want to make a far greater impact with your time?"
+      },
+      "section2": {
+        "headline": "The old way is OK",
+        "tagline": "If you do one of these and invite people to support you:",
+        "boxes": [
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/home-walkathon.jpg",
+            "title": "Walkathon"
+          },
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/home-bikeathon.jpg",
+            "title": "Bikeathon"
+          },
+          {
+            "imgsrc": "http://localhost:3004/static/assets/images/home-charity-run.jpg",
+            "title": "Charity Run"
+          }
+        ],
+        "results": [
+          {
+            "iconsrc": "http://localhost:3004/static/assets/images/icon-money-t.png",
+            "headline": "You raise some money",
+            "tagline": "The average walkathon, bikeathon and charity run raises $600 for charity."
+          }
+        ]
       }
 
     }

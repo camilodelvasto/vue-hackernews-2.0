@@ -160,7 +160,6 @@ export function fetchHomePage () {
 	return new Promise((resolve, reject) => {
 		axios.get(`${baseURL}/pages?page_name=home`)
 			.then(response => {
-				console.log(response)
 				if (response.data) {
 					resolve(response.data[0])
 				} else {

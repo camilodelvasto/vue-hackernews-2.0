@@ -95,10 +95,9 @@ blockquote {
 .card {
   padding: 0;
   margin: 10px;
-  border: none !important;
+  border: 10px solid white;
 
   .card-content {
-    padding: 10px;
     height: calc(80vw - 30px);
     border: none;
     background-size: cover;
