@@ -14,7 +14,7 @@
       </div>
       <div class="container capped">
         <div class="columns combo-wrapper is-multiline">
-          <ComboBox :iconsrc="result.iconsrc" :duplicate="result.duplicate" v-for="result in results">
+          <ComboBox :iconsrc="result.iconsrc" :duplicate="result.duplicate" v-for="result in results" :key="result.headline">
             <h2 v-html="result.headline"></h2>
             <p v-html="result.tagline"></p>
           </ComboBox>
@@ -28,15 +28,15 @@
 </template>
 
 <script>
-import ComboBox from 'Components/general/ComboBox.vue'
-import RotatingImage from 'Components/general/RotatingImage.vue'
+import ComboBox from "Components/general/ComboBox.vue"
+import RotatingImage from "Components/general/RotatingImage.vue"
 
 export default {
-  components: {
-    ComboBox,
-    RotatingImage
-  },
-  props: ['headline', 'tagline', 'boxes', 'results', 'bottomline']
+	components: {
+		ComboBox,
+		RotatingImage
+	},
+	props: ["headline", "tagline", "boxes", "results", "bottomline"]
 }
 </script>
 

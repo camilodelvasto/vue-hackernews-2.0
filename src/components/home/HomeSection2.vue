@@ -9,7 +9,7 @@
           <h3 v-html="tagline"></h3>
         </div>
         <div class="columns" v-if="boxes.length">
-          <div class="card column" v-for="box in boxes">
+          <div class="card column" v-for="box in boxes" :key="box.imgsrc">
             <div class="card-content bg-position-right" :style="`backgroundImage: url(${box.imgsrc})`">
             </div>
             <footer class="card-footer" v-html="box.title"></footer>
@@ -21,7 +21,7 @@
           <h3 class="result">The result is: </h3>
         </div>
         <div class="columns combo-wrapper is-multiline">
-          <ComboBox :iconsrc="result.iconsrc" duplicate="false" v-for="result in results">
+          <ComboBox :iconsrc="result.iconsrc" duplicate="false" v-for="result in results" :key="result.headline">
             <h2 v-html="result.headline"></h2>
             <p v-html="result.tagline"></p>
           </ComboBox>
@@ -32,47 +32,47 @@
 </template>
 
 <script>
-import ComboBox from 'Components/general/ComboBox.vue'
+import ComboBox from "Components/general/ComboBox.vue"
 
 export default {
-  components: {
-    ComboBox
-  },
-  props: ['headline', 'tagline', 'boxes', 'results'],
-  data () {
-    return {
-      currentImg: 0,
-      timer: null,
-      scrollTop: 0
-    }
-  },
-  mounted () {
-    this.startRotation()
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    startRotation: function () {
-      this.timer = setInterval(this.next, 3000)
-    },
-    next: function () {
-      this.currentImg++
-    },
-    prev: function () {
-      this.currentImg--
-    },
-    handleScroll () {
-      this.scrollTop = window.scrollY;
-    }
-  },
-  computed: {
-    bgPosition () {
-      var translate = this.scrollTop / 3
-      return `0 ${translate}px`
-    }
-  }
+	components: {
+		ComboBox
+	},
+	props: ["headline", "tagline", "boxes", "results"],
+	data () {
+		return {
+			currentImg: 0,
+			timer: null,
+			scrollTop: 0
+		}
+	},
+	mounted () {
+		this.startRotation()
+		window.addEventListener("scroll", this.handleScroll)
+	},
+	destroyed () {
+		window.removeEventListener("scroll", this.handleScroll)
+	},
+	methods: {
+		startRotation: function () {
+			this.timer = setInterval(this.next, 3000)
+		},
+		next: function () {
+			this.currentImg++
+		},
+		prev: function () {
+			this.currentImg--
+		},
+		handleScroll () {
+			this.scrollTop = window.scrollY
+		}
+	},
+	computed: {
+		bgPosition () {
+			var translate = this.scrollTop / 3
+			return `0 ${translate}px`
+		}
+	}
 }
 </script>
 

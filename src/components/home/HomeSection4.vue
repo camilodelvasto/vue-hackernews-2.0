@@ -3,7 +3,7 @@
     <div class="container">
       <h1 v-html="headline"></h1>
       <div class="combo-wrapper">
-        <ComboBox :iconsrc="box.imgsrc" :duplicate="box.duplicate" layout="row" :reverse="box.reverse" v-for="box in boxes">
+        <ComboBox :iconsrc="box.imgsrc" :duplicate="box.duplicate" layout="row" :reverse="box.reverse" v-for="box in boxes" :key="box.imgsrc">
           <p v-html="box.tagline"></p>
         </ComboBox>
       </div>
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import ComboBox from 'Components/general/ComboBox.vue'
+import ComboBox from "Components/general/ComboBox.vue"
 
 export default {
-  components: {
-    ComboBox
-  },
-  props: ['boxes', 'headline']
+	components: {
+		ComboBox
+	},
+	props: ["boxes", "headline"]
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div v-if="layout !== 'row'">
       <div class="icon-wrapper">
         <img class="icon-img" :src="iconsrc" v-bind:class="{ 'large': large }">
-        <img class="icon-img" :src="iconsrc" v-if="duplicate">
+        <img class="icon-img" :src="iconsrc" v-if="duplicate === true">
       </div>
       <div>
         <slot>
@@ -116,6 +116,10 @@
       @include breakpoint($desktop) {
         font-size: 20px !important;
         text-align: left;
+      }
+
+      @include breakpoint($fullhd) {
+        font-size: 22px !important;
       }
     }
 

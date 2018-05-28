@@ -17,6 +17,9 @@
     <HomeSection4
       :headline="home.section4.headline"
       :boxes="home.section4.boxes"></HomeSection4>
+
+    <NonprofitForm submit-button-label="Submit" />
+
     <AppFooter></AppFooter>
   </div>
 </template>
@@ -30,6 +33,7 @@ import HomeHero from "Components/home/HomeHero.vue"
 import HomeSection2 from "Components/home/HomeSection2.vue"
 import HomeSection3 from "Components/home/HomeSection3.vue"
 import HomeSection4 from "Components/home/HomeSection4.vue"
+import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
 import TopMenu from "Components/general/TopMenu.vue"
 
 Vue.use(VueMeta)
@@ -39,10 +43,11 @@ export default {
 	components: {
 		AppFooter,
 		AppHeader,
-    HomeHero,
-    HomeSection2,
-    HomeSection3,
+		HomeHero,
+		HomeSection2,
+		HomeSection3,
 		HomeSection4,
+		NonprofitForm,
 		TopMenu
 	},
 	data () {

@@ -26,9 +26,7 @@
       </div>
     </section>
 
-    <div class="container">
-      <NonprofitForm submit-button-label="Submit" />
-    </div>
+    <NonprofitForm submit-button-label="Submit" />
 
     <FloatingShareTools />
     <NonprofitIRSData :nonprofit="nonprofit" v-if="!nonprofit.data.about" />

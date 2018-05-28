@@ -52,9 +52,6 @@
     align-items: center;
     display: flex !important;
   }
-  @include breakpoint($fullhd) {
-    padding-top: 10px;
-  }
 }
 .navbar-container {
   height: 20px;
