@@ -2,6 +2,9 @@ export default {
 	SET_CURRENT_PATH: (state, { fullPath }) => {
 		state.fullPath = fullPath
 	},
+	SET_HOME_PAGE: (state, { home }) => {
+		state.home = home
+	},
 	SET_NONPROFIT: (state, { nonprofit }) => {
 		state.nonprofit = nonprofit
 	},

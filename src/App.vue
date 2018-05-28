@@ -74,10 +74,15 @@ export default {
 
 <style scoped lang="scss">
 .fake-menu {
+  display: none;
   position: absolute;
   top: 140px;
   left: 20px;
   a {
+    display: block;
+  }
+
+  @include breakpoint($widescreen) {
     display: block;
   }
 }

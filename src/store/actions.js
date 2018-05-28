@@ -2,8 +2,9 @@ import {
 	fetchCampaign,
 	fetchCampaigns,
 	fetchComments,
-	fetchDonations,
 	fetchCommonData,
+	fetchDonations,
+	fetchHomePage,
 	fetchNonprofit,
 	fetchTopFundraisers,
 	fetchUpdates
@@ -113,6 +114,18 @@ export default {
 				})
 				.catch(err => {
 					commit("ADD_TOP_FUNDRAISERS", { fundraisers: [] })
+					reject(err)
+				})
+		})
+	},
+	FETCH_HOME_PAGE: ({ commit, dispatch, state }) => {
+		return new Promise((resolve, reject) => {
+			return fetchHomePage()
+				.then(data => {
+					commit("SET_HOME_PAGE", { home: data })
+					resolve(data)
+				})
+				.catch(err => {
 					reject(err)
 				})
 		})

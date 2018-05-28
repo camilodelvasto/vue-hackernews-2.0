@@ -1,9 +1,9 @@
 <template>
   <div class="">
     <AppHeader layout="page"></AppHeader>
-
-    home page content
-
+    <TopMenu></TopMenu>
+    <HomeHero :headline="home.hero.headline" :imgsrc="home.hero.imgsrc" :tagline="home.hero.tagline" :cta="home.hero.cta"/>
+    <div style="height: 600px;"></div>
     <AppFooter></AppFooter>
   </div>
 </template>
@@ -13,6 +13,8 @@ import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppFooter from "Components/general/AppFooter.vue"
 import AppHeader from "Components/general/AppHeader.vue"
+import HomeHero from "Components/home/HomeHero.vue"
+import TopMenu from "Components/general/TopMenu.vue"
 
 Vue.use(VueMeta)
 
@@ -20,7 +22,9 @@ export default {
 	name: "nonprofit",
 	components: {
 		AppFooter,
-		AppHeader
+		AppHeader,
+		HomeHero,
+		TopMenu
 	},
 	data () {
 		return {
@@ -29,12 +33,24 @@ export default {
 			fields: []
 		}
 	},
+	// We only fetch the item itself before entering the view
+	asyncData ({ store, route: { params: { ein } } }) {
+		return new Promise((resolve, reject) => {
+			return store.dispatch("FETCH_HOME_PAGE")
+				.then(data => {
+					resolve(data)
+				})
+				.catch(err => {
+					reject(err)
+				})
+		})
+	},
 	metaInfo () {
 		return {
 			title: this.title,
 			// override the parent template and just use the above title only
-			titleTemplate: null,
-			meta: [
+			titleTemplate: null
+			/*			meta: [
 				{ vmid: "description", name: "description", content: this.nonprofit.ACTIVITY },
 				{ vmid: "og:url", property: "og:url", content: "https://volunteerathon.com/" },
 				{ vmid: "og:type", property: "og:type", content: "website" },
@@ -44,12 +60,12 @@ export default {
 				{ vmid: "og:description", property: "og:description", content: this.nonprofit.ACTIVITY },
 				{ vmid: "twitter:card", property: "twitter:card", content: this.nonprofit.ACTIVITY },
 				{ vmid: "twitter:image", property: "twitter:image", content: "https://startcrowd.club/images/startcrowdimage.jpg" }
-			]
+			] */
 		}
 	},
 	computed: {
-		nonprofit () {
-			return this.$store.state.nonprofit
+		home () {
+			return this.$store.state.home
 		}
 	}
 }

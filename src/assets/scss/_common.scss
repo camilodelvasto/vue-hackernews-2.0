@@ -55,6 +55,7 @@ blockquote {
 
   &.is-fluid {
     @include breakpoint($widescreen) {
+      margin: 0 auto;
       width: $max-fluid-container-width; //1152px
     }
     @include breakpoint($fullhd) {

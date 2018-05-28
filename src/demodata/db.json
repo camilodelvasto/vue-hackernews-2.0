@@ -463,6 +463,18 @@
       "hero": "http://localhost:3004/static/assets/images/nonoprofit-base-hero.jpg"
     }
   },
+  "pages": [
+    {
+      "page_name": "home",
+      "hero": {
+        "headline": "<span class=\"text-line-1\">Raise money</span><br> <span class=\"text-line-2\">while doing</span><br> <span class=\"text-line-3\">good!</span>",
+        "imgsrc": "http://localhost:3004/static/assets/images/home-hero.jpg",
+        "cta": "Join NOW! It's FUN…",
+        "tagline": "Want to make a far greater impact with your time?"
+      }
+
+    }
+  ],
   "common": {
     "nonprofit": {
       "intro": "In social fundraisers like bikeathons, you spend about 100 hours training to ride or walk long-distances, and raise about $600. In a volunteerathon, you raise the same, yet use the 100 hours to volunteer, saving a nonprofit $1,200 in expenses. This means you generate $1,800: triple the impact of a normal fundraiser. Your sponsors will be happier, the nonprofits will be happier, the people being helped will be happier, and you’ll be happier. It’s a win-win-win-win of happiness."
