@@ -1,5 +1,5 @@
 <template>
-  <section class="page-wrapper" :fixed="true" v-bind:style="{ backgroundColor: `#fbf7ea`, backgroundPosition: bgPosition }" breakpoint="(min-width: 968px)">
+  <section class="page-wrapper" :fixed="true" v-bind:style="{ backgroundColor: `#f5f1e0`, backgroundPosition: bgPosition }" breakpoint="(min-width: 968px)">
     <div>
       <div class="container capped">
         <h1 v-html="headline"></h1>
@@ -17,7 +17,9 @@
         </div>
       </div>
       <div class="container capped">
-        <h2 class="result">The result is: </h2>
+        <div class="logo-badge">
+          <h3 class="result">The result is: </h3>
+        </div>
         <div class="columns combo-wrapper is-multiline">
           <ComboBox :iconsrc="result.iconsrc" duplicate="false" v-for="result in results">
             <h2 v-html="result.headline"></h2>
@@ -90,11 +92,10 @@ h1 {
 }
 
 .result {
-  display: block;
+  width: 100%;
   margin-top: 20px;
   color: $color-text;
-  font-weight: bold;
-  font-size: 20px;
+  text-align: left;
 }
 
 .columns {

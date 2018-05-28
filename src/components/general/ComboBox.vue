@@ -3,7 +3,7 @@
     <div v-if="layout !== 'row'">
       <div class="icon-wrapper">
         <img class="icon-img" :src="iconsrc" v-bind:class="{ 'large': large }">
-        <img class="icon-img" :src="iconsrc" v-if="duplicate === 'true'">
+        <img class="icon-img" :src="iconsrc" v-if="duplicate">
       </div>
       <div>
         <slot>
@@ -47,7 +47,7 @@
     @include breakpoint($tablet) {
       min-width: 27%;
       max-width: 33%;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
   }
 

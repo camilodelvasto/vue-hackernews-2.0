@@ -496,8 +496,88 @@
             "tagline": "The average walkathon, bikeathon and charity run raises $600 for charity."
           }
         ]
+      },
+      "section3": {
+        "headline": "The new way quadruples the benefits",
+        "tagline": "If you do a Volunteerathon&trade; and invite people to support you:",
+        "boxes": [
+          {
+            "images": [
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-3.jpg"
+              },
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-4.jpg"
+              },
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-5.jpg"
+              }
+            ],
+            "title": ""
+          },
+          {
+            "images": [
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-1.jpg"
+              },
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-6.jpg"
+              },
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-7.jpg"
+              }
+            ],
+            "title": ""
+          },
+          {
+            "images": [
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-2.jpg"
+              },
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-8.jpg"
+              },
+              {
+                "imgsrc": "http://localhost:3004/static/assets/images/s3-9.jpg"
+              }
+            ],
+            "title": ""
+          }
+        ],
+        "results": [
+          {
+            "iconsrc": "http://localhost:3004/static/assets/images/icon-money-t.png",
+            "duplicate": false,
+            "headline": "You raise more money",
+            "tagline": "People will donate larger amounts to your fundraiser if you spend your time serving others than if you walk, run or bike."
+          },
+          {
+            "iconsrc": "http://localhost:3004/static/assets/images/icon-money-t.png",
+            "duplicate": true,
+            "headline": "More of it goes to charity",
+            "tagline": "About 15% of proceeds of bikeathons etc. go to event admin and credit card costs. In a Volunteerathon™, only 4% goes to those. The extra 11% goes to charity."
+          },
+          {
+            "iconsrc": "http://localhost:3004/static/assets/images/icon-money-bag-t.png",
+            "duplicate": false,
+            "headline": "You save a nonprofit lots of money",
+            "tagline": "If you volunteer 100 hours instead of training to ride or run long-distance, you save a nonprofit $1,200 to $1,800. That triples or quadruples your impact."
+          },
+          {
+            "iconsrc": "http://localhost:3004/static/assets/images/icon-smiley-t.png",
+            "duplicate": false,
+            "headline": "You'll be happier",
+            "tagline": "You’ll be more satisifed serving others than walking or running, and you’ll be happier from creating a bigger impact."
+          },
+          {
+            "iconsrc": "http://localhost:3004/static/assets/images/icon-smiley-t.png",
+            "duplicate": true,
+            "headline": "Your friends will be happier",
+            "tagline": "People are happier about donating their money when your time is spent volunteering than when your time is spent walking or biking."
+          }
+        ],
+        "bottomline": "That’s five wins instead of one for the same amount of effort"
       }
-
     }
   ],
   "common": {

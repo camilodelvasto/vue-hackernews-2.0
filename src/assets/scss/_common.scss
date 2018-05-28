@@ -120,7 +120,7 @@ blockquote {
         height: 275px;
       }
       @include breakpoint($widescreen) {
-        height: 325px;
+        height: 255px;
       }
     }
 
@@ -135,12 +135,12 @@ blockquote {
     }
 
     @include breakpoint($widescreen) {
-      height: calc(349px);
+      height: calc(275px);
     }
 
     .card-content {
       position: absolute;
-      width: calc(100% - 24px);
+      width: 100%;
 
       @include breakpoint($mobile) {
         height: calc(80vw - 56px);

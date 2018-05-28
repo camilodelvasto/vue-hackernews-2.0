@@ -92,11 +92,11 @@
 .tagline {
   z-index: 1;
   position: static;
-  margin-top: 10px;
   width: 100%;
   text-align: center;
   line-height: 1.1;
   font-size: 36px;
+  margin-bottom: 45px;
 }
 
 .cta {

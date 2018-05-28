@@ -8,7 +8,12 @@
       :tagline="home.section2.tagline"
       :boxes="home.section2.boxes"
       :results="home.section2.results"></HomeSection2>
-    <div style="height: 600px;"></div>
+    <HomeSection3
+      :headline="home.section3.headline"
+      :tagline="home.section3.tagline"
+      :boxes="home.section3.boxes"
+      :bottomline="home.section3.bottomline"
+      :results="home.section3.results"></HomeSection3>
     <AppFooter></AppFooter>
   </div>
 </template>
@@ -20,6 +25,7 @@ import AppFooter from "Components/general/AppFooter.vue"
 import AppHeader from "Components/general/AppHeader.vue"
 import HomeHero from "Components/home/HomeHero.vue"
 import HomeSection2 from "Components/home/HomeSection2.vue"
+import HomeSection3 from "Components/home/HomeSection3.vue"
 import TopMenu from "Components/general/TopMenu.vue"
 
 Vue.use(VueMeta)
@@ -30,7 +36,8 @@ export default {
 		AppFooter,
 		AppHeader,
     HomeHero,
-		HomeSection2,
+    HomeSection2,
+		HomeSection3,
 		TopMenu
 	},
 	data () {
