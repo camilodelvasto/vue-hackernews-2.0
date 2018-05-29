@@ -1,10 +1,13 @@
 <template>
-  <div class="progress-bar__wrapper">
-    <div class="progress-bar campaign-pledge__progress-wrapper">
-      <div class="campaign-pledge__progress-bar"
+  <div :class="`progress-bar__wrapper ${size}`">
+    <p v-if="size === 'large'" :class="`${size}`">
+      {{campaign.currentStats.donated | usd}} raised of {{campaign.currentStats.goal | usd}}
+    </p>
+    <div :class="`progress-bar campaign-pledge__progress-wrapper ${size}`">
+      <div :class="`campaign-pledge__progress-bar ${size}`"
         :style="{width: 100*campaign.currentStats.donated / campaign.currentStats.goal + '%'}"></div>
     </div>
-    <p>
+    <p v-if="size !== 'large'">
       {{campaign.currentStats.donated | usd}} raised of {{campaign.currentStats.goal | usd}}
     </p>
   </div>
@@ -24,11 +27,18 @@
       display: block;
     }
 
+    &.large {
+      height: 30px;
+    }
   }
   &__progress-bar {
     display: inline-block;
     background: $color-emphasis-alt;
     height: 20px;
+
+    &.large {
+      height: 30px;
+    }
   }
 }
 
@@ -38,12 +48,18 @@ p {
   line-height: 15px;
   max-height: 15px;
   overflow: hidden;
+
+  &.large {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
 }
 
 </style>
 
 <script>
 export default {
-	props: [ "campaign" ]
+	props: [ "campaign", "size" ]
 }
 </script>

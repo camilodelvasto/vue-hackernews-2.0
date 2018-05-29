@@ -311,15 +311,42 @@
       "name": "Tutoring children for the future",
       "description": "Praesent bibendum gravida diam faucibus lobortis. Nulla a leo id mauris fringilla dictum dictum vitae ligula. Etiam maximus turpis vel dolor venenatis malesuada. Duis eget rutrum elit. Fusce elementum tempor condimentum. Cras feugiat consectetur sem, non scelerisque nisi. Donec eu magna a ante imperdiet accumsan. In tempus laoreet mi aliquet fermentum. Nullam nec cursus est. Nulla dapibus dolor fermentum hendrerit lobortis. ",
       "pictures": [
-        "https://vthon__nonprofit-generic.surge.sh/feed-the-children/1.jpg",
-        "https://vthon__nonprofit-generic.surge.sh/feed-the-children/2.jpg",
-        "https://vthon__nonprofit-generic.surge.sh/feed-the-children/3.png",
-        "https://vthon__nonprofit-generic.surge.sh/feed-the-children/4.jpg"
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-1.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-1x1.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-2.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-3x2.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-4.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-4x3.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-5.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-9x16.jpg"
+        },
+        {
+          "imgsrc": "http://localhost:3004/static/assets/images/campaign-hero-16x9.jpg"
+        }
       ],
       "campaigner": {
         "name": "Carol",
         "fullname": "Joan Engelman",
         "location": "Youngstown, Ohio, US"
+      },
+      "nonprofit": {
+        "logoUrl": "http://localhost:3004/static/assets/images/campaign-feed-the-children-logo-square.png",
+        "name": "MELROSE MASSACHUSETTS TELEVISION"
       },
       "profilePicUrl": "https://vthon__nonprofit-generic.surge.sh/feed-the-children/profile-pic.jpg",
       "currentStats": {
@@ -608,6 +635,9 @@
   "common": {
     "nonprofit": {
       "intro": "In social fundraisers like bikeathons, you spend about 100 hours training to ride or walk long-distances, and raise about $600. In a volunteerathon, you raise the same, yet use the 100 hours to volunteer, saving a nonprofit $1,200 in expenses. This means you generate $1,800: triple the impact of a normal fundraiser. Your sponsors will be happier, the nonprofits will be happier, the people being helped will be happier, and you’ll be happier. It’s a win-win-win-win of happiness."
+    },
+    "campaign": {
+      "campaign_header": "A nonprofit fundraiser to raise money for:"
     },
     "footerMenuLinks": [
       {

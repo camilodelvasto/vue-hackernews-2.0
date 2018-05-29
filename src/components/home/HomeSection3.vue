@@ -2,7 +2,7 @@
   <section class="page-wrapper">
     <div :fixed="true" class="is-fixed">
       <div class="container capped">
-        <h1>The new way quadruples the benefits</h1>
+        <h1 v-html="headline"></h1>
         <h3 class="tagline" v-html="tagline"></h3>
       </div>
       <div class="container capped">

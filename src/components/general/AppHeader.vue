@@ -1,5 +1,5 @@
 <template>
-  <div class="header__wrapper" :class="{ 'page-layout': layout === 'page' }">
+  <div class="header__wrapper white-bg" :class="{ 'page-layout': layout === 'page' }">
     <div class="container is-fluid">
       <div class="header__inner">
         <div class="random-words">

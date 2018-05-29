@@ -1,6 +1,10 @@
 <template>
-  <div class="hello">
+  <div class="campaign">
     <AppHeader layout="app"></AppHeader>
+
+    <CampaignHeader :campaign="campaign"></CampaignHeader>
+    <CampaignHero :campaign="campaign"></CampaignHero>
+
     <h2>Basic data</h2>
     <h2>This campaign:</h2>
     {{campaign.name}}
@@ -49,6 +53,8 @@ import VueMeta from "vue-meta"
 import Update from "Components/Update.vue"
 import Comment from "Components/Comment.vue"
 import AppHeader from "Components/general/AppHeader.vue"
+import CampaignHeader from "Components/campaign/CampaignHeader.vue"
+import CampaignHero from "Components/campaign/CampaignHero.vue"
 
 Vue.use(VueMeta)
 
@@ -56,6 +62,8 @@ export default {
 	name: "campaign",
 	components: {
 		AppHeader,
+    CampaignHeader,
+    CampaignHero,
 		Comment,
 		Update
 	},
@@ -106,15 +114,18 @@ export default {
 		updates () {
 			return this.$store.state.updates.data
 		},
-		comments () {
-			return this.$store.state.comments.data
+    comments () {
+      return this.$store.state.comments.data
+    },
+		common () {
+			return this.$store.state.common
 		}
 	},
 
 	// We only fetch the item itself before entering the view
 	asyncData ({ store, route: { params: { id } } }) {
 		return new Promise((resolve, reject) => {
-			return store.dispatch("FETCH_CAMPAIGN", { id })
+			store.dispatch("FETCH_CAMPAIGN", { id })
 				.then(data => {
 					resolve(data)
 				})
@@ -205,9 +216,21 @@ function showMoreButton (state, arg) {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-a {
-  color: orange;
-  font-family: $font-primary;
+<style lang="scss">
+.campaign {
+  background-color: $color-fundraiser-bg;
+
+  @include breakpoint($tablet) {
+    background-color: $color-fundraiser-bg;
+  }
+
+  .white-bg {
+    background-color: $white;
+
+    @include breakpoint($tablet) {
+      padding: 20px 45px 0;
+    }
+  }
 }
+
 </style>

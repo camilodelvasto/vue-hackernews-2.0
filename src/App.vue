@@ -36,11 +36,6 @@ export default {
 				console.log(err)
 			})
 	},
-	computed: {
-		common () {
-			return this.$store.state.common
-		}
-	},
 	mounted () {
 		require("Components/plugins/FacebookSDK.js")
 	},
