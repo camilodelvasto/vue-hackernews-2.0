@@ -17,17 +17,17 @@ export function timeAgo (timestamp) {
 }
 
 export function usd (amount) {
-  if (!isNaN(amount)) {
-    var newValue = amount.toLocaleString("en-US")
-    return `$${newValue}`
-  }
+	if (!isNaN(amount)) {
+		var newValue = amount.toLocaleString("en-US")
+		return `$${newValue}`
+	}
 }
 
 export function people (number) {
 	if (!isNaN(number)) {
-    if (number === 1) {
-      return `${number} person`
-    }
-    return `${number} people`
+		if (number === 1) {
+			return `${number} person`
+		}
+		return `${number} people`
 	}
 }

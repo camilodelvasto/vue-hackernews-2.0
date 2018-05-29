@@ -62,8 +62,8 @@ export default {
 	name: "campaign",
 	components: {
 		AppHeader,
-    CampaignHeader,
-    CampaignHero,
+		CampaignHeader,
+		CampaignHero,
 		Comment,
 		Update
 	},
@@ -114,9 +114,9 @@ export default {
 		updates () {
 			return this.$store.state.updates.data
 		},
-    comments () {
-      return this.$store.state.comments.data
-    },
+		comments () {
+			return this.$store.state.comments.data
+		},
 		common () {
 			return this.$store.state.common
 		}

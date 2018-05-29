@@ -151,20 +151,20 @@ import Flickity from "Components/plugins/Flickity.vue"
 
 export default {
 	props: [ "campaign" ],
-  components: {
-    Flickity,
-    ProgressBar
-  },
-  data () {
-    return {
-      mainCarouselOptions: {
-        initialIndex: 0,
-        prevNextButtons: false,
-        pageDots: true,
-        wrapAround: true,
-        autoPlay: 3500
-      }
-    }
-  }
+	components: {
+		Flickity,
+		ProgressBar
+	},
+	data () {
+		return {
+			mainCarouselOptions: {
+				initialIndex: 0,
+				prevNextButtons: false,
+				pageDots: true,
+				wrapAround: true,
+				autoPlay: 3500
+			}
+		}
+	}
 }
 </script>

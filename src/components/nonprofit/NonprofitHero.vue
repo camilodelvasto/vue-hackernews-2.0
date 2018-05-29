@@ -194,8 +194,8 @@ import Icons from "Components/general/Icons.vue"
 
 export default {
 	props: [ "common", "nonprofit" ],
-  components: {
-    Icons
-  }
+	components: {
+		Icons
+	}
 }
 </script>

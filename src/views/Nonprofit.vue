@@ -46,7 +46,7 @@ export default {
 		FloatingShareTools,
 		NonprofitAbout,
 		NonprofitCampaigns,
-    NonprofitForm,
+		NonprofitForm,
 		NonprofitHero,
 		NonprofitIRSData
 	},
