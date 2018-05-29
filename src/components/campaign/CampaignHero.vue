@@ -1,32 +1,30 @@
 <template>
-  <div>
-    <div class="container is-fluid white-bg campaign-content__wrapper">
-      <div class="columns campaign-content">
-        <div class="column is-two-thirds-desktop campaign-content__left">
-          <div class="campaign-photo-section">
-            <flickity ref="main-carousel" class="main-carousel" :options="mainCarouselOptions">
-              <div class="campaign-photo-section__photo" v-for="item in campaign.pictures"
-                :style="`background-image: url(${item.imgsrc})`">
-              </div>
-            </flickity>
-          </div>
+  <div class="container is-fluid white-bg campaign-content__wrapper">
+    <div class="columns campaign-content">
+      <div class="column is-two-thirds-desktop campaign-content__left">
+        <div class="campaign-photo-section">
+          <flickity ref="main-carousel" class="main-carousel" :options="mainCarouselOptions">
+            <div class="campaign-photo-section__photo" v-for="item in campaign.pictures"
+              :style="`background-image: url(${item.imgsrc})`">
+            </div>
+          </flickity>
         </div>
-        <div class="column is-one-third-desktop campaign-content__right">
-          <div class="campaign-pledge">
-            <div class="campaign-pledge__heading">
-              <p>{{campaign.campaigner.name}} will volunteer {{campaign.currentStats.hours}} hours {{campaign.communityWork}} to raise money for the nonprofit <a target="_blank" :href="campaign.nonprofit.url">{{campaign.nonprofit.name}}</a></p>
-              <p class="campaign-pledge__subheading">Please sponsor {{campaign.campaigner.name}}'s Volunteerathon</p>
-            </div>
-            <div class="button campaign-pledge__cta is-success is-large">
-              Donate now
-            </div>
-            <div class="progress-bar campaign-pledge__progress-wrapper">
-              <ProgressBar :campaign="campaign" size="large" />
-            </div>
-            <div class="campaign-pledge__more-stats">
-              <div class="campaign-pledge__goal">Goal: {{campaign.currentStats.goal | usd}}</div>
-              <div class="campaign-pledge__goal">Days left: {{campaign.currentStats.daysLeft}}</div>
-            </div>
+      </div>
+      <div class="column is-one-third-desktop campaign-content__right">
+        <div class="campaign-pledge">
+          <div class="campaign-pledge__heading">
+            <p>{{campaign.campaigner.name}} will volunteer {{campaign.currentStats.hours}} hours {{campaign.communityWork}} to raise money for the nonprofit <a target="_blank" :href="campaign.nonprofit.url">{{campaign.nonprofit.name}}</a></p>
+            <p class="campaign-pledge__subheading">Please sponsor {{campaign.campaigner.name}}'s Volunteerathon</p>
+          </div>
+          <div class="button campaign-pledge__cta is-success is-large">
+            Donate now
+          </div>
+          <div class="progress-bar campaign-pledge__progress-wrapper">
+            <ProgressBar :campaign="campaign" size="large" />
+          </div>
+          <div class="campaign-pledge__more-stats">
+            <div class="campaign-pledge__goal">Goal: {{campaign.currentStats.goal | usd}}</div>
+            <div class="campaign-pledge__goal">Days left: {{campaign.currentStats.daysLeft}}</div>
           </div>
         </div>
       </div>

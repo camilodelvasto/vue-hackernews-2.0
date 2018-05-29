@@ -4,6 +4,7 @@
 
     <CampaignHeader :campaign="campaign"></CampaignHeader>
     <CampaignHero :campaign="campaign"></CampaignHero>
+    <CampaignCampaigner :campaign="campaign"></CampaignCampaigner>
 
     <h2>Basic data</h2>
     <h2>This campaign:</h2>
@@ -53,6 +54,7 @@ import VueMeta from "vue-meta"
 import Update from "Components/Update.vue"
 import Comment from "Components/Comment.vue"
 import AppHeader from "Components/general/AppHeader.vue"
+import CampaignCampaigner from "Components/campaign/CampaignCampaigner.vue"
 import CampaignHeader from "Components/campaign/CampaignHeader.vue"
 import CampaignHero from "Components/campaign/CampaignHero.vue"
 
@@ -62,6 +64,7 @@ export default {
 	name: "campaign",
 	components: {
 		AppHeader,
+    CampaignCampaigner,
 		CampaignHeader,
 		CampaignHero,
 		Comment,
