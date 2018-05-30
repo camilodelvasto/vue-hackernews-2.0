@@ -11,9 +11,17 @@
 
     <NonprofitCampaigns :campaigns="campaigns" />
 
-    <DonorsList :donations="donations" title="Top Donors"/>
+    <DonorsList
+      section-title="Top Donors"
+      view-all-cta=""
+      :donations="donations"
+      layout="horizontal"/>
 
-    <DonorsList :donations="fundraisers" title="Top Fundraisers" />
+    <DonorsList
+      section-title="Top Fundraisers"
+      view-all-cta=""
+      :donations="fundraisers"
+      layout="horizontal"/>
 
     <section>
       <button class="button is-large is-info is-centered fundraiser_cta">Create your own fundraiser</button>

@@ -5,58 +5,23 @@
     <CampaignHeader :campaign="campaign"></CampaignHeader>
     <CampaignHero :campaign="campaign"></CampaignHero>
     <CampaignCampaigner :campaign="campaign"></CampaignCampaigner>
-
-    <h2>Basic data</h2>
-    <h2>This campaign:</h2>
-    {{campaign.name}}
-    <ul v-if="campaign.name">
-      <li><strong>description</strong>: {{campaign.description}}</li>
-      <li><strong>pictures</strong>: {{campaign.pictures}}</li>
-      <li><strong>campaigner.fullname</strong>: {{campaign.campaigner.fullname}}</li>
-      <li><strong>profilePicUrl</strong>: {{campaign.profilePicUrl}}</li>
-      <li><strong>currentStats.hours</strong>: {{campaign.currentStats.hours}}</li>
-      <li><strong>currentStats.donated</strong>: {{campaign.currentStats.donated}}</li>
-      <li><strong>currentStats.donors</strong>: {{campaign.currentStats.donors}}</li>
-      <li><strong>currentStats.goal</strong>: {{campaign.currentStats.goal}}</li>
-      <li><strong>currentStats.daysLeft</strong>: {{campaign.currentStats.daysLeft}}</li>
-    </ul>
+    <CampaignLowerBody :campaign="campaign"></CampaignLowerBody>
 
     <li><router-link to="/nonprofits/43138428">43138428 (nonprofit)</router-link></li>
     <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
     <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
 
-    <h2>Donations</h2>
-    <div v-for="donation in donations">
-      <div>{{donation.donorName}}</div>
-      <div>{{donation.amount}}</div>
-    </div>
-    <button @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
-
-    <h2>Updates</h2>
-    <ul>
-      <li v-for="update in updates" v-bind:key="update.id">
-        <update :update="update"></update>
-      </li>
-    </ul>
-    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
-
-    <h2>Comments</h2>
-    <div v-for="comment in comments">
-      <comment :comment="comment"></comment>
-    </div>
-    <button @click="loadMoreComments()" v-if="moreComments">Load more comments</button>
   </div>
 </template>
 
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
-import Update from "Components/Update.vue"
-import Comment from "Components/Comment.vue"
 import AppHeader from "Components/general/AppHeader.vue"
 import CampaignCampaigner from "Components/campaign/CampaignCampaigner.vue"
 import CampaignHeader from "Components/campaign/CampaignHeader.vue"
 import CampaignHero from "Components/campaign/CampaignHero.vue"
+import CampaignLowerBody from "Components/campaign/CampaignLowerBody.vue"
 
 Vue.use(VueMeta)
 
@@ -66,13 +31,11 @@ export default {
 		AppHeader,
     CampaignCampaigner,
 		CampaignHeader,
-		CampaignHero,
-		Comment,
-		Update
+    CampaignHero,
+		CampaignLowerBody
 	},
 	data () {
 		return {
-			bottom: false,
 			title: "",
 			fields: []
 		}
@@ -101,27 +64,6 @@ export default {
 	computed: {
 		campaign () {
 			return this.$store.state.campaign
-		},
-		moreComments () {
-			return showMoreButton(this.$store.state, "comments")
-		},
-		moreDonations () {
-			return showMoreButton(this.$store.state, "donations")
-		},
-		moreUpdates () {
-			return showMoreButton(this.$store.state, "updates")
-		},
-		donations () {
-			return this.$store.state.donations.data
-		},
-		updates () {
-			return this.$store.state.updates.data
-		},
-		comments () {
-			return this.$store.state.comments.data
-		},
-		common () {
-			return this.$store.state.common
 		}
 	},
 
@@ -136,85 +78,7 @@ export default {
 					reject(err)
 				})
 		})
-	},
-
-	// Data to be fetched asynchronously, only in the client.
-	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
-	mounted () {
-		window.addEventListener("scroll", () => {
-			this.bottom = this.userHasScrolled()
-		})
-	},
-
-	methods: {
-		userHasScrolled () {
-			const scrollY = window.scrollY
-			return scrollY > 0
-		},
-
-		loadMoreComments (paginated = true) {
-			if (this.moreComments) {
-				const campaignId = this.$route.params.id
-				return this.$store.dispatch("FETCH_COMMENTS", { campaignId: campaignId, paginated: paginated })
-					.then(data => {
-						return data
-					})
-					.catch(err => {
-						console.log(err)
-					})
-			}
-		},
-		loadMoreDonations (paginated = true) {
-			if (this.moreDonations) {
-				const campaignId = this.$route.params.id
-				return this.$store.dispatch("FETCH_DONATIONS", { campaignId: campaignId, paginated: paginated })
-					.then(data => {
-						return data
-					})
-					.catch(err => {
-						console.log(err)
-					})
-			}
-		},
-		loadMoreUpdates (paginated = true) {
-			const campaignId = this.$route.params.id
-			if (this.moreUpdates) {
-				return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
-					.then(data => {
-						return data
-					})
-					.catch(err => {
-						console.log(err)
-					})
-			}
-		}
-	},
-
-	// Load these items only when the user has scrolled down.
-	watch: {
-		bottom (bottom) {
-			if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
-				this.loadMoreUpdates()
-			}
-			if (bottom && this.moreComments && this.$store.state.comments.current === 1) {
-				this.loadMoreComments()
-			}
-			if (bottom && this.moreDonations && this.$store.state.donations.current === 1) {
-				this.loadMoreDonations()
-			}
-		}
-	},
-	destroyed () {
-		this.$store.commit("RESET_CAMPAIGN")
 	}
-}
-
-function showMoreButton (state, arg) {
-	const limit = state[arg].limit
-	const current = state[arg].current
-	const count = state.campaign[`${arg}_count`]
-	const totalPages = Math.ceil(count / limit)
-	return totalPages >= current
 }
 </script>
 

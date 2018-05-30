@@ -1,5 +1,5 @@
 <template>
-  <div class="container is-fluid white-bg">
+  <div class="container is-fluid white-bg campaign-campaigner__wrapper">
     <div class="campaign-body">
       <div class="campaign-campaigner">
         <figure class="campaign-campaigner__avatar">
@@ -24,7 +24,7 @@
       </div>
       <div class="campaign-campaigner__description">
         <p>{{campaign.description}}</p>
-        <SharingIconsRow />
+        <SharingIconsRow :key="$route.fullPath" :route-path="$route.fullPath" />
       </div>
     </div>
   </div>
@@ -37,6 +37,10 @@
 
 .campaign-campaigner {
   display: flex;
+
+  &__wrapper {
+    padding-top: 20px;    
+  }
 
   &__name {
     font-size: 20px;
@@ -110,7 +114,14 @@
 </style>
 
 <script>
+import Icons from "Components/general/Icons.vue"
+import SharingIconsRow from "Components/general/SharingIconsRow.vue"
+
 export default {
-	props: [ "campaign" ]
+	props: [ "campaign" ],
+  components: {
+    Icons,
+    SharingIconsRow
+  }
 }
 </script>
