@@ -24,16 +24,17 @@
       </div>
       <div class="column">
         <div class="sharing-icons-row__share-item sharing-icons-row__share-email button is-white"
-          @click="shareEmail()">
-          <Icons iconwidth="20px" iconheight="20px" icon="email" color="#fff" class="icon" />
-          <span>Email</span>
-          <div class="addthis_inline_share_toolbox"></div>
+          @click="donate()">
+          <Icons iconwidth="20px" iconheight="20px" icon="usd" color="#fff" class="icon" />
+          <span>Donate</span>
         </div>
       </div>
       <div class="column">
-        <div class="sharing-icons-row__share-item sharing-icons-row__share-link button is-light">
-          <Icons iconwidth="20px" iconheight="20px" icon="link" color="#444" class="icon" />
-          <span>Link</span>
+        <div class="sharing-icons-row__share-item sharing-icons-row__share-plus button is-light"
+          @click="shareEmail()">
+          <Icons iconwidth="20px" iconheight="20px" icon="email" color="#444" class="icon" />
+          <span>Email</span>
+          <div class="addthis_inline_share_toolbox"></div>
         </div>
       </div>
       <div class="column">
@@ -66,6 +67,8 @@
 <style scoped lang="scss">
 .sharing-icons-row {
   &__wrapper {
+    margin-top: 20px;
+
     .column {
       padding: 0.2em 0.75rem;
       @include breakpoint($tablet) {
@@ -193,7 +196,10 @@ export default {
 		},
 		shareEmail () {
 			document.querySelector(".at-share-btn").click()
-		}
+		},
+    donate () {
+      this.$emit('donateFromButton')
+    }
 	}
 }
 
