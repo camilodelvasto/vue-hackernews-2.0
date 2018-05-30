@@ -221,117 +221,117 @@ import DonorsList from "Components/general/DonorsList.vue"
 export default {
 	props: [ "campaign" ],
 	components: {
-    CampaignGivingLevel,
-    CampaignUpdates,
+		CampaignGivingLevel,
+		CampaignUpdates,
 		DonorsList
 	},
 	data () {
-    return {
-      bottom: false,
-      currentTab: 1
+		return {
+			bottom: false,
+			currentTab: 1
 		}
 	},
-  computed: {
-    moreComments () {
-      return showMoreButton(this.$store.state, "comments")
-    },
-    moreDonations () {
-      return showMoreButton(this.$store.state, "donations")
-    },
-    moreUpdates () {
-      return showMoreButton(this.$store.state, "updates")
-    },
-    donations () {
-      return this.$store.state.donations.data
-    },
-    updates () {
-      return this.$store.state.updates.data
-    },
-    comments () {
-      return this.$store.state.comments.data
-    },
-    common () {
-      return this.$store.state.common
-    }
-  },
-  methods: {
-    userHasScrolled () {
-      const scrollY = window.scrollY
-      return scrollY > 0
-    },
-    loadMoreComments (paginated = true) {
-      if (this.moreComments) {
-        const campaignId = this.$route.params.id
-        return this.$store.dispatch("FETCH_COMMENTS", { campaignId: campaignId, paginated: paginated })
-          .then(data => {
-            return data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-    },
-    loadMoreDonations (paginated = true) {
-      if (this.moreDonations) {
-        const campaignId = this.$route.params.id
-        return this.$store.dispatch("FETCH_DONATIONS", { campaignId: campaignId, paginated: paginated })
-          .then(data => {
-            return data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-    },
-    loadMoreUpdates (paginated = true) {
-      const campaignId = this.$route.params.id
-      if (this.moreUpdates) {
-        return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
-          .then(data => {
-            return data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-    },
-    loadDonationsTab () {
-      this.currentTab = 3
-      //scroll to tab bar
-    }
-  },
-  // Data to be fetched asynchronously, only in the client.
-  // To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
-  mounted () {
-    window.addEventListener("scroll", () => {
-      this.bottom = this.userHasScrolled()
-    })
-  },
+	computed: {
+		moreComments () {
+			return showMoreButton(this.$store.state, "comments")
+		},
+		moreDonations () {
+			return showMoreButton(this.$store.state, "donations")
+		},
+		moreUpdates () {
+			return showMoreButton(this.$store.state, "updates")
+		},
+		donations () {
+			return this.$store.state.donations.data
+		},
+		updates () {
+			return this.$store.state.updates.data
+		},
+		comments () {
+			return this.$store.state.comments.data
+		},
+		common () {
+			return this.$store.state.common
+		}
+	},
+	methods: {
+		userHasScrolled () {
+			const scrollY = window.scrollY
+			return scrollY > 0
+		},
+		loadMoreComments (paginated = true) {
+			if (this.moreComments) {
+				const campaignId = this.$route.params.id
+				return this.$store.dispatch("FETCH_COMMENTS", { campaignId: campaignId, paginated: paginated })
+					.then(data => {
+						return data
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		},
+		loadMoreDonations (paginated = true) {
+			if (this.moreDonations) {
+				const campaignId = this.$route.params.id
+				return this.$store.dispatch("FETCH_DONATIONS", { campaignId: campaignId, paginated: paginated })
+					.then(data => {
+						return data
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		},
+		loadMoreUpdates (paginated = true) {
+			const campaignId = this.$route.params.id
+			if (this.moreUpdates) {
+				return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
+					.then(data => {
+						return data
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		},
+		loadDonationsTab () {
+			this.currentTab = 3
+			// scroll to tab bar
+		}
+	},
+	// Data to be fetched asynchronously, only in the client.
+	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
+	mounted () {
+		window.addEventListener("scroll", () => {
+			this.bottom = this.userHasScrolled()
+		})
+	},
 
-  // Load these items only when the user has scrolled down.
-  watch: {
-    bottom (bottom) {
-      if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
-        this.loadMoreUpdates()
-      }
-      if (bottom && this.moreComments && this.$store.state.comments.current === 1) {
-        this.loadMoreComments()
-      }
-      if (bottom && this.moreDonations && this.$store.state.donations.current === 1) {
-        this.loadMoreDonations()
-      }
-    }
-  },
-  destroyed () {
-    this.$store.commit("RESET_CAMPAIGN")
-  }
+	// Load these items only when the user has scrolled down.
+	watch: {
+		bottom (bottom) {
+			if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
+				this.loadMoreUpdates()
+			}
+			if (bottom && this.moreComments && this.$store.state.comments.current === 1) {
+				this.loadMoreComments()
+			}
+			if (bottom && this.moreDonations && this.$store.state.donations.current === 1) {
+				this.loadMoreDonations()
+			}
+		}
+	},
+	destroyed () {
+		this.$store.commit("RESET_CAMPAIGN")
+	}
 }
 
 function showMoreButton (state, arg) {
-  const limit = state[arg].limit
-  const current = state[arg].current
-  const count = state.campaign[`${arg}_count`]
-  const totalPages = Math.ceil(count / limit)
-  return totalPages >= current
+	const limit = state[arg].limit
+	const current = state[arg].current
+	const count = state.campaign[`${arg}_count`]
+	const totalPages = Math.ceil(count / limit)
+	return totalPages >= current
 }
 </script>

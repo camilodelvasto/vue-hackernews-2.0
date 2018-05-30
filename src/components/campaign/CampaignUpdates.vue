@@ -48,32 +48,32 @@
 </style>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue"
 
 export default {
-  data () {
-    return {
-      showFullUpdate: {}
-    }
-  },
-  props: [ 'updates', 'maxchar' ],
-  methods: {
-    formattedDate(dateX) {
-      var date = new Date(dateX)
-      var options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return date.toLocaleString('en-US', options)
-    },
-    excerpt(content) {
-      var stripHtml = content.replace(/<\/?[^>]+(>|$)/g, "")
-      return stripHtml.substring(0, this.maxchar)
-    },
-    toggleIndex(index) {
-      if (!this.showFullUpdate[index]) {
-        Vue.set(this.showFullUpdate, index, true)
-      } else {
-        Vue.set(this.showFullUpdate, index, false)
-      }
-    }
-  }
+	data () {
+		return {
+			showFullUpdate: {}
+		}
+	},
+	props: [ "updates", "maxchar" ],
+	methods: {
+		formattedDate (dateX) {
+			var date = new Date(dateX)
+			var options = { year: "numeric", month: "long", day: "numeric" }
+			return date.toLocaleString("en-US", options)
+		},
+		excerpt (content) {
+			var stripHtml = content.replace(/<\/?[^>]+(>|$)/g, "")
+			return stripHtml.substring(0, this.maxchar)
+		},
+		toggleIndex (index) {
+			if (!this.showFullUpdate[index]) {
+				Vue.set(this.showFullUpdate, index, true)
+			} else {
+				Vue.set(this.showFullUpdate, index, false)
+			}
+		}
+	}
 }
 </script>

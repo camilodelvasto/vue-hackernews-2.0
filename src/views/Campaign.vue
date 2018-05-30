@@ -27,10 +27,10 @@ export default {
 	name: "campaign",
 	components: {
 		AppHeader,
-    AppFooter,
-    CampaignCampaigner,
+		AppFooter,
+		CampaignCampaigner,
 		CampaignHeader,
-    CampaignHero,
+		CampaignHero,
 		CampaignLowerBody
 	},
 	data () {

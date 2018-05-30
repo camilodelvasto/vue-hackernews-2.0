@@ -80,12 +80,12 @@
 
 <script>
 export default {
-  props: [ 'section-title', 'view-all-cta', 'donations', 'layout', 'show-more' ],
-  methods: {
-    loadMoreDonations () {
-      this.$emit("loadDonationsTab")      
-    }
-  }
+	props: [ "section-title", "view-all-cta", "donations", "layout", "show-more" ],
+	methods: {
+		loadMoreDonations () {
+			this.$emit("loadDonationsTab")
+		}
+	}
 }
 </script>
 

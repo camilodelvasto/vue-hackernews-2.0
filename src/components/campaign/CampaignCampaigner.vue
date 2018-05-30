@@ -118,9 +118,9 @@ import SharingIconsRow from "Components/general/SharingIconsRow.vue"
 
 export default {
 	props: [ "campaign" ],
-  components: {
-    Icons,
-    SharingIconsRow
-  }
+	components: {
+		Icons,
+		SharingIconsRow
+	}
 }
 </script>
