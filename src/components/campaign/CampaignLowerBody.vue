@@ -6,17 +6,17 @@
           <div class="tabs__bottom-line"></div>
           <ul>
             <li @click="currentTab = 1" :class="{'is-active': currentTab === 1}"><a>Home</a></li>
-            <li @click="currentTab = 2" :class="{'is-active': currentTab === 2}">
-              <a>Comments ({{comments.length}})</a>
-            </li>
             <li @click="currentTab = 3" :class="{'is-active': currentTab === 3}">
               <a>Donors ({{donations.length}})</a>
             </li>
-            <li @click="currentTab = 4" :class="{'is-active': currentTab === 4}">
-              <a>Updates ({{updates.length}})</a>
-            </li>
             <li @click="currentTab = 5" :class="{'is-active': currentTab === 5}">
-              <a>Shares ({raisedThroughSharing.length + 5}})</a>
+              <a>Shares ({{campaign.shared_count}})</a>
+            </li>
+            <li @click="currentTab = 2" :class="{'is-active': currentTab === 2}">
+              <a>Comments ({{comments.length}})</a>
+            </li>
+            <li @click="currentTab = 4" :class="{'is-active': currentTab === 4}">
+              <a>Updates ({{campaign.updates_count}})</a>
             </li>
           </ul>
         </div>
