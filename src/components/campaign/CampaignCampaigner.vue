@@ -6,7 +6,6 @@
           <img class="campaign-campaigner__img" :src="campaign.profilePicUrl" :alt="campaign.campaigner.name">
         </figure>
         <div class="campaign-campaigner__details">
-          <h3 class="campaign-campaigner__name">by <span>{{campaign.campaigner.fullname}}</span></h3>
           <div class="campaign-campaigner__detail-item-wrapper">
             <div class="campaign-campaigner__detail-item">
               <Icons iconwidth="24px" iconheight="24px" icon="location" color="#f0f0f0" class="campaign-campaigner__icon"/>

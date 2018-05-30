@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="top-donors__wrapper" v-if="layout !== 'horizontal'">
-      <h4 class="top-donors__title lower-body-right-column__title">{{sectionTitle}} <span class="top-donors__view-all-cta" v-if="viewAllCta"><a>{{viewAllCta}}</a></span></h4>
+      <h4 class="top-donors__title lower-body-right-column__title">
+        {{sectionTitle}} 
+        <span class="top-donors__view-all-cta" v-if="viewAllCta" @click="loadMoreDonations()">
+          <a>{{viewAllCta}}</a>
+        </span>
+      </h4>
       <div class="campaign-donors__wrapper"  v-if="layout === 'top'">
         <div class="campaign-donors__donor columns is-mobile is-multiline" v-for="(donation, index) in donations">
           <div class="column is-2 has-text-centered">
@@ -34,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="campaign-donors__wrapper" v-if="layout === 'shared'">
+      <div class="campaign-donors__wrapper" v-if="layout === 'sharing'">
         <div class="recent-donations__wrapper">
           <div class="campaign-donors__donor columns is-mobile is-multiline" v-for="(donation, index) in donations">
             <div class="column is-2 has-text-centered">
@@ -75,7 +80,12 @@
 
 <script>
 export default {
-  props: [ 'section-title', 'view-all-cta', 'donations', 'layout', 'show-more' ]
+  props: [ 'section-title', 'view-all-cta', 'donations', 'layout', 'show-more' ],
+  methods: {
+    loadMoreDonations () {
+      this.$emit("loadDonationsTab")      
+    }
+  }
 }
 </script>
 

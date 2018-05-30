@@ -7,13 +7,13 @@
           <ul>
             <li @click="currentTab = 1" :class="{'is-active': currentTab === 1}"><a>Home</a></li>
             <li @click="currentTab = 2" :class="{'is-active': currentTab === 2}">
-              <a>Comments ({comments.length}})</a>
+              <a>Comments ({{comments.length}})</a>
             </li>
             <li @click="currentTab = 3" :class="{'is-active': currentTab === 3}">
-              <a>Donors ({donors.length}})</a>
+              <a>Donors ({{donations.length}})</a>
             </li>
             <li @click="currentTab = 4" :class="{'is-active': currentTab === 4}">
-              <a>Updates ({updates.length}})</a>
+              <a>Updates ({{updates.length}})</a>
             </li>
             <li @click="currentTab = 5" :class="{'is-active': currentTab === 5}">
               <a>Shares ({raisedThroughSharing.length + 5}})</a>
@@ -75,13 +75,19 @@
                 <p style="height: 400px;">empty tab for now</p>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 3" key="3">
-                empty tab for now
+                <DonorsList
+                  v-on:loadDonationsTab="loadDonationsTab()"
+                  section-title="Donors"
+                  view-all-cta="View all"
+                  :donations="donations"
+                  layout="horizontal"/>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 4" key="4">
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">
-                    <Updates :updates="updates" maxchar="600"/>
+                    <CampaignUpdates :updates="updates" maxchar="600"/>
+                    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
               </div>
@@ -97,8 +103,9 @@
               </div>
               <div class="top-donors">
                 <DonorsList
+                  v-on:loadDonationsTab="loadDonationsTab()"
                   section-title="Donors"
-                  view-all-cta=""
+                  view-all-cta="View all"
                   :donations="donations"
                   layout="top"/>
               </div>
@@ -115,7 +122,7 @@
                   section-title="Raised Through Sharing"
                   view-all-cta=""
                   :donations="donations"
-                  layout="recent"/>
+                  layout="sharing"/>
                 <button @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
               </div>
               <div class="button campaign-pledge__cta is-success is-large">
@@ -194,12 +201,12 @@
     border-radius: 10px;
   }
   &__left-column {
-    padding: 0;
     padding-right: 0.5rem;
   }
   &__right-column {
-    padding: 0;
-    padding-left: 2.7rem;
+    @include breakpoint($tablet) {
+      padding-left: 2.7rem;
+    }
   }
 }
 
@@ -287,6 +294,10 @@ export default {
             console.log(err)
           })
       }
+    },
+    loadDonationsTab () {
+      this.currentTab = 3
+      //scroll to tab bar
     }
   },
   // Data to be fetched asynchronously, only in the client.

@@ -7,10 +7,7 @@
     <CampaignCampaigner :campaign="campaign"></CampaignCampaigner>
     <CampaignLowerBody :campaign="campaign"></CampaignLowerBody>
 
-    <li><router-link to="/nonprofits/43138428">43138428 (nonprofit)</router-link></li>
-    <li><router-link to="/nonprofits/43063409">43063409 (nonprofit)</router-link></li>
-    <li><router-link to="/campaigns/255">255 (campaign)</router-link></li>
-
+    <AppFooter></AppFooter>
   </div>
 </template>
 
@@ -18,6 +15,7 @@
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
+import AppFooter from "Components/general/AppFooter.vue"
 import CampaignCampaigner from "Components/campaign/CampaignCampaigner.vue"
 import CampaignHeader from "Components/campaign/CampaignHeader.vue"
 import CampaignHero from "Components/campaign/CampaignHero.vue"
@@ -29,6 +27,7 @@ export default {
 	name: "campaign",
 	components: {
 		AppHeader,
+    AppFooter,
     CampaignCampaigner,
 		CampaignHeader,
     CampaignHero,
@@ -91,11 +90,11 @@ export default {
     background-color: $color-fundraiser-bg;
   }
 
-  .white-bg {
+  .is-fluid.white-bg {
     background-color: $white;
 
     @include breakpoint($tablet) {
-      padding: 20px 45px 0;
+      padding: 0 50px 20px;
     }
   }
 }

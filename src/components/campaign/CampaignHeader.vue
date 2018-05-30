@@ -1,22 +1,23 @@
 <template>
-  <div>
-    <div class="container is-fluid white-bg campaign-header__wrapper">
-      <div class="campaign-header">
-        <h1 class="campaign-header__title" v-html="campaign.name"></h1>
-        <div class="campaign-nonprofit">
-          <h2 class="campaign-nonprofit__subtitle">A nonprofit fundraiser to raise money for:
-            <figure class="campaign-nonprofit__logo">
-              <img class="campaign-nonprofit__img" :src="campaign.nonprofit.logoUrl" :alt="campaign.nonprofit.name">
-            </figure>
-            <router-link to="campaign.nonprofit.slug" v-html="campaign.nonprofit.name"></router-link>
-          </h2>
-        </div>
+  <div class="container is-fluid white-bg campaign-header__wrapper">
+    <div class="campaign-header">
+      <h1 class="campaign-header__title" v-html="campaign.name"></h1>
+      <div class="campaign-nonprofit">
+        <h2 class="campaign-nonprofit__subtitle">A fundraiser supporting the nonprofit:
+          <figure class="campaign-nonprofit__logo">
+            <img class="campaign-nonprofit__img" :src="campaign.nonprofit.logoUrl" :alt="campaign.nonprofit.name">
+          </figure>
+          <router-link to="campaign.nonprofit.slug" v-html="campaign.nonprofit.name"></router-link>
+        </h2>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.white-bg.is-fluid {
+  padding-bottom: 0 !important;
+}
 
 .campaign-header {
   &__title {
@@ -24,6 +25,10 @@
     text-align: center;
     margin-bottom: 10px;
     padding-top: 10px;
+
+    @include breakpoint($tablet) {
+      margin-bottom: 5px;
+    }
   }
 
   .container {
@@ -49,9 +54,14 @@
   &__subtitle {
     color: $color-medium-gray;
     font-size: 18px;
+    margin-bottom: 10px;
+
+    @include breakpoint($tablet) {
+      margin-bottom: 0;
+    }
 
     a {
-      color: $color-medium-gray;
+      color: $color-emphasis;
       text-decoration: underline;
     }
   }

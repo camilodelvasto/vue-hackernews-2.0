@@ -40,7 +40,15 @@
     }
   }
   &__left {
-    padding-left: 0 !important;
+    @include breakpoint($mobile) {
+      padding-left: 0 !important;
+    }
+  }
+  &__right {
+    @include breakpoint($tablet) {
+      padding-left: 6px;
+      display: flex;
+    }
   }
 }
 
@@ -48,13 +56,13 @@
   width: 100vw;
 
   @include breakpoint($mobile) {
-    max-width: $max-flickity-width;
-    margin-left: -1.5% !important;
+    max-width: $max-flickity-width - 22px;
+    margin-left: 0;
   }
 
   @include breakpoint($tablet) {
     transform: translateX(0);
-    width: calc(100% - 20px);
+    width: calc(100% - 30px);
     height: 0;
     padding-bottom: calc(100% * 2/3 - 60px + 70px);
     overflow: hidden;
@@ -62,7 +70,7 @@
 
   &__photo {
     width: 100vw;
-    height: calc(100vw*2/3);
+    height: calc((100vw - 30px) * 2/3);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -105,7 +113,8 @@
 
   @include breakpoint($tablet) {
     text-align: left;
-    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-top: 0;
     flex: auto;
     display: flex;
     flex-direction: column;
@@ -118,6 +127,7 @@
       font-size: 18px;
       color: $color-medium-gray;
       font-style: italic;
+      margin-bottom: 20px;
     }
   }
 
