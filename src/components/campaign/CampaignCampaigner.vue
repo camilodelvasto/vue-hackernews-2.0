@@ -9,7 +9,7 @@
           <div class="campaign-campaigner__detail-item-wrapper">
             <div class="campaign-campaigner__detail-item">
               <Icons iconwidth="24px" iconheight="24px" icon="location" color="#f0f0f0" class="campaign-campaigner__icon"/>
-              <span class="campaign-campaigner__location">{{campaign.campaigner.location}}</span>
+              <span class="campaign-campaigner__location" v-html="campaign.campaigner.location"></span>
             </div>
             <div class="campaign-campaigner__detail-item">
               <Icons iconwidth="24px" iconheight="24px" icon="email" color="#f0f0f0" class="campaign-campaigner__icon"/>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="campaign-campaigner__description">
-        <p>{{campaign.description}}</p>
+        <p v-html="campaign.description"></p>
         <SharingIconsRow :key="$route.fullPath" :route-path="$route.fullPath" />
       </div>
     </div>
@@ -69,6 +69,7 @@
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: wrap;
+    margin-top: 20px;
   }
 
   &__detail-item {

@@ -54,7 +54,7 @@ import Avatar from "vue-avatar"
 import Icons from "Components/general/Icons.vue"
 
 export default {
-	props: [ "comment", "title", "is-reply" ],
+	props: [ "comment", "is-reply" ],
 	components: {
 		Avatar,
 		Icons,

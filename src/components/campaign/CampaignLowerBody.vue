@@ -33,13 +33,13 @@
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">
                     <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
-                    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
+                    <button class="button is-warning is-load-more" @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
                 <h2>Nonprofit Organization</h2>
                 <div class="tab-section tab-section__header">
                   <p>A Volunteerathon is a fundraiser like a walkathon or bikeathon, except the person's time goes to help a nonprofit or do an independent service project.</p>
-                  <p>{{campaign.campaigner.name}} is raising money for: </p>
+                  <p><span v-html="campaign.campaigner.name"></span> is raising money for: </p>
                   <div class="this-nonprofit__wrapper">
                     <figure class="campaign-lower__logo-wrapper">
                       <img :src="campaign.nonprofit.logo_square" class="campaign-lower__logo" width="200"
@@ -57,28 +57,24 @@
                 </div>
                 <div class="tab-section tab-section__comments">
                   <h2>Comments</h2>
-                  <div class="comments-section__wrapper">
-                    <div class="comments-section__comment-wrapper" v-for="comment in comments">
-                      <div class="comment-item__comment-wrapper">
-                        <Comment :comment="comment" title="comment title" />
-                      </div>
-                      <div class="comment-item__comment-replies">
-                        <div class="comment-item__comment-wrapper" v-for="reply in comment.replies">
-                          <Comment :comment="reply" :is-reply="true"/>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button @click="loadMoreComments()" v-if="moreComments">Show more comments</button>
-                  <h4>Leave a comment</h4>
-                  <CommentReply />
+                  <Comments
+                    :comments="comments"
+                    :more-comments="moreComments"
+                    v-on:loadMoreComments="loadMoreComments()"></Comments>
                   <div class="button campaign-lower__cta-start is-info is-large">
                     Start your own fundraiser
                   </div>
                 </div>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 2" key="2">
-                <p style="height: 400px;">empty tab for now</p>
+                <h2>Comments</h2>
+                <Comments
+                  :comments="comments"
+                  :more-comments="moreComments"
+                  v-on:loadMoreComments="loadMoreComments()"></Comments>
+                <div class="button campaign-lower__cta-start is-info is-large">
+                  Start your own fundraiser
+                </div>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 3" key="3">
                 <DonorsList
@@ -93,7 +89,7 @@
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">campaign.updates_count: {{campaign.updates_count}}
                     <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
-                    <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
+                    <button class="button is-warning is-load-more" @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
               </div>
@@ -121,7 +117,7 @@
                   view-all-cta=""
                   :donations="donations"
                   layout="recent"/>
-                <button @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
+                <button class="button is-warning is-load-more" @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
               </div>
               <div class="raised-through-sharing">
                 <DonorsList
@@ -129,7 +125,7 @@
                   view-all-cta=""
                   :donations="donations"
                   layout="sharing"/>
-                <button @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
+                <button class="button is-warning is-load-more" @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
               </div>
               <div class="button campaign-pledge__cta is-success is-large">
                 Donate now
@@ -258,8 +254,7 @@
 <script>
 import CampaignGivingLevel from "Components/campaign/CampaignGivingLevel.vue"
 import CampaignUpdates from "Components/campaign/CampaignUpdates.vue"
-import Comment from "Components/general/Comment.vue"
-import CommentReply from "Components/general/CommentReply.vue"
+import Comments from "Components/general/Comments.vue"
 import DonorsList from "Components/general/DonorsList.vue"
 
 export default {
@@ -267,8 +262,7 @@ export default {
 	components: {
 		CampaignGivingLevel,
 		CampaignUpdates,
-		Comment,
-		CommentReply,
+    Comments,
 		DonorsList
 	},
 	data () {

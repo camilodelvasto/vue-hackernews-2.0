@@ -25,7 +25,7 @@ export function createStore () {
 			comments: {
 				data: [],
 				current: 1,
-				limit: 6
+				limit: 2
 			},
 			donations: {
 				data: [],
