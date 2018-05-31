@@ -72,6 +72,9 @@
                   <button @click="loadMoreComments()" v-if="moreComments">Show more comments</button>
                   <h4>Leave a comment</h4>
                   <CommentReply />
+                  <div class="button campaign-lower__cta-start is-info is-large">
+                    Start your own fundraiser
+                  </div>
                 </div>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 2" key="2">
@@ -205,9 +208,12 @@
     }
   }
   &__cta-start {
-    display: block;
-    margin: 50px 0;
+    margin: 50px auto;
     border-radius: 10px;
+    display: flex;
+    @include breakpoint ($tablet) {
+      width: 70%;
+    }
   }
   &__left-column {
     padding-right: 0.5rem;
@@ -261,8 +267,8 @@ export default {
 	components: {
 		CampaignGivingLevel,
 		CampaignUpdates,
-    Comment,
-    CommentReply,
+		Comment,
+		CommentReply,
 		DonorsList
 	},
 	data () {

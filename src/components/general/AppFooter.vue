@@ -45,7 +45,7 @@
       </div>
       <div class="copy">
         <div class="container">
-          Copyright 2010-2017 <a href="//thedailysource.org" target="_blank">The Daily Source</a> All Rights Reserved.  <a href="#">Terms of Service</a>
+          Copyright 2010-2018 <a href="//thedailysource.org" target="_blank">The Daily Source</a> All Rights Reserved.  <a href="#">Terms of Service</a>
         </div>
       </div>
     </div>

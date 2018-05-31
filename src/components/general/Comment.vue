@@ -49,16 +49,16 @@
 </style>
 
 <script>
-import ShareDonateToolbar from 'Components/general/ShareDonateToolbar.vue'
-import Avatar from 'vue-avatar'
-import Icons from 'Components/general/Icons.vue'
+import ShareDonateToolbar from "Components/general/ShareDonateToolbar.vue"
+import Avatar from "vue-avatar"
+import Icons from "Components/general/Icons.vue"
 
 export default {
-  props: [ 'comment', 'title', 'is-reply' ],
-  components: {
-    Avatar,
-    Icons,
-    ShareDonateToolbar
-  }
+	props: [ "comment", "title", "is-reply" ],
+	components: {
+		Avatar,
+		Icons,
+		ShareDonateToolbar
+	}
 }
 </script>

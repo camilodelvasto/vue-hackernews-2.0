@@ -11,15 +11,15 @@ export function host (url) {
 }
 
 export function timeAgo (timestamp) {
-  const timeAgo = new TimeAgo("en-US")
-  var formedString = timeAgo.format(timestamp)
-  return formedString
+	const timeAgo = new TimeAgo("en-US")
+	var formedString = timeAgo.format(timestamp)
+	return formedString
 }
 
 export function formattedDate (timestamp) {
-  var date = new Date(timestamp)
-  var options = { year: "numeric", month: "long", day: "numeric" }
-  return date.toLocaleString("en-US", options)
+	var date = new Date(timestamp)
+	var options = { year: "numeric", month: "long", day: "numeric" }
+	return date.toLocaleString("en-US", options)
 }
 
 export function usd (amount) {

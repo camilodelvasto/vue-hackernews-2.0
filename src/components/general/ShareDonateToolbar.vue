@@ -41,12 +41,12 @@
 </style>
 
 <script>
-import Icons from 'Components/general/Icons.vue'
+import Icons from "Components/general/Icons.vue"
 
 export default {
-  props: [ 'allowComment' ],
-  components: {
-    Icons
-  }
+	props: [ "allowComment" ],
+	components: {
+		Icons
+	}
 }
 </script>

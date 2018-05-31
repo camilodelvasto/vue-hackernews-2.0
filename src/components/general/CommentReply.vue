@@ -38,14 +38,14 @@ textarea {
 
 <script>
 export default {
-  props: [ 'parent-comment' ],
-  data () {
-    return {
-      commentBody: ''
-    }
-  },
-  mounted () {
-    this.$refs.faxthis.classList.add('made-as-it-is')
-  }
+	props: [ "parent-comment" ],
+	data () {
+		return {
+			commentBody: ""
+		}
+	},
+	mounted () {
+		this.$refs.faxthis.classList.add("made-as-it-is")
+	}
 }
 </script>

@@ -197,9 +197,9 @@ export default {
 		shareEmail () {
 			document.querySelector(".at-share-btn").click()
 		},
-    donate () {
-      this.$emit('donateFromButton')
-    }
+		donate () {
+			this.$emit("donateFromButton")
+		}
 	}
 }
 

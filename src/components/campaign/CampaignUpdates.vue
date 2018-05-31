@@ -63,9 +63,9 @@ export default {
 			showFullUpdate: {}
 		}
 	},
-  components: {
-    ShareDonateToolbar
-  },
+	components: {
+		ShareDonateToolbar
+	},
 	props: [ "updates", "maxchar", "count" ],
 	methods: {
 		excerpt (content) {
