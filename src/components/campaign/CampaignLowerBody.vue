@@ -87,7 +87,7 @@
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 4" key="4">
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
-                  <div class="user-optional__updates-wrapper">campaign.updates_count: {{campaign.updates_count}}
+                  <div class="user-optional__updates-wrapper">
                     <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
                     <button class="button is-warning is-load-more" @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
@@ -262,7 +262,7 @@ export default {
 	components: {
 		CampaignGivingLevel,
 		CampaignUpdates,
-    Comments,
+		Comments,
 		DonorsList
 	},
 	data () {

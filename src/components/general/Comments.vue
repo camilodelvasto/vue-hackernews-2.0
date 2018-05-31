@@ -31,13 +31,13 @@ import CommentReply from "Components/general/CommentReply.vue"
 export default {
 	props: [ "comments", "more-comments" ],
 	components: {
-    Comment,
-    CommentReply
+		Comment,
+		CommentReply
 	},
-  methods: {
-    loadMoreComments () {
-      this.$emit('loadMoreComments')
-    }
-  }
+	methods: {
+		loadMoreComments () {
+			this.$emit("loadMoreComments")
+		}
+	}
 }
 </script>
