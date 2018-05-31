@@ -1,11 +1,12 @@
 <template>
   <div class="updates__wrapper">
-    <div class="update__wrapper" v-for="(update, index) in updates" >
-      <div class="update__timestamp">{{formattedDate(update.timestamp)}}</div>
-      <div class="update__content-excerpt" v-if="update.content.length > maxchar">
+    <div class="update__wrapper" v-for="(update, index) in updates">
+      <div class="update__fullname"><span class="update__fullname-name">Update # {{count - index}}</span></div>
+      <div class="update__timestamp">{{update.timestamp | formattedDate}}</div>
+      <div class="update__content" v-if="update.content.length > maxchar">
         <transition name="fade">
           <div v-if="!showFullUpdate[index]">
-            <span class="update__content" v-html="excerpt(update.content)"></span>
+            <span v-html="excerpt(update.content)"></span>
             <span>... <a @click="toggleIndex(index)">Show more</a></span>
           </div>
           <div class="update__content" v-else>
@@ -15,12 +16,16 @@
         </transition>
       </div>
       <div class="update__content" v-else v-html="update.content"></div>
-      <div ShareDonateToolbar :allowComment="false" />
+      <ShareDonateToolbar :allowComment="false" />
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.updates__wrapper {
+  font-size: 20px;
+}
+
 .update {
   &__wrapper {
     margin-bottom: 20px;
@@ -30,14 +35,15 @@
     font-size: 18px;
   }
   &__timestamp {
-    color: $color-text;    
+    font-style: italic;
+    color: $color-medium-gray;
     margin-bottom: 6px;
-    font-style: bold;
-    font-size: 18px;
+    font-size: 16px;
   }
   &__fullname {
     font-style: normal;
     color: $color-text;
+    font-size: 22px;
   }
   &__content {
     font-size: 20px;
@@ -49,6 +55,7 @@
 
 <script>
 import Vue from "vue"
+import ShareDonateToolbar from "Components/general/ShareDonateToolbar.vue"
 
 export default {
 	data () {
@@ -56,13 +63,11 @@ export default {
 			showFullUpdate: {}
 		}
 	},
-	props: [ "updates", "maxchar" ],
+  components: {
+    ShareDonateToolbar
+  },
+	props: [ "updates", "maxchar", "count" ],
 	methods: {
-		formattedDate (dateX) {
-			var date = new Date(dateX)
-			var options = { year: "numeric", month: "long", day: "numeric" }
-			return date.toLocaleString("en-US", options)
-		},
 		excerpt (content) {
 			var stripHtml = content.replace(/<\/?[^>]+(>|$)/g, "")
 			return stripHtml.substring(0, this.maxchar)

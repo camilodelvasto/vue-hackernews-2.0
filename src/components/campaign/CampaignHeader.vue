@@ -4,8 +4,8 @@
       <h1 class="campaign-header__title" v-html="campaign.name"></h1>
       <div class="campaign-nonprofit">
         <h2 class="campaign-nonprofit__subtitle">A fundraiser supporting the nonprofit:
-          <figure class="campaign-nonprofit__logo">
-            <img class="campaign-nonprofit__img" :src="campaign.nonprofit.logoUrl" :alt="campaign.nonprofit.name">
+          <figure class="campaign-nonprofit__logo" v-if="campaign.nonprofit.logo_square">
+            <img class="campaign-nonprofit__img" :src="campaign.nonprofit.logo_square" alt="">
           </figure>
           <router-link to="campaign.nonprofit.slug" v-html="campaign.nonprofit.name"></router-link>
         </h2>

@@ -36,6 +36,7 @@
     "route-cache": "0.4.3",
     "serve-favicon": "^2.4.5",
     "vue": "^2.5.16",
+    "vue-avatar": "^2.1.4",
     "vue-meta": "^1.5.0",
     "vue-no-ssr": "^0.2.2",
     "vue-router": "^3.0.1",

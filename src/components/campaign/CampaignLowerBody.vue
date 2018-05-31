@@ -32,24 +32,27 @@
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">
-                    <CampaignUpdates :updates="updates" maxchar="200"/>
+                    <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
                     <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
-                <h2>Nonprofit</h2>
+                <h2>Nonprofit Organization</h2>
                 <div class="tab-section tab-section__header">
                   <p>A Volunteerathon is a fundraiser like a walkathon or bikeathon, except the person's time goes to help a nonprofit or do an independent service project.</p>
                   <p>{{campaign.campaigner.name}} is raising money for: </p>
                   <div class="this-nonprofit__wrapper">
                     <figure class="campaign-lower__logo-wrapper">
-                      <span v-html="campaign.nonprofit.name" v-if="campaign.nonprofit.logoFullUrl"></span>
-                      <img :src="campaign.nonprofit.logoFullUrl" class="campaign-lower__logo" width="200" v-else>
+                      <img :src="campaign.nonprofit.logo_square" class="campaign-lower__logo" width="200"
+                        v-if="campaign.nonprofit.logo_square">
                     </figure>
-                    <div class="campaign-lower__button-wrapper">
-                      <button class="button button-style is-warning">View profile</button>
-                      <button class="button button-style is-info" v-if="campaign.nonprofit.website">Donate</button>
+                    <div class="this-nonprofit__right-side">
+                      <span class="this-nonprofit__title" v-html="campaign.nonprofit.name"></span>
+                      <div class="campaign-lower__button-wrapper">
+                        <button class="button button-style is-warning">View profile</button>
+                        <button class="button button-style is-info" v-if="campaign.nonprofit.website">Contribute</button>
+                      </div>
+                      <p class="help">This is an IRS-approved 501(c){{campaign.nonprofit.SUBSECTION}} charity, so<br>your donation is 100% tax deductible</p>
                     </div>
-                    <p class="help">This is an IRS-approved 501(c)3 charity, so<br>your donation is 100% tax deductible</p>
                   </div>
                 </div>
                 <div class="tab-section tab-section__comments">
@@ -57,18 +60,18 @@
                   <div class="comments-section__wrapper">
                     <div class="comments-section__comment-wrapper" v-for="comment in comments">
                       <div class="comment-item__comment-wrapper">
-                        <div Comment :comment="comment" />
+                        <Comment :comment="comment" title="comment title" />
                       </div>
                       <div class="comment-item__comment-replies">
                         <div class="comment-item__comment-wrapper" v-for="reply in comment.replies">
-                          <div Comment :comment="reply" />
+                          <Comment :comment="reply" :is-reply="true"/>
                         </div>
                       </div>
                     </div>
                   </div>
                   <button @click="loadMoreComments()" v-if="moreComments">Show more comments</button>
                   <h4>Leave a comment</h4>
-                  <div CommentReply />
+                  <CommentReply />
                 </div>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 2" key="2">
@@ -85,8 +88,8 @@
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 4" key="4">
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
-                  <div class="user-optional__updates-wrapper">
-                    <CampaignUpdates :updates="updates" maxchar="600"/>
+                  <div class="user-optional__updates-wrapper">campaign.updates_count: {{campaign.updates_count}}
+                    <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
                     <button @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
@@ -174,15 +177,21 @@
       }
     }
   }
+
   &__logo-wrapper {
     display: flex;
     flex-direction: column;
-    font-weight: bold;
-    font-size: 20px;
-    text-transform: uppercase;
+    height: 140px;
+    width: 140px;
+    margin: 15px auto;
+
+    @include breakpoint($tablet) {
+      margin: 0 20px 0 0;
+    }
 
     img {
       display: block;
+      max-width: 140px;
     }
   }
   &__button-wrapper {
@@ -190,8 +199,8 @@
       margin: 10px 0;
       display: inline-block;
 
-      &:last-child {
-        margin-left: 10px;
+      &:first-child {
+        margin-right: 10px;
       }
     }
   }
@@ -210,12 +219,41 @@
   }
 }
 
+.this-nonprofit {
+  &__wrapper {
+    text-align: center;
+    margin: auto;
+    margin-bottom: 40px;
+    margin-top: 25px;
+
+    figure {
+      align-items: center;
+    }
+
+    @include breakpoint($tablet) {
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .help {
+    font-size: 13px;
+  }
+  &__title {
+    font-weight: bold;
+    color: $color-dark-gray;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+}
 
 </style>
 
 <script>
 import CampaignGivingLevel from "Components/campaign/CampaignGivingLevel.vue"
 import CampaignUpdates from "Components/campaign/CampaignUpdates.vue"
+import Comment from "Components/general/Comment.vue"
+import CommentReply from "Components/general/CommentReply.vue"
 import DonorsList from "Components/general/DonorsList.vue"
 
 export default {
@@ -223,6 +261,8 @@ export default {
 	components: {
 		CampaignGivingLevel,
 		CampaignUpdates,
+    Comment,
+    CommentReply,
 		DonorsList
 	},
 	data () {

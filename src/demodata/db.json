@@ -53,6 +53,16 @@
   ],
   "updates": [
     {
+      "id": 18,
+      "author_id": 24,
+      "campaign_id": 254,
+      "content": "<p>Latest update. Mauris nec pharetra massa. Nulla facilisi. Nulla at scelerisque ante. Nam at nisi vel odio fringilla ultrices. Phasellus quis nunc consectetur, ullamcorper sapien ut, condimentum risus. Quisque feugiat gravida faucibus. Praesent eget nisl bibendum, suscipit odio vitae, euismod nisl. Ut varius aliquam semper. Quisque ac aliquam leo. Suspendisse et rhoncus neque.</p><p>Ut eleifend leo eu est lobortis, nec lobortis magna fringilla. Nullam nec condimentum libero. Vivamus et tristique est, vitae venenatis tellus. Duis tempus nibh justo, at mattis turpis rhoncus ut. Morbi ac est id ex feugiat lacinia a sit amet arcu. Maecenas sit amet eros tellus. Ut sit amet mattis neque. Nunc leo risus, vulputate pellentesque interdum facilisis, suscipit ac sapien. Morbi volutpat ac turpis a blandit. Maecenas ultricies quis nunc vitae aliquam.</p><p>Nulla facilisi. Proin congue imperdiet volutpat. Vivamus quis enim a neque consequat dictum et sed lacus. Vestibulum aliquam vel metus non egestas. Duis ligula lacus, tincidunt a quam non, porta cursus elit. Nunc at fermentum quam. Duis ut elit justo. In eget pulvinar sapien. Cras interdum orci a pellentesque faucibus. Maecenas nec enim ac velit commodo faucibus. Nam vitae lorem sollicitudin, sodales eros ac, congue nibh. Aenean laoreet semper convallis. Vestibulum pharetra, purus non elementum convallis, lectus neque consequat magna, et dictum metus ante non lacus. Quisque scelerisque ex sit amet euismod semper.</p><p>Integer sed ante vitae arcu luctus ultrices. Donec iaculis est ut turpis malesuada, eu bibendum libero malesuada. Sed et fermentum est. Sed sit amet consequat nibh. Mauris posuere mi eu sapien vestibulum, ac viverra urna dictum. Vestibulum finibus enim et pharetra fringilla. Curabitur molestie, dui vitae lobortis dignissim, elit massa facilisis arcu, a lobortis odio felis et sem. Mauris lectus quam, varius in scelerisque ac, condimentum eget nisi. Sed ac vulputate purus, sit amet aliquam lacus. Sed eget euismod arcu. Quisque maximus, sapien at blandit vestibulum, lectus purus sagittis dui, vitae lacinia arcu sapien ut urna. Nunc laoreet mi eget libero condimentum ultricies. Phasellus quam augue, congue ac est ac, rutrum tincidunt nibh.</p>",
+      "timestamp": 1517915925000,
+      "fullname": "Alison Baxley",
+      "name": "Alison",
+      "title": "My fourth week of volunteering"
+    },
+    {
       "id": 12,
       "author_id": 24,
       "campaign_id": 254,
@@ -118,12 +128,35 @@
       "id": 22,
       "author_id": 24,
       "campaign_id": 254,
-      "reply_to": null,
       "avatar": "https://volunteerathon__fundraiser2.surge.sh/fundraiser/avatar.png",
       "comment": "<p>This is great that you’re doing this good deed to help other people in need. I myself have needed help in the past and gladly, I have found this site.</p>",
       "timestamp": 1517415125000,
       "fullname": "Mark Twain",
-      "name": "Alison"
+      "name": "Alison",
+      "replies": [
+        {
+          "id": 23,
+          "author_id": 24,
+          "campaign_id": 254,
+          "reply_to": 22,
+          "avatar": null,
+          "comment": "<p>Indeed, that’s fantastic.</p>",
+          "timestamp": 1526504544000,
+          "fullname": "George Gerschwinn",
+          "name": "George"
+        },
+        {
+          "id": 24,
+          "author_id": 24,
+          "campaign_id": 254,
+          "reply_to": 22,
+          "avatar": null,
+          "comment": "<p>Nam at nisi vel odio fringilla ultrices. Phasellus quis nunc consectetur, ullamcorper sapien ut, condimentum risus. Phasellus quam augue, congue ac est ac, rutrum tincidunt nibh.</p>",
+          "timestamp": 1521504544000,
+          "fullname": "Dave Weckl",
+          "name": "Dave"
+        }
+      ]
     },
     {
       "id": 23,
@@ -133,8 +166,8 @@
       "avatar": null,
       "comment": "<p>Indeed, that’s fantastic.</p>",
       "timestamp": 1526504544000,
-      "fullname": "George Gerschwinn",
-      "name": "George"
+      "fullname": "Jen Zuckerberg",
+      "name": "Jen"
     },
     {
       "id": 24,
@@ -144,8 +177,8 @@
       "avatar": null,
       "comment": "<p>Nam at nisi vel odio fringilla ultrices. Phasellus quis nunc consectetur, ullamcorper sapien ut, condimentum risus. Phasellus quam augue, congue ac est ac, rutrum tincidunt nibh.</p>",
       "timestamp": 1521504544000,
-      "fullname": "Dave Weckl",
-      "name": "Dave"
+      "fullname": "Martin Luc-Defau",
+      "name": "Martin"
     }
   ],
   "donations": [
@@ -346,8 +379,21 @@
         "location": "Youngstown, Ohio, US"
       },
       "nonprofit": {
-        "logoUrl": "http://localhost:3004/static/assets/images/campaign-feed-the-children-logo-square.png",
-        "name": "MELROSE MASSACHUSETTS TELEVISION"
+        "logo_square": "http://localhost:3004/static/assets/images/campaign-feed-the-children-logo-square.png",
+        "logo": "http://localhost:3004/static/assets/images/campaign-feed-the-children-logo.png",
+        "name": "MELROSE MASSACHUSETTS TELEVISION",
+        "website": "https://melrose-massachusetts.tv",
+        "EIN": 43138428,
+        "STREET": "360 MAIN ST",
+        "CITY": "MELROSE",
+        "STATE": "MA",
+        "ZIP": "02176-4623",
+        "ACTIVITY": "Described in section 170(b)1)(a)(vi) of the Code; Radio or television broadcasting",
+        "CLASSIFICATION": "Charitable Organization",
+        "DEDUCTIBILITY": 1,
+        "SUBSECTION": 3,
+        "NTEE_CD": "0",
+        "SORT_NAME": "0"        
       },
       "giving_levels": [
         { "amount": 10, "tagline": "Per mile", "description": "For every 10 dollars spent, I will run a mile!" },
@@ -363,8 +409,8 @@
         "goal": 12000,
         "daysLeft": 131
       },
-      "updates_count": 4,
-      "comments_count": 3,
+      "updates_count": 5,
+      "comments_count": 4,
       "donations_count": 6,
       "shared_count": 12
     },

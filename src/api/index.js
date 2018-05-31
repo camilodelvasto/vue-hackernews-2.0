@@ -85,7 +85,7 @@ export function fetchUpdates (campaignId, page, limit, paginated = true) {
 		if (!paginated) {
 			page = 1
 		}
-		axios.get(`${baseURL}/updates?campaign_id=${campaignId}&_limit=${limit}&_page=${page++}`)
+		axios.get(`${baseURL}/updates?_sort=timestamp&_order=desc&campaign_id=${campaignId}&_limit=${limit}&_page=${page++}`)
 			.then(response => {
 				if (response.data.length) {
 					resolve(response.data)
