@@ -169,8 +169,6 @@ export default {
 		this.fullURL = window.location.origin + this.routePath
 		this.loadScripts()
 	},
-	computed: {
-	},
 	methods: {
 		loadScripts () {
 			if (typeof window !== "undefined" && window.FB) {

@@ -71,10 +71,11 @@ export default {
 .fake-menu {
   display: none;
   position: absolute;
-  opacity: 0.1;
+  opacity: 0;
   top: 140px;
   left: 20px;
-  transition: opacity 0.2s ease-in-out;
+  padding: 20px;
+  transition: all 0.2s ease-in-out;
   a {
     display: block;
   }

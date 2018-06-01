@@ -5,7 +5,7 @@
         <div class="campaign-photo-section">
           <flickity ref="main-carousel" class="main-carousel" :options="mainCarouselOptions">
             <div class="campaign-photo-section__photo" v-for="item in campaign.pictures"
-              :style="`background-image: url(${item.imgsrc})`">
+              :style="`background-image: url(${item})`">
             </div>
           </flickity>
         </div>

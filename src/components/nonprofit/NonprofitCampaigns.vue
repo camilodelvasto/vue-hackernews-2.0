@@ -6,14 +6,16 @@
         <div class="volunteerathon__campaign-item column is-one-fifth" v-for="(campaign, index) in campaigns">
           <div class="volunteerathon__campaign-content">
             <router-link :to="`/campaigns/${campaign.campaign_id}`">
-              <figure class="volunteerathon__campaign-image" :style="{backgroundImage: `url(${campaign.pictures[0]})`}">
+              <figure class="volunteerathon__campaign-image"
+                :style="{backgroundImage: `url(${campaign.pictures[0]})`}"
+                v-if="campaign.pictures.length">
               </figure>
               <h4 v-html="campaign.name"></h4>
             </router-link>
             <p>
               By <span v-html="campaign.campaigner.fullname"></span><br>
             </p>
-            <ProgressBar :campaign="campaign" />
+            <ProgressBar :campaign="campaign" size="small"/>
           </div>
         </div>
       </div>

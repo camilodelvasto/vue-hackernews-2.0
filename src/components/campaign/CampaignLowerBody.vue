@@ -41,9 +41,8 @@
                   <p>A Volunteerathon is a fundraiser like a walkathon or bikeathon, except the person's time goes to help a nonprofit or do an independent service project.</p>
                   <p><span v-html="campaign.campaigner.name"></span> is raising money for: </p>
                   <div class="this-nonprofit__wrapper">
-                    <figure class="campaign-lower__logo-wrapper">
-                      <img :src="campaign.nonprofit.logo_square" class="campaign-lower__logo" width="200"
-                        v-if="campaign.nonprofit.logo_square">
+                    <figure class="campaign-lower__logo-wrapper" v-if="campaign.nonprofit">
+                      <img :src="campaign.nonprofit.logo_square" class="campaign-lower__logo" width="200">
                     </figure>
                     <div class="this-nonprofit__right-side">
                       <span class="this-nonprofit__title" v-html="campaign.nonprofit.name"></span>

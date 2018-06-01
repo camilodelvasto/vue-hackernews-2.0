@@ -4,10 +4,10 @@
       <h1 class="campaign-header__title" v-html="campaign.name"></h1>
       <div class="campaign-nonprofit">
         <h2 class="campaign-nonprofit__subtitle">A fundraiser supporting the nonprofit:
-          <figure class="campaign-nonprofit__logo" v-if="campaign.nonprofit.logo_square">
+          <figure class="campaign-nonprofit__logo" v-if="campaign.nonprofit">
             <img class="campaign-nonprofit__img" :src="campaign.nonprofit.logo_square" alt="">
           </figure>
-          <router-link to="campaign.nonprofit.slug" v-html="campaign.nonprofit.name"></router-link>
+          <router-link :to="`/nonprofits/${campaign.nonprofit.EIN}`" v-html="campaign.nonprofit.name"></router-link>
         </h2>
       </div>
     </div>
@@ -55,6 +55,10 @@
     color: $color-medium-gray;
     font-size: 18px;
     margin-bottom: 10px;
+
+    @include breakpoint($mobile) {
+      display: none;
+    }
 
     @include breakpoint($tablet) {
       margin-bottom: 0;

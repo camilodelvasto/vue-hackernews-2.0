@@ -21,7 +21,6 @@
     height: 20px;
     border-radius: 20px;
     overflow: hidden;
-    display: none;
 
     @include breakpoint($tablet) {
       display: block;
