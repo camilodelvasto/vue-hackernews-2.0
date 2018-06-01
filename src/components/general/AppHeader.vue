@@ -252,7 +252,10 @@
 .page-layout {
   .header__inner {
     .user-space__search {
-      order: unset;
+      order: 2;
+    }
+    .max-good {
+      order: 3;
     }
 
     .logo__wrapper {
