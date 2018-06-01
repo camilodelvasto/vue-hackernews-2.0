@@ -50,7 +50,7 @@ blockquote {
   }
 
   @include breakpoint($fullhd) {
-    width: $max-container-width; //1344px
+    width: $max-fluid-container-width; //1152px
   }
 
   &.is-fluid {

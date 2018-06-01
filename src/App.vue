@@ -71,12 +71,17 @@ export default {
 .fake-menu {
   display: none;
   position: absolute;
+  opacity: 0.1;
   top: 140px;
   left: 20px;
+  transition: opacity 0.2s ease-in-out;
   a {
     display: block;
   }
 
+  &:hover {
+    opacity: 1;
+  }
   @include breakpoint($widescreen) {
     display: block;
   }

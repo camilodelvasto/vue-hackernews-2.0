@@ -249,6 +249,9 @@
   }
 }
 
+.is-load-more {
+  margin-bottom: 40px;
+}
 </style>
 
 <script>

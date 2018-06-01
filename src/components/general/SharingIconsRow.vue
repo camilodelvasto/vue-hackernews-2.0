@@ -67,7 +67,7 @@
 <style scoped lang="scss">
 .sharing-icons-row {
   &__wrapper {
-    margin-top: 20px;
+    margin-top: 30px;
 
     .column {
       padding: 0.2em 0.75rem;

@@ -1,18 +1,18 @@
 <template>
-  <section class="page-wrapper">
+  <section class="page-wrapper section3">
     <div :fixed="true" class="is-fixed">
       <div class="container capped">
         <h1 v-html="headline"></h1>
         <h3 class="tagline" v-html="tagline"></h3>
       </div>
-      <div class="container capped">
+      <div class="container capped images-wrapper">
         <div class="columns">
           <RotatingImage delay="0" interval="6000" :imgarr="boxes[0].images"></RotatingImage>
           <RotatingImage delay="2000" interval="6000" :imgarr="boxes[1].images"></RotatingImage>
           <RotatingImage delay="4000" interval="6000" :imgarr="boxes[2].images"></RotatingImage>
         </div>
       </div>
-      <div class="container capped">
+      <div class="container capped boxes-wrapper">
         <div class="columns combo-wrapper is-multiline">
           <ComboBox :iconsrc="result.iconsrc" :duplicate="result.duplicate" v-for="result in results" :key="result.headline">
             <h2 v-html="result.headline"></h2>
@@ -61,12 +61,6 @@ h3.tagline {
 .is-fixed.Masthead {
 }
 
-.container {
-  @include breakpoint($tablet) {
-    margin: 0 auto !important;
-  }
-}
-
 .columns {
   @include breakpoint($tablet) {
     justify-content: center;
@@ -83,5 +77,11 @@ h3.tagline {
 .fade-enter, .fade-leave-to {
     opacity: 0
 }
-
+.boxes-wrapper {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.images-wrapper {
+  margin-top: 30px;
+}
 </style>

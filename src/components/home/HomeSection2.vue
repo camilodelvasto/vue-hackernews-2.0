@@ -1,5 +1,5 @@
 <template>
-  <section class="page-wrapper" :fixed="true" v-bind:style="{ backgroundColor: `#f5f1e0`, backgroundPosition: bgPosition }" breakpoint="(min-width: 968px)">
+  <section class="page-wrapper section2" :fixed="true" v-bind:style="{ backgroundColor: `#f5f1e0`, backgroundPosition: bgPosition }" breakpoint="(min-width: 968px)">
     <div>
       <div class="container capped">
         <h1 v-html="headline"></h1>
@@ -8,7 +8,7 @@
         <div class="logo-badge">
           <h3 v-html="tagline"></h3>
         </div>
-        <div class="columns" v-if="boxes.length">
+        <div class="columns boxes-wrapper" v-if="boxes.length">
           <div class="card column" v-for="box in boxes" :key="box.imgsrc">
             <div class="card-content bg-position-right" :style="`backgroundImage: url(${box.imgsrc})`">
             </div>

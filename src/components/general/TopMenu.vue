@@ -2,7 +2,7 @@
   <div class="nav-container">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-menu" v-bind:class="{'is-active': showMobileMenu}">
-        <div class="container">
+        <div class="container is-fluid">
           <router-link to="/">Home</router-link>
           <router-link to="/">Volunteering</router-link>
           <router-link to="/">Nonprofits</router-link>
@@ -51,6 +51,7 @@
     justify-content: center;
     align-items: center;
     display: flex !important;
+    z-index: 13;
   }
 }
 .navbar-container {
@@ -120,12 +121,9 @@
       margin: 10px 0;
     }
   }
-
-  .container {
-    @include breakpoint($tablet) {
-      width: 960px;
-    }
-  }
+}
+.container {
+  padding: 0 10px;
 }
 </style>
 
