@@ -408,10 +408,10 @@ function loadAndScrollTo (component, itemId, vm) {
 					return loadAndScrollTo(component, itemId, vm)
 				})
 				.catch(err => {
-					console.log("unknonw error", err)
+					return err
 				})
 		} else {
-			console.log("target does not exist")
+      return { code: 404 }
 		}
 	}
 }
