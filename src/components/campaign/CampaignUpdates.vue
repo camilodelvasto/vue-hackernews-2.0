@@ -89,11 +89,11 @@ export default {
 	components: {
 		ShareDonateToolbar
 	},
-  computed: {
-    currentId () {
-      return parseInt(this.$route.query.update_id, 10)
-    }
-  },
+	computed: {
+		currentId () {
+			return parseInt(this.$route.query.update_id, 10)
+		}
+	},
 	props: [ "updates", "maxchar", "count" ],
 	methods: {
 		excerpt (content) {

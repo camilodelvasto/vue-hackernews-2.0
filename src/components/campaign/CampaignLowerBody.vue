@@ -258,7 +258,6 @@ import CampaignGivingLevel from "Components/campaign/CampaignGivingLevel.vue"
 import CampaignUpdates from "Components/campaign/CampaignUpdates.vue"
 import Comments from "Components/general/Comments.vue"
 import DonorsList from "Components/general/DonorsList.vue"
-var VueScrollTo = require('vue-scrollto')
 
 export default {
 	props: [ "campaign" ],
@@ -327,19 +326,18 @@ export default {
 			}
 		},
 		loadMoreUpdates (paginated = true) {
-      return new Promise((resolve, reject) => {
-        const campaignId = this.$route.params.id
-        if (this.moreUpdates) {
-          return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
-            .then(data => {
-              resolve(data)
-            })
-            .catch(err => {
-              reject(err)
-            })
-        }
-
-      })
+			return new Promise((resolve, reject) => {
+				const campaignId = this.$route.params.id
+				if (this.moreUpdates) {
+					return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
+						.then(data => {
+							resolve(data)
+						})
+						.catch(err => {
+							reject(err)
+						})
+				}
+			})
 		},
 		loadDonationsTab () {
 			this.currentTab = 3
@@ -352,18 +350,18 @@ export default {
 		window.addEventListener("scroll", () => {
 			this.bottom = this.userHasScrolled()
 		})
-    const updateId = this.$route.query.update_id
-    if (updateId) {
-      this.currentTab = 5
-      loadAndScrollTo('update', updateId, this)
-    }
+		const updateId = this.$route.query.update_id
+		if (updateId) {
+			this.currentTab = 5
+			loadAndScrollTo("update", updateId, this)
+		}
 
-    // if there's comment_id param, select the updates tab
-    // smooth scroll to the tab anchor
-    // test if anchor exists, load updates if not. repeat. 
-    // if no anchor found after no more pages remain, log the error but do not display 404
-    // scroll to the update when found.
-    // highlight selected update like stackoverflow does
+		// if there's comment_id param, select the updates tab
+		// smooth scroll to the tab anchor
+		// test if anchor exists, load updates if not. repeat.
+		// if no anchor found after no more pages remain, log the error but do not display 404
+		// scroll to the update when found.
+		// highlight selected update like stackoverflow does
 	},
 
 	// Load these items only when the user has scrolled down.
@@ -393,29 +391,28 @@ function showMoreButton (state, arg) {
 	return totalPages >= current
 }
 
-function loadAndScrollTo(component, itemId, vm) {
-  const target = `#${component}_${itemId}`
+function loadAndScrollTo (component, itemId, vm) {
+	const target = `#${component}_${itemId}`
 
-  var targetExists = vm.updates.find(update => {
-    return update.id === parseInt(itemId, 10)
-  })
-  if (targetExists) {
-    var cancelScroll = {}
-    setTimeout(() => {
-      cancelScroll = vm.$scrollTo(target, { offset: -200 })
-    }, 4000)
-  } else {
-    if (vm.moreUpdates) {
-      return vm.loadMoreUpdates()
-        .then(data => {
-          return loadAndScrollTo(component, itemId, vm)
-        })
-        .catch(err => {
-          console.log('unknonw error', err)
-        })
-    } else {
-      console.log('target does not exist')
-    }
-  }
+	var targetExists = vm.updates.find(update => {
+		return update.id === parseInt(itemId, 10)
+	})
+	if (targetExists) {
+		setTimeout(() => {
+			vm.$scrollTo(target, { offset: -200 })
+		}, 4000)
+	} else {
+		if (vm.moreUpdates) {
+			return vm.loadMoreUpdates()
+				.then(data => {
+					return loadAndScrollTo(component, itemId, vm)
+				})
+				.catch(err => {
+					console.log("unknonw error", err)
+				})
+		} else {
+			console.log("target does not exist")
+		}
+	}
 }
 </script>
