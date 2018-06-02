@@ -40,6 +40,7 @@
     "vue-meta": "^1.5.0",
     "vue-no-ssr": "^0.2.2",
     "vue-router": "^3.0.1",
+    "vue-scrollto": "^2.11.0",
     "vue-server-renderer": "^2.5.16",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
@@ -51,6 +52,7 @@
     "babel-eslint": "8",
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "chokidar": "^1.7.0",

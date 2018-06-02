@@ -20,7 +20,7 @@ export function createStore () {
 			updates: {
 				data: [],
 				current: 1,
-				limit: 2
+				limit: 1
 			},
 			comments: {
 				data: [],

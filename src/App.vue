@@ -18,7 +18,9 @@
 import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppHeader from "Components/general/AppHeader.vue"
+import VueScrollTo from "vue-scrollto"
 
+Vue.use(VueScrollTo)
 Vue.use(VueMeta)
 
 export default {

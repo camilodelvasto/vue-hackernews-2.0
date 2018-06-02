@@ -6,16 +6,16 @@
           <div class="tabs__bottom-line"></div>
           <ul>
             <li @click="currentTab = 1" :class="{'is-active': currentTab === 1}"><a>Home</a></li>
-            <li @click="currentTab = 3" :class="{'is-active': currentTab === 3}">
+            <li @click="currentTab = 2" :class="{'is-active': currentTab === 2}">
               <a>Donors ({{donations.length}})</a>
             </li>
-            <li @click="currentTab = 5" :class="{'is-active': currentTab === 5}">
+            <li @click="currentTab = 3" :class="{'is-active': currentTab === 3}">
               <a>Shares ({{campaign.shared_count}})</a>
             </li>
-            <li @click="currentTab = 2" :class="{'is-active': currentTab === 2}">
+            <li @click="currentTab = 4" :class="{'is-active': currentTab === 4}">
               <a>Comments ({{comments.length}})</a>
             </li>
-            <li @click="currentTab = 4" :class="{'is-active': currentTab === 4}">
+            <li @click="currentTab = 5" :class="{'is-active': currentTab === 5}">
               <a>Updates ({{campaign.updates_count}})</a>
             </li>
           </ul>
@@ -66,6 +66,14 @@
                 </div>
               </div>
               <div class="campaign-lower__tabs-tab" v-if="currentTab === 2" key="2">
+                <DonorsList
+                  v-on:loadDonationsTab="loadDonationsTab()"
+                  section-title="Donors"
+                  view-all-cta="View all"
+                  :donations="donations"
+                  layout="horizontal"/>
+              </div>
+              <div class="campaign-lower__tabs-tab" v-if="currentTab === 4" key="4">
                 <h2>Comments</h2>
                 <Comments
                   :comments="comments"
@@ -75,15 +83,7 @@
                   Start your own fundraiser
                 </div>
               </div>
-              <div class="campaign-lower__tabs-tab" v-if="currentTab === 3" key="3">
-                <DonorsList
-                  v-on:loadDonationsTab="loadDonationsTab()"
-                  section-title="Donors"
-                  view-all-cta="View all"
-                  :donations="donations"
-                  layout="horizontal"/>
-              </div>
-              <div class="campaign-lower__tabs-tab" v-if="currentTab === 4" key="4">
+              <div class="campaign-lower__tabs-tab" v-if="currentTab === 5" key="5">
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">
@@ -258,6 +258,7 @@ import CampaignGivingLevel from "Components/campaign/CampaignGivingLevel.vue"
 import CampaignUpdates from "Components/campaign/CampaignUpdates.vue"
 import Comments from "Components/general/Comments.vue"
 import DonorsList from "Components/general/DonorsList.vue"
+var VueScrollTo = require('vue-scrollto')
 
 export default {
 	props: [ "campaign" ],
@@ -326,16 +327,19 @@ export default {
 			}
 		},
 		loadMoreUpdates (paginated = true) {
-			const campaignId = this.$route.params.id
-			if (this.moreUpdates) {
-				return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
-					.then(data => {
-						return data
-					})
-					.catch(err => {
-						console.log(err)
-					})
-			}
+      return new Promise((resolve, reject) => {
+        const campaignId = this.$route.params.id
+        if (this.moreUpdates) {
+          return this.$store.dispatch("FETCH_UPDATES", { campaignId: campaignId, paginated: paginated })
+            .then(data => {
+              resolve(data)
+            })
+            .catch(err => {
+              reject(err)
+            })
+        }
+
+      })
 		},
 		loadDonationsTab () {
 			this.currentTab = 3
@@ -348,6 +352,18 @@ export default {
 		window.addEventListener("scroll", () => {
 			this.bottom = this.userHasScrolled()
 		})
+    const updateId = this.$route.query.update_id
+    if (updateId) {
+      this.currentTab = 5
+      loadAndScrollTo('update', updateId, this)
+    }
+
+    // if there's comment_id param, select the updates tab
+    // smooth scroll to the tab anchor
+    // test if anchor exists, load updates if not. repeat. 
+    // if no anchor found after no more pages remain, log the error but do not display 404
+    // scroll to the update when found.
+    // highlight selected update like stackoverflow does
 	},
 
 	// Load these items only when the user has scrolled down.
@@ -375,5 +391,31 @@ function showMoreButton (state, arg) {
 	const count = state.campaign[`${arg}_count`]
 	const totalPages = Math.ceil(count / limit)
 	return totalPages >= current
+}
+
+function loadAndScrollTo(component, itemId, vm) {
+  const target = `#${component}_${itemId}`
+
+  var targetExists = vm.updates.find(update => {
+    return update.id === parseInt(itemId, 10)
+  })
+  if (targetExists) {
+    var cancelScroll = {}
+    setTimeout(() => {
+      cancelScroll = vm.$scrollTo(target, { offset: -200 })
+    }, 4000)
+  } else {
+    if (vm.moreUpdates) {
+      return vm.loadMoreUpdates()
+        .then(data => {
+          return loadAndScrollTo(component, itemId, vm)
+        })
+        .catch(err => {
+          console.log('unknonw error', err)
+        })
+    } else {
+      console.log('target does not exist')
+    }
+  }
 }
 </script>

@@ -31,7 +31,9 @@ textarea {
 }
 
 .button {
-  margin-left: 20px;
+  @include breakpoint($tablet) {
+    margin-left: 20px;
+  }
 }
 
 </style>

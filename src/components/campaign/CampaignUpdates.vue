@@ -1,6 +1,9 @@
 <template>
   <div class="updates__wrapper">
-    <div class="update__wrapper" v-for="(update, index) in updates">
+    <div :class="{'current': update.id === currentId}" 
+        :id="`update_${update.id}`"
+        class="update__wrapper"
+        v-for="(update, index) in updates">
       <div class="update__fullname"><span class="update__fullname-name">Update # {{count - index}}</span></div>
       <div class="update__timestamp">{{update.timestamp | formattedDate}}</div>
       <div class="update__content" v-if="update.content.length > maxchar">
@@ -29,6 +32,13 @@
 .update {
   &__wrapper {
     margin-bottom: 20px;
+
+    &.current {
+      padding: 10px;
+      margin-left: -10px;
+      animation: fadeBackground 3s ease-in-out;
+      animation-delay: 5s;
+    }
   }
   &__title {
     font-weight: bold;
@@ -51,6 +61,19 @@
     font-family: $font-primary;
   }
 }
+
+@keyframes fadeBackground {
+  0% {
+    background: rgba($color-medium-gray, 0.0);
+  }
+  25% {
+    background: rgba($color-medium-gray, 0.1);
+  }
+  100% {
+    background: rgba($color-medium-gray, 0);
+  }
+
+}
 </style>
 
 <script>
@@ -66,6 +89,11 @@ export default {
 	components: {
 		ShareDonateToolbar
 	},
+  computed: {
+    currentId () {
+      return parseInt(this.$route.query.update_id, 10)
+    }
+  },
 	props: [ "updates", "maxchar", "count" ],
 	methods: {
 		excerpt (content) {
