@@ -269,7 +269,6 @@ export default {
 	},
 	data () {
 		return {
-			bottom: false,
 			currentTab: 1
 		}
 	},
@@ -297,10 +296,6 @@ export default {
 		}
 	},
 	methods: {
-		userHasScrolled () {
-			const scrollY = window.scrollY
-			return scrollY > 0
-		},
 		loadMoreComments (paginated = true) {
 			if (this.moreComments) {
 				const campaignId = this.$route.params.id
@@ -347,35 +342,32 @@ export default {
 	// Data to be fetched asynchronously, only in the client.
 	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
 	mounted () {
-		window.addEventListener("scroll", () => {
-			this.bottom = this.userHasScrolled()
-		})
+		if (this.moreUpdates && this.$store.state.updates.current === 1) {
+			this.loadMoreUpdates()
+		}
+		if (this.moreComments && this.$store.state.comments.current === 1) {
+			this.loadMoreComments()
+		}
+		if (this.moreDonations && this.$store.state.donations.current === 1) {
+			this.loadMoreDonations()
+		}
+
+		// If there's an update_id param, find it and scroll to it.
 		const updateId = this.$route.query.update_id
 		if (updateId) {
 			this.currentTab = 5
-			loadAndScrollTo("update", updateId, this)
+			setTimeout(() => {
+				loadUpdatesAndScrollTo(updateId, this)
+			}, 4500)
 		}
 
-		// if there's comment_id param, select the updates tab
-		// smooth scroll to the tab anchor
-		// test if anchor exists, load updates if not. repeat.
-		// if no anchor found after no more pages remain, log the error but do not display 404
-		// scroll to the update when found.
-		// highlight selected update like stackoverflow does
-	},
-
-	// Load these items only when the user has scrolled down.
-	watch: {
-		bottom (bottom) {
-			if (bottom && this.moreUpdates && this.$store.state.updates.current === 1) {
-				this.loadMoreUpdates()
-			}
-			if (bottom && this.moreComments && this.$store.state.comments.current === 1) {
-				this.loadMoreComments()
-			}
-			if (bottom && this.moreDonations && this.$store.state.donations.current === 1) {
-				this.loadMoreDonations()
-			}
+		// If there's a comment_id param, find it and scroll to it.
+		const commentId = this.$route.query.comment_id
+		if (commentId) {
+			this.currentTab = 4
+			setTimeout(() => {
+				loadCommentsAndScrollTo(commentId, this)
+			}, 4500)
 		}
 	},
 	destroyed () {
@@ -391,27 +383,48 @@ function showMoreButton (state, arg) {
 	return totalPages >= current
 }
 
-function loadAndScrollTo (component, itemId, vm) {
-	const target = `#${component}_${itemId}`
+function loadUpdatesAndScrollTo (itemId, vm) {
+	const target = `#update_${itemId}`
 
 	var targetExists = vm.updates.find(update => {
 		return update.id === parseInt(itemId, 10)
 	})
 	if (targetExists) {
-		setTimeout(() => {
-			vm.$scrollTo(target, { offset: -200 })
-		}, 4000)
+		vm.$scrollTo(target, { offset: -200 })
 	} else {
 		if (vm.moreUpdates) {
 			return vm.loadMoreUpdates()
 				.then(data => {
-					return loadAndScrollTo(component, itemId, vm)
+					return loadUpdatesAndScrollTo(itemId, vm)
 				})
 				.catch(err => {
 					return err
 				})
 		} else {
-      return { code: 404 }
+			return { code: 404 }
+		}
+	}
+}
+
+function loadCommentsAndScrollTo (itemId, vm) {
+	const target = `#comment_${itemId}`
+
+	var targetExists = vm.comments.find(comment => {
+		return comment.id === parseInt(itemId, 10)
+	})
+	if (targetExists) {
+		vm.$scrollTo(target, { offset: -200 })
+	} else {
+		if (vm.moreComments) {
+			return vm.loadMoreComments()
+				.then(data => {
+					return loadCommentsAndScrollTo(itemId, vm)
+				})
+				.catch(err => {
+					return err
+				})
+		} else {
+			return { code: 404 }
 		}
 	}
 }

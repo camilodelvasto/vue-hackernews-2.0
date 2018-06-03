@@ -1,5 +1,7 @@
 <template>
-  <div class="comment-item__comment-wrapper" :class="{'is-reply': isReply}">
+  <div class="comment-item__comment-wrapper"
+      :class="{'is-reply': isReply, 'current': comment.id === currentId}"
+      :id="`comment_${comment.id}`">
     <div class="comment-item__avatar">
       <avatar 
         username="comment.commenter.fullname" 
@@ -26,6 +28,13 @@
     &.is-reply {
       margin-left: 30px;
     }
+
+    &.current {
+      padding: 10px;
+      margin-left: -10px;
+      animation: fadeBackground 3s ease-in-out;
+      animation-delay: 3s;
+    }
   }
   &__comment-header {
     color: $color-silver;
@@ -46,6 +55,19 @@
     }
   }
 }
+
+@keyframes fadeBackground {
+  0% {
+    background: rgba($color-medium-gray, 0.0);
+  }
+  25% {
+    background: rgba($color-medium-gray, 0.1);
+  }
+  100% {
+    background: rgba($color-medium-gray, 0);
+  }
+}
+
 </style>
 
 <script>
@@ -59,6 +81,11 @@ export default {
 		Avatar,
 		Icons,
 		ShareDonateToolbar
+	},
+	computed: {
+		currentId () {
+			return parseInt(this.$route.query.comment_id, 10)
+		}
 	}
 }
 </script>

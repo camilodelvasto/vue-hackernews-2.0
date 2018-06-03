@@ -19,6 +19,7 @@ export function createRouter () {
 	return new Router({
 		mode: "history",
 		fallback: false,
+		saveScrollPosition: true,
 		scrollBehavior: () => ({ y: 0 }),
 		routes: [
 			{

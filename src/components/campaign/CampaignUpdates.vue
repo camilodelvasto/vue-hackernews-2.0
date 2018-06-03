@@ -37,7 +37,7 @@
       padding: 10px;
       margin-left: -10px;
       animation: fadeBackground 3s ease-in-out;
-      animation-delay: 5s;
+      animation-delay: 3s;
     }
   }
   &__title {
@@ -72,7 +72,6 @@
   100% {
     background: rgba($color-medium-gray, 0);
   }
-
 }
 </style>
 
