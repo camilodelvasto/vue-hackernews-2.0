@@ -409,9 +409,23 @@ function loadUpdatesAndScrollTo (itemId, vm) {
 function loadCommentsAndScrollTo (itemId, vm) {
 	const target = `#comment_${itemId}`
 
-	var targetExists = vm.comments.find(comment => {
-		return comment.id === parseInt(itemId, 10)
+	var targetExists = false
+	vm.comments.forEach(comment => {
+		if (comment.id === parseInt(itemId, 10)) {
+			targetExists = true
+			return
+		}
+
+		if (comment.replies && comment.replies.length) {
+			var a = comment.replies.find(reply => {
+				return reply.id === parseInt(itemId, 10)
+			})
+			if (a) {
+				targetExists = true
+			}
+		}
 	})
+
 	if (targetExists) {
 		vm.$scrollTo(target, { offset: -200 })
 	} else {
