@@ -37,7 +37,8 @@ export function createStore () {
 				current: 1,
 				limit: 6
 			},
-			home: {}
+			home: {},
+      user: {}
 		},
 		actions,
 		mutations

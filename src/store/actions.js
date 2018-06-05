@@ -7,7 +7,8 @@ import {
 	fetchHomePage,
 	fetchNonprofit,
 	fetchTopFundraisers,
-	fetchUpdates
+	fetchUpdates,
+  sendComment
 } from "../api"
 
 export default {
@@ -117,12 +118,24 @@ export default {
 					reject(err)
 				})
 		})
+  },
+  FETCH_HOME_PAGE: ({ commit, dispatch, state }) => {
+    return new Promise((resolve, reject) => {
+      return fetchHomePage()
+        .then(data => {
+          commit("SET_HOME_PAGE", { home: data })
+          resolve(data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
 	},
-	FETCH_HOME_PAGE: ({ commit, dispatch, state }) => {
+	WRITE_COMMENT: ({ commit, dispatch, state }, {comment, reply, fullName, campaignId, contact_us_by_fax_only}) => {
 		return new Promise((resolve, reject) => {
-			return fetchHomePage()
+			return sendComment(comment, reply, fullName, campaignId, contact_us_by_fax_only)
 				.then(data => {
-					commit("SET_HOME_PAGE", { home: data })
+					commit("UPDATE_COMMENTS", { comment: data })
 					resolve(data)
 				})
 				.catch(err => {

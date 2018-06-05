@@ -4,7 +4,9 @@
       <Icons iconwidth="19px" iconheight="19px" icon="share" color="#666" class="icon" />
       <a>Share</a>
     </div>
-    <div class="share-toolbar__share-item share-toolbar__share-comment" v-if="allowComment !== false">
+    <div class="share-toolbar__share-item share-toolbar__share-comment"
+        v-if="allowComment !== false"
+        @click="replyTo(comment.id)">
       <Icons iconwidth="21px" iconheight="21px" icon="bubble" color="#666" class="icon" />
       <a>Comment</a>
     </div>
@@ -44,9 +46,14 @@
 import Icons from "Components/general/Icons.vue"
 
 export default {
-	props: [ "allowComment" ],
+	props: [ "allowComment", "comment" ],
 	components: {
 		Icons
-	}
+	},
+  methods: {
+    replyTo (commentId) {
+      this.$emit('replyTo', { comment_id: commentId })
+    }
+  }
 }
 </script>

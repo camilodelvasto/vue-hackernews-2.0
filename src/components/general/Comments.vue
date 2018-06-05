@@ -14,7 +14,7 @@
     </div>
     <button class="button is-warning is-load-more" @click="loadMoreComments()" v-if="moreComments">Show more comments</button>
     <h4>Leave a comment</h4>
-    <CommentReply />
+    <CommentReply class="comment-reply__wrapper" />
   </div>
 </template>
 
@@ -22,6 +22,10 @@
 .is-load-more {
   margin-bottom: 40px;
 }
+.comment-reply__wrapper {
+  margin-left: 60px;
+}
+
 </style>
 
 <script>

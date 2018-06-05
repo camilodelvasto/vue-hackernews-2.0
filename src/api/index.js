@@ -157,17 +157,36 @@ export function fetchTopFundraisers (page = 1, limit, paginated = true) {
 }
 
 export function fetchHomePage () {
-	return new Promise((resolve, reject) => {
-		axios.get(`${baseURL}/pages?page_name=home`)
-			.then(response => {
-				if (response.data) {
-					resolve(response.data[0])
-				} else {
-					reject({ code: 404 })
-				}
-			})
-			.catch(e => {
-				reject(e)
-			})
+  return new Promise((resolve, reject) => {
+    axios.get(`${baseURL}/pages?page_name=home`)
+      .then(response => {
+        if (response.data) {
+          resolve(response.data[0])
+        } else {
+          reject({ code: 404 })
+        }
+      })
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
+export function sendComment (commentBody, inReplyTo, fullName, campaignId, contact_us_by_fax_only) {
+  const commentAPI = 'https://wt-9c78551d704acfbbfbeb0bb6cca86e9a-0.sandbox.auth0-extend.com/volunteerathon-comment'
+  return new Promise((resolve, reject) => {
+    axios.post(commentAPI, {
+      comment: commentBody,
+      reply: inReplyTo,
+      fullName: fullName,
+      campaign_id: campaignId,
+      fax: contact_us_by_fax_only
+    })
+    .then(data => {
+      resolve(data)
+    })
+    .catch(e => {
+      reject(e)
+    })
 	})
 }

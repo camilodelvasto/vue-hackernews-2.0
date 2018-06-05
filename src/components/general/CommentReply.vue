@@ -1,10 +1,24 @@
 <template>
   <div class="comment-reply__wrapper">
-    <form placeholder="Write your message">
-      <textarea type="text" v-model="commentBody" rows="3" cols="75">
+    <form>
+      <!--
+        If not logged in, provide the login link
+        If user doesn't want to log in, then use name/comment combo (avatar???)
+        
+      -->
+      <p v-if="userFullName">
+        Commenting as <span v-html="userFullName"></span>. <a>Not you?</a>
+      </p>
+      <div class="control columns" v-else>
+        <input class="input column is-6" type="text" name="fullname" placeholder="Full name" v-model="fullName" required>
+        <div class="column is-6"> or <a>login</a></div>
+      </div>
+
+      <textarea type="text" name="comment" v-model="commentBody" rows="3" cols="75">
       </textarea>
-      <input ref="faxthis" type="checkbox" name="contact_us_by_fax_only" value="1" tabindex="-1" autocomplete="off">
-      <button type="button" class="button">Add comment</button>
+      <input type="hidden" name="in_reply_to" :value="inReplyTo" />
+      <input ref="faxthis" type="checkbox" name="contact_us_by_fax_only" v-model="fax" tabindex="-1" autocomplete="off">
+      <button class="button" @click.prevent="sendForm()">Add comment</button>
     </form>
   </div>
 </template>
@@ -36,18 +50,55 @@ textarea {
   }
 }
 
+.control {
+  margin: 10px 0;
+}
+
 </style>
 
 <script>
+import axios from 'axios'
+const commentAPI = 'https://wt-9c78551d704acfbbfbeb0bb6cca86e9a-0.sandbox.auth0-extend.com/volunteerathon-comment'
+
 export default {
-	props: [ "parent-comment" ],
+	props: [ "inReplyTo" ],
 	data () {
 		return {
-			commentBody: ""
+			commentBody: "",
+      fax: 1,
+      fullName: ""
 		}
 	},
 	mounted () {
 		this.$refs.faxthis.classList.add("made-as-it-is")
-	}
+	},
+  computed: {
+    userFullName () {
+      if (this.$store.state.user) {
+        return this.$store.state.user.fullName
+      } else {
+        return null
+      }
+    }
+  },
+  methods: {
+    sendForm () {
+      return new Promise((resolve, reject) => {
+        return this.$store.dispatch("WRITE_COMMENT", {
+            comment: this.commentBody,
+            reply: this.inReplyTo,
+            fullName: this.userFullName || this.fullName,
+            campaignId: this.$route.params.id,
+            contact_us_by_fax_only: this.fax
+          })
+          .then(data => {
+            console.log(data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    }
+  }
 }
 </script>

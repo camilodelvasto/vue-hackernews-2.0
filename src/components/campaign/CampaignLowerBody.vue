@@ -13,7 +13,7 @@
               <a>Shares ({{campaign.shared_count}})</a>
             </li>
             <li @click="currentTab = 4" :class="{'is-active': currentTab === 4}">
-              <a>Comments ({{comments.length}})</a>
+              <a>Comments ({{campaign.comments_count}})</a>
             </li>
             <li @click="currentTab = 5" :class="{'is-active': currentTab === 5}">
               <a>Updates ({{campaign.updates_count}})</a>
