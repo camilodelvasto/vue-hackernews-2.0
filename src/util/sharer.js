@@ -1,12 +1,18 @@
 export function shareOnTwitter (url, text, via, title) {
-	var newText = `${stripTags(text).substring(0, 111)}...`
+  var newText = stripTags(text)
+  if (newText.length > 111) {
+    newText = newText.substring(0, 111) + '...'
+  }
 	const baseUrl = "https://twitter.com/intent/tweet/"
 	popUpWindow(`${baseUrl}?url=${encodeURIComponent(url)}&text=${encodeURI(newText)}&via=${encodeURI(via)}`, `${encodeURI(title)}`, 450, 320)
 }
 
 export function shareOnLinkedIn (url, text, via, title) {
 	const baseUrl = "http://www.linkedin.com/shareArticle/"
-	var newText = `${stripTags(text).substring(0, 211)}...`
+  var newText = stripTags(text)
+  if (newText.length > 211) {
+    newText = newText.substring(0, 211) + '...'
+  }
 	popUpWindow(`${baseUrl}?mini=true&url=${encodeURIComponent(url)}&text=${encodeURI(newText)}`, `${encodeURI(title)}`, 650, 420)
 }
 
@@ -15,11 +21,15 @@ export function shareByEmail (url, text, via, title) {
 }
 
 export function shareOnFacebook (url, text, via, title) {
+  var newText = stripTags(text)
+  if (newText.length > 140) {
+    newText = newText.substring(0, 140) + '...'
+  }
 	if (window) {
 		window.FB.ui({
 			method: "share",
 			href: url,
-			quote: `${stripTags(text).substring(0, 140)}...`,
+			quote: encodeURI(newText),
 			hashtag: `#${via}`
 		}, function (response) {
 			return response

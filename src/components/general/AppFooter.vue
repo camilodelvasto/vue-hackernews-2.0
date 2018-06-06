@@ -10,9 +10,6 @@
           <div class="icon-wrapper" @click="shareTweet()">
             <Icons iconwidth="32px" iconheight="32px" icon="twitter" class="share-icon-gray" />
           </div>
-          <div class="icon-wrapper" @click="shareInstagram()">
-            <Icons iconwidth="32px" iconheight="32px" icon="instagram" class="share-icon-gray" />
-          </div>
           <div class="icon-wrapper" @click="shareLinkedIn()">
             <Icons iconwidth="32px" iconheight="32px" icon="linkedin" class="share-icon-gray" />
           </div>
