@@ -16,11 +16,11 @@
     </div>
     <div class="share-toolbar__share-item share-toolbar__share-comment"
         v-if="allowComment !== false"
-        @click="replyTo(comment.id)">
+        @click="replyTo(commentId)">
       <Icons iconwidth="21px" iconheight="21px" icon="bubble" color="#666" class="icon" />
       <a>Comment</a>
     </div>
-    <div class="share-toolbar__share-item share-toolbar__share-donate">
+    <div class="share-toolbar__share-item share-toolbar__share-donate" @click="donate()">
       <Icons iconwidth="22px" iconheight="22px" icon="money" color="#666" class="icon" />
       <a>Donate</a>
     </div>
@@ -60,9 +60,10 @@
 <script>
 import Icons from "Components/general/Icons.vue"
 import ShareBox from "Components/general/ShareBox.vue"
+import * as sharer from "../../util/sharer.js"
 
 export default {
-	props: [ "allowComment", "comment", "url", "text", "via", "title" ],
+	props: [ "allowComment", "commentId", "url", "text", "via", "title", "trigger", "campaignId", "updateId" ],
 	components: {
 		Icons,
 		ShareBox
@@ -79,9 +80,17 @@ export default {
 		share (commentId) {
 			this.openShareBox = !this.openShareBox
 		},
-		donate () {
-			this.$emit("donate")
-		}
+    donate () {
+      sharer.donate({
+        campaign: this.campaignId,
+        comment: this.commentId,
+        fullPath: `${window.location.origin}${window.location.pathname}`,
+        referrer: window.location.href,
+        timestamp: Math.floor(Date.now() / 1000),
+        trigger: this.trigger,
+        update: this.updateId
+      })
+    }
 	}
 }
 </script>

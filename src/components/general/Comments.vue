@@ -3,11 +3,11 @@
     <div class="comments-section__wrapper">
       <div class="comments-section__comment-wrapper" v-for="comment in comments">
         <div class="comment-item__comment-wrapper">
-          <Comment :comment="comment" />
+          <Comment :comment="comment" :campaign-id="campaignId" />
         </div>
         <div class="comment-item__comment-replies">
           <div class="comment-item__comment-wrapper" v-for="reply in comment.replies">
-            <Comment :comment="reply" :is-reply="true"/>
+            <Comment :comment="reply" :is-reply="true" :campaign-id="campaignId" />
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@ import Comment from "Components/general/Comment.vue"
 import CommentReply from "Components/general/CommentReply.vue"
 
 export default {
-	props: [ "comments", "more-comments" ],
+	props: [ "comments", "more-comments", "campaignId" ],
 	components: {
 		Comment,
 		CommentReply

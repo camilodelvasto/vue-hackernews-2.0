@@ -32,33 +32,24 @@
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">
-                    <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
+                    <CampaignUpdates
+                      :updates="updates"
+                      :count="campaign.updates_count"
+                      :campaign-id="campaign.campaign_id"
+                      maxchar="700" />
                     <button class="button is-warning is-load-more" @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
                 <h2>Nonprofit Organization</h2>
                 <div class="tab-section tab-section__header">
-                  <p>A Volunteerathon is a fundraiser like a walkathon or bikeathon, except the person's time goes to help a nonprofit or do an independent service project.</p>
-                  <p><span v-html="campaign.campaigner.name"></span> is raising money for: </p>
-                  <div class="this-nonprofit__wrapper">
-                    <figure class="campaign-lower__logo-wrapper" v-if="campaign.nonprofit">
-                      <img :src="campaign.nonprofit.logo_square" class="campaign-lower__logo" width="200">
-                    </figure>
-                    <div class="this-nonprofit__right-side">
-                      <span class="this-nonprofit__title" v-html="campaign.nonprofit.name"></span>
-                      <div class="campaign-lower__button-wrapper">
-                        <button class="button button-style is-warning">View profile</button>
-                        <button class="button button-style is-info" v-if="campaign.nonprofit.website">Contribute</button>
-                      </div>
-                      <p class="help">This is an IRS-approved 501(c){{campaign.nonprofit.SUBSECTION}} charity, so<br>your donation is 100% tax deductible</p>
-                    </div>
-                  </div>
+                  <CampaignNonprofitDetails :campaign="campaign" />
                 </div>
                 <div class="tab-section tab-section__comments">
                   <h2>Comments</h2>
                   <Comments
                     :comments="comments"
                     :more-comments="moreComments"
+                    :campaign-id="campaign.campaign_id"
                     v-on:loadMoreComments="loadMoreComments()"></Comments>
                   <div class="button campaign-lower__cta-start is-info is-large">
                     Start your own fundraiser
@@ -78,6 +69,7 @@
                 <Comments
                   :comments="comments"
                   :more-comments="moreComments"
+                  :campaign-id="campaign.campaign_id"
                   v-on:loadMoreComments="loadMoreComments()"></Comments>
                 <div class="button campaign-lower__cta-start is-info is-large">
                   Start your own fundraiser
@@ -87,7 +79,11 @@
                 <div class="tab-section tab-section__updates">
                   <h2>Updates</h2>
                   <div class="user-optional__updates-wrapper">
-                    <CampaignUpdates :updates="updates" maxchar="700" :count="campaign.updates_count" />
+                    <CampaignUpdates
+                      :updates="updates"
+                      :count="campaign.updates_count"
+                      :campaign-id="campaign.campaign_id"
+                      maxchar="700" />
                     <button class="button is-warning is-load-more" @click="loadMoreUpdates()" v-if="moreUpdates">Load more updates</button>
                   </div>
                 </div>
@@ -126,7 +122,7 @@
                   layout="sharing"/>
                 <button class="button is-warning is-load-more" @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
               </div>
-              <div class="button campaign-pledge__cta is-success is-large">
+              <div class="button campaign-pledge__cta is-success is-large" @click="donateRightColumn()">
                 Donate now
               </div>
             </div>
@@ -176,32 +172,6 @@
     }
   }
 
-  &__logo-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 140px;
-    width: 140px;
-    margin: 15px auto;
-
-    @include breakpoint($tablet) {
-      margin: 0 20px 0 0;
-    }
-
-    img {
-      display: block;
-      max-width: 140px;
-    }
-  }
-  &__button-wrapper {
-    .button-style {
-      margin: 10px 0;
-      display: inline-block;
-
-      &:first-child {
-        margin-right: 10px;
-      }
-    }
-  }
   &__cta-start {
     margin: 50px auto;
     border-radius: 10px;
@@ -220,34 +190,6 @@
   }
 }
 
-.this-nonprofit {
-  &__wrapper {
-    text-align: center;
-    margin: auto;
-    margin-bottom: 40px;
-    margin-top: 25px;
-
-    figure {
-      align-items: center;
-    }
-
-    @include breakpoint($tablet) {
-      text-align: left;
-      display: flex;
-      flex-direction: row;
-    }
-  }
-  .help {
-    font-size: 13px;
-  }
-  &__title {
-    font-weight: bold;
-    color: $color-dark-gray;
-    font-size: 20px;
-    text-transform: uppercase;
-  }
-}
-
 .is-load-more {
   margin-bottom: 40px;
 }
@@ -256,13 +198,16 @@
 <script>
 import CampaignGivingLevel from "Components/campaign/CampaignGivingLevel.vue"
 import CampaignUpdates from "Components/campaign/CampaignUpdates.vue"
+import CampaignNonprofitDetails from "Components/campaign/CampaignNonprofitDetails.vue"
 import Comments from "Components/general/Comments.vue"
 import DonorsList from "Components/general/DonorsList.vue"
+import * as sharer from "../../util/sharer.js"
 
 export default {
 	props: [ "campaign" ],
 	components: {
 		CampaignGivingLevel,
+    CampaignNonprofitDetails,
 		CampaignUpdates,
 		Comments,
 		DonorsList
@@ -337,7 +282,16 @@ export default {
 		loadDonationsTab () {
 			this.currentTab = 3
 			// scroll to tab bar
-		}
+		},
+    donateRightColumn () {
+      sharer.donate({
+        campaign: this.campaign.campaign_id,
+        fullPath: `${window.location.origin}${window.location.pathname}`,
+        referrer: window.location.href,
+        timestamp: Math.floor(Date.now() / 1000),
+        trigger: "campaign/lower/right/donors",
+      })      
+    }
 	},
 	// Data to be fetched asynchronously, only in the client.
 	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates

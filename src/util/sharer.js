@@ -37,6 +37,11 @@ export function shareOnFacebook (url, text, via, title) {
 	}
 }
 
+export function donate (referrer) {
+  console.log('donate, referrer: ', referrer)
+  //this.$emit("donateFromButton")
+}
+
 function popUpWindow (url, title, w, h) {
 	// Credit goes to https://stackoverflow.com/a/16861050/1176464
 	// Fixes dual-screen position                         Most browsers      Firefox

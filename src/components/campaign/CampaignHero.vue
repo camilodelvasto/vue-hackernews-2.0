@@ -16,7 +16,7 @@
             <p>{{campaign.campaigner.name}} will volunteer {{campaign.currentStats.hours}} hours {{campaign.communityWork}} to raise money for the nonprofit <a target="_blank" :href="campaign.nonprofit.url">{{campaign.nonprofit.name}}</a></p>
             <p class="campaign-pledge__subheading">Please sponsor {{campaign.campaigner.name}}'s Volunteerathon</p>
           </div>
-          <div class="button campaign-pledge__cta is-success is-large">
+          <div class="button campaign-pledge__cta is-success is-large" @click="donate()">
             Donate now
           </div>
           <div class="progress-bar campaign-pledge__progress-wrapper">
@@ -156,6 +156,7 @@
 <script>
 import ProgressBar from "Components/general/ProgressBar.vue"
 import Flickity from "Components/plugins/Flickity.vue"
+import * as sharer from "../../util/sharer.js"
 
 export default {
 	props: [ "campaign" ],
@@ -173,6 +174,17 @@ export default {
 				autoPlay: 3500
 			}
 		}
-	}
+	},
+  methods: {
+    donate () {
+      sharer.donate({
+        fullPath: `${window.location.origin}${window.location.pathname}`,
+        referrer: window.location.href,
+        campaign: this.campaign.campaign_id,
+        trigger: 'campaign/hero',
+        timestamp: Math.floor(Date.now() / 1000)
+      })
+    }
+  }  
 }
 </script>

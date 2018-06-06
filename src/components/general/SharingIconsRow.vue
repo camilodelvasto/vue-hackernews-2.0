@@ -165,7 +165,7 @@ export default {
 			shareWindowTitle: "Sharing"
 		}
 	},
-	props: [ "routePath" ],
+	props: [ "routePath", "campaignId", "trigger" ],
 	mounted () {
 		this.fullURL = window.location.origin + this.routePath
 		this.loadScripts()
@@ -192,7 +192,13 @@ export default {
 			sharer.shareByEmail(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		donate () {
-			this.$emit("donateFromButton")
+      sharer.donate({
+        fullPath: `${window.location.origin}${window.location.pathname}`,
+        referrer: this.fullURL,
+        campaign: this.campaignId,
+        trigger: this.trigger,
+        timestamp: Math.floor(Date.now() / 1000)
+      })
 		}
 	}
 }

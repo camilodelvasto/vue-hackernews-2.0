@@ -14,11 +14,13 @@
       <div class="comment-item__comment-content" v-html="comment.comment"></div>
     </div>
     <ShareDonateToolbar
-      :comment="comment"
+      :campaign-id="campaignId"
+      :comment-id="comment.id"
       :text="comment.comment"
       :url="getPermalink(comment.id)"
       :allow-comment="!isReply"
       title="Share this comment"
+      trigger="campaign/lower/comments"
       v-on:replyTo="openReplyBox($event)"
       v-on:share="openShareBox = true"
       v-on:donate="openDonateBox()"
@@ -85,7 +87,7 @@ import Avatar from "vue-avatar"
 import Icons from "Components/general/Icons.vue"
 
 export default {
-	props: [ "comment", "is-reply" ],
+	props: [ "comment", "is-reply", "campaignId" ],
 	components: {
 		Avatar,
 		CommentReply,

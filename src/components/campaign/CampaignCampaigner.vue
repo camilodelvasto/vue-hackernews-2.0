@@ -23,7 +23,11 @@
       </div>
       <div class="campaign-campaigner__description">
         <p v-html="campaign.description"></p>
-        <SharingIconsRow :key="$route.fullPath" :route-path="$route.fullPath" />
+        <SharingIconsRow
+          :key="$route.fullPath"
+          :route-path="$route.fullPath"
+          :campaign-id="campaign.campaign_id"
+          trigger="campaign/campaigner" />
       </div>
     </div>
   </div>

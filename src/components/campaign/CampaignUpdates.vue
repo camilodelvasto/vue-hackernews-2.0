@@ -23,6 +23,9 @@
         :allowComment="false"
         :url="getPermalink(update.id)"
         :text="update.content"
+        :campaign-id="campaignId"
+        :update-id="update.id"
+        trigger="campaign/lower/updates"
         via="Volunteerathon"
         title="Share this update" />
     </div>
@@ -98,7 +101,7 @@ export default {
 			return parseInt(this.$route.query.update_id, 10)
 		}
 	},
-	props: [ "updates", "maxchar", "count" ],
+	props: [ "updates", "maxchar", "count", "campaignId" ],
 	methods: {
 		getPermalink (id) {
 			return `${window.location.origin}${window.location.pathname}?update_id=${id}`

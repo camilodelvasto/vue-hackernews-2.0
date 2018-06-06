@@ -151,7 +151,6 @@ export default {
 	},
 	mounted () {
 		this.fullURL = `${window.location.origin}${window.location.pathname}`
-		console.log(this.fullURL)
 	},
 	methods: {
 		loadScripts () {
