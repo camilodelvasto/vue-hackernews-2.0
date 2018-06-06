@@ -151,6 +151,7 @@
 </style>
 <script>
 import Icons from "Components/general/Icons.vue"
+import * as sharer from "../../util/sharer.js"
 
 export default {
 	components: {
@@ -179,44 +180,20 @@ export default {
 			}
 		},
 		shareFB () {
-			window.FB.ui({
-				method: "share",
-				href: this.fullURL
-			}, function (response) {
-				return response
-			})
+			sharer.shareOnFacebook(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		shareTweet () {
-			popUpWindow(`https://twitter.com/intent/tweet/?url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}&via=${encodeURI(this.siteName)}`, `${encodeURI(this.shareWindowTitle)}`, 450, 320)
+			sharer.shareOnTwitter(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		shareLinkedIn () {
-			popUpWindow(`http://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(this.fullURL)}&text=${encodeURI(this.shareText)}`, `${encodeURI(this.shareWindowTitle)}`, 650, 420)
+			sharer.shareOnLinkedIn(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		shareEmail () {
-			document.querySelector(".at-share-btn").click()
+			sharer.shareByEmail(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		donate () {
 			this.$emit("donateFromButton")
 		}
-	}
-}
-
-function popUpWindow (url, title, w, h) {
-	// Credit goes to https://stackoverflow.com/a/16861050/1176464
-	// Fixes dual-screen position                         Most browsers      Firefox
-	var dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX
-	var dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY
-
-	var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
-	var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
-
-	var left = ((width / 2) - (w / 2)) + dualScreenLeft
-	var top = ((height / 2) - (h / 2)) + dualScreenTop
-	var newWindow = window.open(url, title, "scrollbars=yes, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left)
-
-	// Puts focus on the newWindow
-	if (window.focus) {
-		newWindow.focus()
 	}
 }
 </script>

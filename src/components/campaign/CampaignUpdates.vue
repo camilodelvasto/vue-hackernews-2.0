@@ -19,7 +19,12 @@
         </transition>
       </div>
       <div class="update__content" v-else v-html="update.content"></div>
-      <ShareDonateToolbar :allowComment="false" />
+      <ShareDonateToolbar
+        :allowComment="false"
+        :url="getPermalink(update.id)"
+        :text="update.content"
+        via="Volunteerathon"
+        title="Share this update" />
     </div>
   </div>
 </template>
@@ -95,6 +100,9 @@ export default {
 	},
 	props: [ "updates", "maxchar", "count" ],
 	methods: {
+		getPermalink (id) {
+			return `${window.location.origin}${window.location.pathname}?update_id=${id}`
+		},
 		excerpt (content) {
 			var stripHtml = content.replace(/<\/?[^>]+(>|$)/g, "")
 			return stripHtml.substring(0, this.maxchar)
@@ -105,6 +113,9 @@ export default {
 			} else {
 				Vue.set(this.showFullUpdate, index, false)
 			}
+		},
+		openShareBox (update) {
+			alert(`${window.location.origin}${window.location.pathname}?update_id=${update.id}`)
 		}
 	}
 }

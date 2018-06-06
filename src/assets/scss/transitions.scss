@@ -38,6 +38,32 @@
   animation: acrossOut 0.5s;
 }
 
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+@keyframes fadeBackground {
+  0% {
+    background: rgba($color-medium-gray, 0.0);
+  }
+  25% {
+    background: rgba($color-medium-gray, 0.1);
+  }
+  100% {
+    background: rgba($color-medium-gray, 0);
+  }
+}
+
 /* Animations */
 @keyframes bounceIn {
   0% { transform: scale(0.9) }

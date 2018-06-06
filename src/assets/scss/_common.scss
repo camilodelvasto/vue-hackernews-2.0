@@ -210,3 +210,87 @@ blockquote {
 .white-bg {
   background: $white;
 }
+
+/* Share tools colors */
+.share-facebook {
+  svg {
+    path {
+      fill: $color-share-facebook !important;
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    svg {
+      path {
+        fill: $color-gray !important;
+      }
+    }
+  }
+}
+
+.share-twitter {
+  svg {
+    path {
+      fill: $color-share-twitter !important;
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    svg {
+      path {
+        fill: $color-gray !important;
+      }
+    }
+  }
+}
+
+.share-email {
+  svg {
+    path {
+      fill: $color-share-instagram !important;
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    svg {
+      path {
+        fill: $color-gray !important;
+      }
+    }
+  }
+}
+
+.share-linkedin {
+  svg {
+    path {
+      fill: $color-share-linkedin !important;
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    svg {
+      path {
+        fill: $color-gray !important;
+      }
+    }
+  }
+}
+
+.share-icon-gray {
+  svg {
+    path {
+      fill: $color-silver;
+      transition: fill 0.2s ease-in-out;
+    }
+
+    &:hover {
+      path {
+        fill: $color-medium-gray;
+      }
+    }
+  }  
+}

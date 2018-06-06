@@ -13,7 +13,16 @@
       </div>
       <div class="comment-item__comment-content" v-html="comment.comment"></div>
     </div>
-    <ShareDonateToolbar :comment="comment" v-on:replyTo="openReplyBox($event)" :allow-comment="!isReply" />
+    <ShareDonateToolbar
+      :comment="comment"
+      :text="comment.comment"
+      :url="getPermalink(comment.id)"
+      :allow-comment="!isReply"
+      title="Share this comment"
+      v-on:replyTo="openReplyBox($event)"
+      v-on:share="openShareBox = true"
+      v-on:donate="openDonateBox()"
+      via="Volunteerathon" />
     <transition name="slide-fade">
       <CommentReply :in-reply-to="inReplyTo" class="comment-reply__wrapper" v-if="showReplyBox" />
     </transition>
@@ -67,32 +76,6 @@
   margin-left: 60px;
 }
 
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
-
-@keyframes fadeBackground {
-  0% {
-    background: rgba($color-medium-gray, 0.0);
-  }
-  25% {
-    background: rgba($color-medium-gray, 0.1);
-  }
-  100% {
-    background: rgba($color-medium-gray, 0);
-  }
-}
-
 </style>
 
 <script>
@@ -105,26 +88,33 @@ export default {
 	props: [ "comment", "is-reply" ],
 	components: {
 		Avatar,
-    CommentReply,
+		CommentReply,
 		Icons,
 		ShareDonateToolbar
 	},
-  data () {
-    return  {
-      showReplyBox: false,
-      inReplyTo: null
-    }
-  },
+	data () {
+		return {
+			showReplyBox: false,
+			inReplyTo: null,
+			openShareBox: false
+		}
+	},
 	computed: {
 		currentId () {
 			return parseInt(this.$route.query.comment_id, 10)
 		}
 	},
-  methods: {
-    openReplyBox (payload) {
-      this.showReplyBox = true
-      this.inReplyTo = payload.comment_id
-    }
-  }
+	methods: {
+		openReplyBox (payload) {
+			this.showReplyBox = true
+			this.inReplyTo = payload.comment_id
+		},
+		getPermalink (id) {
+			return `${window.location.origin}${window.location.pathname}?comment_id=${id}`
+		},
+		openShareBoxx () {
+			alert(`${window.location.origin}${window.location.pathname}?comment_id=${this.comment.id}`)
+		}
+	}
 }
 </script>

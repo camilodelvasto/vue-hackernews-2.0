@@ -1,6 +1,16 @@
 <template>
   <div class="share-toolbar__share-wrapper">
-    <div class="share-toolbar__share-item share-toolbar__share-share">
+    <transition name="slide-fade">
+      <ShareBox
+        v-if="openShareBox"
+        class="share-box__wrapper"
+        :url="url"
+        :text="text"
+        :via="via"
+        :title="title" />
+    </transition>
+    <div class="share-toolbar__share-item share-toolbar__share-share"
+        @click="share()">
       <Icons iconwidth="19px" iconheight="19px" icon="share" color="#666" class="icon" />
       <a>Share</a>
     </div>
@@ -25,6 +35,8 @@
     align-items: center;
     width: 100%;
     margin: 10px 0;
+    position: relative;
+    user-select: none;
   }
   &__share-item {
     display: flex;
@@ -40,20 +52,36 @@
   }
 }
 
+.share-box__wrapper {
+  position: absolute;
+}
 </style>
 
 <script>
 import Icons from "Components/general/Icons.vue"
+import ShareBox from "Components/general/ShareBox.vue"
 
 export default {
-	props: [ "allowComment", "comment" ],
+	props: [ "allowComment", "comment", "url", "text", "via", "title" ],
 	components: {
-		Icons
+		Icons,
+		ShareBox
 	},
-  methods: {
-    replyTo (commentId) {
-      this.$emit('replyTo', { comment_id: commentId })
-    }
-  }
+	data () {
+		return {
+			openShareBox: false
+		}
+	},
+	methods: {
+		replyTo (commentId) {
+			this.$emit("replyTo", { comment_id: commentId })
+		},
+		share (commentId) {
+			this.openShareBox = !this.openShareBox
+		},
+		donate () {
+			this.$emit("donate")
+		}
+	}
 }
 </script>

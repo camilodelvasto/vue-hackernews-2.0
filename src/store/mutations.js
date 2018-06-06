@@ -41,9 +41,9 @@ export default {
 	SET_CAMPAIGNS: (state, { campaigns }) => {
 		state.campaigns.data = campaigns
 	},
-  SET_COMMON_DATA: (state, { common }) => {
-    state.common = common
-  },
+	SET_COMMON_DATA: (state, { common }) => {
+		state.common = common
+	},
 	UPDATE_COMMENTS: (state, { comment }) => {
 		console.log(comment)
 	}
