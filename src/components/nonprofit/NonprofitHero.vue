@@ -22,7 +22,6 @@
               <ShareBox
                 v-if="openShareBox"
                 class="share-box__wrapper"
-                :url="fullURL"
                 :text="shareText"
                 :via="siteName"
                 :title="shareWindowTitle" />
@@ -229,15 +228,11 @@ export default {
 	},
   data () {
     return {
-      fullURL: "",
       shareText: "Check out this nonprofit!",
       siteName: "Volunteerathon",
       shareWindowTitle: "Share Nonprofit",
       openShareBox: false
     }
-  },
-  mounted () {
-    this.fullURL = `${window.location.origin}${window.location.pathname}`
   },
   methods: {
     share (commentId) {

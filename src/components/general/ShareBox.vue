@@ -65,19 +65,19 @@ export default {
 	components: {
 		Icons
 	},
-	props: [ "url", "text", "via", "title" ],
+	props: [ "urlParams", "text", "via", "title" ],
 	methods: {
 		fb () {
-			sharer.shareOnFacebook(this.url, this.text, this.via, this.title)
+			sharer.shareOnFacebook(this.urlParams, this.text, this.via, this.title)
 		},
 		tweet () {
-			sharer.shareOnTwitter(this.url, this.text, this.via, this.title)
+			sharer.shareOnTwitter(this.urlParams, this.text, this.via, this.title)
 		},
 		linkedIn () {
-			sharer.shareOnLinkedIn(this.url, this.text, this.via, this.title)
+			sharer.shareOnLinkedIn(this.urlParams, this.text, this.via, this.title)
 		},
 		email () {
-			sharer.shareByEmail(this.url, this.text, this.via, this.title)
+			sharer.shareByEmail(this.urlParams, this.text, this.via, this.title)
 		}
 	}
 }

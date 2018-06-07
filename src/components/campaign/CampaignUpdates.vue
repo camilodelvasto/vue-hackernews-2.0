@@ -21,7 +21,7 @@
       <div class="update__content" v-else v-html="update.content"></div>
       <ShareDonateToolbar
         :allowComment="false"
-        :url="getPermalink(update.id)"
+        :url-params="`update_id=${update.id}`"
         :text="update.content"
         :campaign-id="campaignId"
         :update-id="update.id"
@@ -45,7 +45,7 @@
       padding: 10px;
       margin-left: -10px;
       animation: fadeBackground 3s ease-in-out;
-      animation-delay: 3s;
+      animation-delay: 1s;
     }
   }
   &__title {
@@ -103,9 +103,6 @@ export default {
 	},
 	props: [ "updates", "maxchar", "count", "campaignId" ],
 	methods: {
-		getPermalink (id) {
-			return `${window.location.origin}${window.location.pathname}?update_id=${id}`
-		},
 		excerpt (content) {
 			var stripHtml = content.replace(/<\/?[^>]+(>|$)/g, "")
 			return stripHtml.substring(0, this.maxchar)

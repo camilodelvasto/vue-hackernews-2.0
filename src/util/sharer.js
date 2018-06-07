@@ -1,29 +1,41 @@
 import Vue from 'vue'
 var vm = new Vue()
 
-export function shareOnTwitter (url, text, via, title) {
+export function shareOnTwitter (urlParams = '', text, via, title) {
+  var shareUrl = `${window.location.origin}${window.location.pathname}`
   var newText = stripTags(text)
+  if (urlParams) {
+    shareUrl += '?' + urlParams
+  }
   if (newText.length > 111) {
     newText = newText.substring(0, 111) + '...'
   }
-	const baseUrl = "https://twitter.com/intent/tweet/"
-	popUpWindow(`${baseUrl}?url=${encodeURIComponent(url)}&text=${encodeURI(newText)}&via=${encodeURI(via)}`, `${encodeURI(title)}`, 450, 320)
+	const shareServiceUrl = "https://twitter.com/intent/tweet/"
+	popUpWindow(`${shareServiceUrl}?url=${encodeURIComponent(shareUrl)}&text=${encodeURI(newText)}&via=${encodeURI(via)}`, `${encodeURI(title)}`, 450, 320)
 }
 
-export function shareOnLinkedIn (url, text, via, title) {
-	const baseUrl = "http://www.linkedin.com/shareArticle/"
+export function shareOnLinkedIn (urlParams, text, via, title) {
+  var shareUrl = `${window.location.origin}${window.location.pathname}`
+	const shareServiceUrl = "http://www.linkedin.com/shareArticle/"
   var newText = stripTags(text)
+  if (urlParams) {
+    shareUrl += '?' + urlParams
+  }
   if (newText.length > 211) {
     newText = newText.substring(0, 211) + '...'
   }
-	popUpWindow(`${baseUrl}?mini=true&url=${encodeURIComponent(url)}&text=${encodeURI(newText)}`, `${encodeURI(title)}`, 650, 420)
+	popUpWindow(`${shareServiceUrl}?mini=true&url=${encodeURIComponent(shareUrl)}&text=${encodeURI(newText)}`, `${encodeURI(title)}`, 650, 420)
 }
 
-export function shareByEmail (url, text, via, title) {
+export function shareByEmail (urlParams, text, via, title) {
 	document.querySelector(".at-share-btn").click()
 }
 
-export function shareOnFacebook (url, text, via, title) {
+export function shareOnFacebook (urlParams, text, via, title) {
+  var shareUrl = `${window.location.origin}${window.location.pathname}`
+  if (urlParams) {
+    shareUrl += '?' + urlParams
+  }
   var newText = stripTags(text)
   if (newText.length > 140) {
     newText = newText.substring(0, 140) + '...'
@@ -31,7 +43,7 @@ export function shareOnFacebook (url, text, via, title) {
 	if (window) {
 		window.FB.ui({
 			method: "share",
-			href: url,
+			href: encodeURIComponent(shareUrl),
 			quote: encodeURI(newText),
 			hashtag: `#${via}`
 		}, function (response) {

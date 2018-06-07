@@ -17,7 +17,7 @@
       :campaign-id="campaignId"
       :comment-id="comment.id"
       :text="comment.comment"
-      :url="getPermalink(comment.id)"
+      :url-params="`comment_id=${comment.id}`"
       :allow-comment="!isReply"
       title="Share this comment"
       trigger="campaign/lower/comments"
@@ -110,9 +110,6 @@ export default {
 		openReplyBox (payload) {
 			this.showReplyBox = true
 			this.inReplyTo = payload.commentId
-		},
-		getPermalink (id) {
-			return `${window.location.origin}${window.location.pathname}?comment_id=${id}`
 		},
 		openShareBoxx () {
 			alert(`${window.location.origin}${window.location.pathname}?comment_id=${this.comment.id}`)

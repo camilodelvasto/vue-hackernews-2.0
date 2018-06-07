@@ -175,7 +175,6 @@ export default {
 	},
 	props: [ "routePath", "campaignId", "trigger", "nonprofitEin" ],
 	mounted () {
-		this.fullURL = window.location.origin + this.routePath
 		this.loadScripts()
 	},
 	methods: {
@@ -188,16 +187,16 @@ export default {
 			}
 		},
 		shareFB () {
-			sharer.shareOnFacebook(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
+			sharer.shareOnFacebook(null, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		shareTweet () {
-			sharer.shareOnTwitter(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
+			sharer.shareOnTwitter(null, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		shareLinkedIn () {
-			sharer.shareOnLinkedIn(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
+			sharer.shareOnLinkedIn(null, this.shareText, this.siteName, this.shareWindowTitle)
 		},
 		shareEmail () {
-			sharer.shareByEmail(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
+			sharer.shareByEmail(null, this.shareText, this.siteName, this.shareWindowTitle)
 		}
 	}
 }

@@ -4,7 +4,7 @@
       <ShareBox
         v-if="openShareBox"
         class="share-box__wrapper"
-        :url="url"
+        :url-params="urlParams"
         :text="text"
         :via="via"
         :title="title" />
@@ -69,10 +69,9 @@
 import DonateAction from "Components/general/DonateAction.vue"
 import Icons from "Components/general/Icons.vue"
 import ShareBox from "Components/general/ShareBox.vue"
-import * as sharer from "../../util/sharer.js"
 
 export default {
-	props: [ "allowComment", "commentId", "url", "text", "via", "title", "trigger", "campaignId", "updateId" ],
+	props: [ "allowComment", "commentId", "urlParams", "text", "via", "title", "trigger", "campaignId", "updateId" ],
 	components: {
     DonateAction,
 		Icons,
