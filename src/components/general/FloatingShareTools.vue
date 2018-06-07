@@ -2,15 +2,15 @@
   <div class="" ref="nonpToolbar">
     <div class="share-toolbar__outer-wrapper" :class="{'toolbar-fixed': isFixed}">
       <h5>Share</h5>
-      <div class="share-toolbar__share-wrapper">
+      <div class="share-toolbar__share-wrapper" @click="fb()">
         <div class="share-toolbar__share-item share-toolbar__share-share">
           <Icons iconwidth="24px" iconheight="24px" icon="facebook" color="#666" class="icon" />
         </div>
-        <div class="share-toolbar__share-item share-toolbar__share-comment">
+        <div class="share-toolbar__share-item share-toolbar__share-comment" @click="tweet()">
           <Icons iconwidth="24px" iconheight="24px" icon="twitter" color="#666" class="icon" />
         </div>
-        <div class="share-toolbar__share-item share-toolbar__share-donate">
-          <Icons iconwidth="24px" iconheight="24px" icon="share" color="#666" class="icon" />
+        <div class="share-toolbar__share-item share-toolbar__share-donate" @click="linkedIn()">
+          <Icons iconwidth="24px" iconheight="24px" icon="linkedin" color="#666" class="icon" />
         </div>
       </div>
     </div>
@@ -82,8 +82,10 @@
 
 <script>
 import Icons from "Components/general/Icons.vue"
+import * as sharer from "../../util/sharer.js"
 
 export default {
+  props: [ "urlParams", "text", "via", "title" ],
 	components: {
 		Icons
 	},
@@ -102,8 +104,20 @@ export default {
 			} else {
 				this.isFixed = false
 			}
-		}
-	},
+		},
+    fb () {
+      sharer.shareOnFacebook(this.urlParams, this.text, this.via, this.title)
+    },
+    tweet () {
+      sharer.shareOnTwitter(this.urlParams, this.text, this.via, this.title)
+    },
+    linkedIn () {
+      sharer.shareOnLinkedIn(this.urlParams, this.text, this.via, this.title)
+    },
+    email () {
+      sharer.shareByEmail(this.urlParams, this.text, this.via, this.title)
+    }
+  },
 	mounted () {
 		window.addEventListener("scroll", this.handleScroll)
 	},

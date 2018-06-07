@@ -5,7 +5,6 @@
       <div class="columns">
         <div class="column is-12">
           <h2 ref="aboutHeading">About <span v-html="nonprofit.data.name"></span></h2>
-          <div NonprofitShareToolbar />
           <div class="columns">
             <div class="nonprofit-extended__about column is-8-desktop">
               <p>{{nonprofit.data.about}}</p>

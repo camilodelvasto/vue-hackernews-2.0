@@ -5,7 +5,7 @@
     <NonprofitHero :nonprofit="nonprofit" :common="common" />
     <NonprofitForm submit-button-label="Submit" />
 
-    <FloatingShareTools />
+    <FloatingShareTools text="Check out this nonprofit!" via="Volunteerathon" title="Share this" />
     <NonprofitIRSData :nonprofit="nonprofit" v-if="!nonprofit.data.about" />
     <NonprofitAbout :nonprofit="nonprofit" v-else />
 
