@@ -26,6 +26,7 @@ export default {
         updateId: this.updateId
       }
       console.log(args)
+      this.$store.dispatch('START_DONATION', { initiator: args })
       // save donation info in store
       // open donation funnel
       // this.$router.push('/')

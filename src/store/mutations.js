@@ -46,5 +46,10 @@ export default {
 	},
 	UPDATE_COMMENTS: (state, { comment }) => {
 		console.log(comment)
-	}
+	},
+  START_DONATION: (state, { initiator }) => {
+    state.userActions.donation.status = "started"
+    state.userActions.donation.amount = initiator.givingLevel ? initiator.givingLevel.amount : state.userActions.donation.amount
+    state.userActions.donation.initiator = initiator
+  }
 }

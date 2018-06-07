@@ -38,7 +38,14 @@ export function createStore () {
 				limit: 6
 			},
 			home: {},
-			user: {}
+			user: {},
+      userActions: {
+        donation: {
+          status: "",
+          amount: 350,
+          initiator: {}
+        }        
+      }
 		},
 		actions,
 		mutations

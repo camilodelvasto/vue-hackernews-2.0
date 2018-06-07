@@ -131,6 +131,9 @@ export default {
 				})
 		})
 	},
+  START_DONATION: ({ commit, dispatch, state }, { initiator }) => {
+    commit("START_DONATION", { initiator: initiator })
+  },
 	WRITE_COMMENT: ({ commit, dispatch, state }, { comment, reply, fullName, campaignId, honeypot }) => {
 		return new Promise((resolve, reject) => {
 			return sendComment(comment, reply, fullName, campaignId, honeypot)
