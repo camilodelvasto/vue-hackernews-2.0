@@ -67,7 +67,7 @@ import Flickity from "Components/plugins/Flickity.vue"
 export default {
 	props: [ "nonprofit" ],
 	components: {
-    DonateAction,
+		DonateAction,
 		Icons,
 		Flickity,
 		SharingIconsRow

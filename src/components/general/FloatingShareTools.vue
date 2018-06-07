@@ -85,7 +85,7 @@ import Icons from "Components/general/Icons.vue"
 import * as sharer from "../../util/sharer.js"
 
 export default {
-  props: [ "urlParams", "text", "via", "title" ],
+	props: [ "urlParams", "text", "via", "title" ],
 	components: {
 		Icons
 	},
@@ -105,19 +105,19 @@ export default {
 				this.isFixed = false
 			}
 		},
-    fb () {
-      sharer.shareOnFacebook(this.urlParams, this.text, this.via, this.title)
-    },
-    tweet () {
-      sharer.shareOnTwitter(this.urlParams, this.text, this.via, this.title)
-    },
-    linkedIn () {
-      sharer.shareOnLinkedIn(this.urlParams, this.text, this.via, this.title)
-    },
-    email () {
-      sharer.shareByEmail(this.urlParams, this.text, this.via, this.title)
-    }
-  },
+		fb () {
+			sharer.shareOnFacebook(this.urlParams, this.text, this.via, this.title)
+		},
+		tweet () {
+			sharer.shareOnTwitter(this.urlParams, this.text, this.via, this.title)
+		},
+		linkedIn () {
+			sharer.shareOnLinkedIn(this.urlParams, this.text, this.via, this.title)
+		},
+		email () {
+			sharer.shareByEmail(this.urlParams, this.text, this.via, this.title)
+		}
+	},
 	mounted () {
 		window.addEventListener("scroll", this.handleScroll)
 	},

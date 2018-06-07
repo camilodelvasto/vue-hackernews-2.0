@@ -73,7 +73,7 @@ import ShareBox from "Components/general/ShareBox.vue"
 export default {
 	props: [ "allowComment", "commentId", "urlParams", "text", "via", "title", "trigger", "campaignId", "updateId" ],
 	components: {
-    DonateAction,
+		DonateAction,
 		Icons,
 		ShareBox
 	},
@@ -88,7 +88,7 @@ export default {
 		},
 		share (commentId) {
 			this.openShareBox = !this.openShareBox
-    }
+		}
 	}
 }
 </script>

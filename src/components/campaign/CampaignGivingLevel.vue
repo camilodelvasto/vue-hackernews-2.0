@@ -46,13 +46,12 @@
 </style>
 
 <script>
-import * as sharer from "../../util/sharer.js"
 import DonateAction from "Components/general/DonateAction.vue"
 
 export default {
 	props: [ "level", "campaign" ],
-  components: {
-    DonateAction
-  }
+	components: {
+		DonateAction
+	}
 }
 </script>

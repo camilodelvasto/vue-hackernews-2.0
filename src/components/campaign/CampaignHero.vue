@@ -161,12 +161,11 @@
 import DonateAction from "Components/general/DonateAction.vue"
 import ProgressBar from "Components/general/ProgressBar.vue"
 import Flickity from "Components/plugins/Flickity.vue"
-import * as sharer from "../../util/sharer.js"
 
 export default {
 	props: [ "campaign" ],
 	components: {
-    DonateAction,
+		DonateAction,
 		Flickity,
 		ProgressBar
 	},
@@ -180,6 +179,6 @@ export default {
 				autoPlay: 3500
 			}
 		}
-  }  
+	}
 }
 </script>

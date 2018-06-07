@@ -90,8 +90,8 @@ import DonateAction from "Components/general/DonateAction.vue"
 
 export default {
 	props: [ "campaign" ],
-  components: {
-    DonateAction
-  }
+	components: {
+		DonateAction
+	}
 }
 </script>

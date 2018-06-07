@@ -39,13 +39,13 @@ export function createStore () {
 			},
 			home: {},
 			user: {},
-      userActions: {
-        donation: {
-          status: "",
-          amount: 350,
-          initiator: {}
-        }        
-      }
+			userActions: {
+				donation: {
+					status: "",
+					amount: 350,
+					initiator: {}
+				}
+			}
 		},
 		actions,
 		mutations

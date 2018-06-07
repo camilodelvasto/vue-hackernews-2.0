@@ -222,22 +222,22 @@ import Icons from "Components/general/Icons.vue"
 export default {
 	props: [ "common", "nonprofit" ],
 	components: {
-    DonateAction,
+		DonateAction,
 		Icons,
-    ShareBox
+		ShareBox
 	},
-  data () {
-    return {
-      shareText: "Check out this nonprofit!",
-      siteName: "Volunteerathon",
-      shareWindowTitle: "Share Nonprofit",
-      openShareBox: false
-    }
-  },
-  methods: {
-    share (commentId) {
-      this.openShareBox = !this.openShareBox
-    }
-  }
+	data () {
+		return {
+			shareText: "Check out this nonprofit!",
+			siteName: "Volunteerathon",
+			shareWindowTitle: "Share Nonprofit",
+			openShareBox: false
+		}
+	},
+	methods: {
+		share (commentId) {
+			this.openShareBox = !this.openShareBox
+		}
+	}
 }
 </script>

@@ -209,17 +209,16 @@ import CampaignUpdates from "Components/campaign/CampaignUpdates.vue"
 import CampaignNonprofitDetails from "Components/campaign/CampaignNonprofitDetails.vue"
 import Comments from "Components/general/Comments.vue"
 import DonorsList from "Components/general/DonorsList.vue"
-import * as sharer from "../../util/sharer.js"
 import DonateAction from "Components/general/DonateAction.vue"
 
 export default {
 	props: [ "campaign" ],
 	components: {
 		CampaignGivingLevel,
-    CampaignNonprofitDetails,
+		CampaignNonprofitDetails,
 		CampaignUpdates,
 		Comments,
-    DonateAction,
+		DonateAction,
 		DonorsList
 	},
 	data () {
@@ -292,7 +291,7 @@ export default {
 		loadDonationsTab () {
 			this.currentTab = 3
 			// scroll to tab bar
-    }
+		}
 	},
 	// Data to be fetched asynchronously, only in the client.
 	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates

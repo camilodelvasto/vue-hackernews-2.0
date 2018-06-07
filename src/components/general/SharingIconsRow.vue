@@ -162,7 +162,7 @@ import * as sharer from "../../util/sharer.js"
 
 export default {
 	components: {
-    DonateAction,
+		DonateAction,
 		Icons
 	},
 	data () {
