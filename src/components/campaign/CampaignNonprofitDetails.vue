@@ -12,9 +12,12 @@
           <button class="button button-style is-warning">View profile</button>
           <button
             class="button button-style is-info"
-            v-if="campaign.nonprofit.website"
-            @click="donate()">
-            Contribute
+            v-if="campaign.nonprofit.website">
+            <DonateAction
+              :campaign-id="campaign.campaign_id"
+              trigger="campaign/lower/left/organization">
+              Contribute
+            </DonateAction>
           </button>
         </div>
         <p class="help">This is an IRS-approved 501(c){{campaign.nonprofit.SUBSECTION}} charity, so<br>your donation is 100% tax deductible</p>
@@ -83,20 +86,12 @@
 </style>
 
 <script>
-import * as sharer from "../../util/sharer.js"
+import DonateAction from "Components/general/DonateAction.vue"
 
 export default {
 	props: [ "campaign" ],
-  methods: {
-    donate () {
-      sharer.donate({
-        campaign: this.campaign.campaign_id,
-        fullPath: `${window.location.origin}${window.location.pathname}`,
-        referrer: window.location.href,
-        timestamp: Math.floor(Date.now() / 1000),
-        trigger: "campaign/lower/left/organization",
-      })      
-    }
+  components: {
+    DonateAction
   }
 }
 </script>

@@ -4,7 +4,12 @@
     <div class="level__tagline">{{level.tagline}}</div>
     <div class="level__description">{{level.description}}</div>
     <div class="button level__this-cta is-success is-small">
-      Donate now
+      <DonateAction
+        :campaign-id="campaign.campaign_id"
+        :giving-level="level"
+        trigger="campaign/lower/right/levels">
+        Donate now
+      </DonateAction>
     </div>
   </div>
 
@@ -41,8 +46,13 @@
 </style>
 
 <script>
+import * as sharer from "../../util/sharer.js"
+import DonateAction from "Components/general/DonateAction.vue"
 
 export default {
-	props: [ "level" ]
+	props: [ "level", "campaign" ],
+  components: {
+    DonateAction
+  }
 }
 </script>

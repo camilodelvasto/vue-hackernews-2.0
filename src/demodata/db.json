@@ -378,10 +378,10 @@
         "SORT_NAME": "0"        
       },
       "giving_levels": [
-        { "amount": 10, "tagline": "Per mile", "description": "For every 10 dollars spent, I will run a mile!" },
-        { "amount": 25, "tagline": "Donor", "description": "Thank you for your donation!" },
-        { "amount": 50, "tagline": "Shirt sponsor", "description": "Donate $50 and your name will go on the back of my race shirt as a sponsor!" },
-        { "amount": 100, "tagline": "Per mile", "description": "If you donate $100, your name will go on the back of my shirt as a sponsor and you'll get a t-shirt!" }
+        { "id": 231, "amount": 10, "tagline": "Per mile", "description": "For every 10 dollars spent, I will run a mile!" },
+        { "id": 232, "amount": 25, "tagline": "Donor", "description": "Thank you for your donation!" },
+        { "id": 233, "amount": 50, "tagline": "Shirt sponsor", "description": "Donate $50 and your name will go on the back of my race shirt as a sponsor!" },
+        { "id": 234, "amount": 100, "tagline": "Per mile", "description": "If you donate $100, your name will go on the back of my shirt as a sponsor and you'll get a t-shirt!" }
       ],
       "profilePicUrl": "https://vthon__nonprofit-generic.surge.sh/feed-the-children/profile-pic.jpg",
       "currentStats": {

@@ -23,11 +23,16 @@
         </div>
       </div>
       <div class="column">
-        <div class="sharing-icons-row__share-item sharing-icons-row__share-email button is-white"
-          @click="donate()">
-          <Icons iconwidth="20px" iconheight="20px" icon="usd" color="#fff" class="icon" />
-          <span>Donate</span>
-        </div>
+        <DonateAction
+          :campaign-id="campaignId"
+          :trigger="trigger">
+          <div class="sharing-icons-row__share-item sharing-icons-row__share-email button is-white">
+            <Icons iconwidth="20px" iconheight="20px" icon="usd" color="#fff" class="icon" />
+            <span>
+              Donate
+            </span>
+          </div>
+        </DonateAction>
       </div>
       <div class="column">
         <div class="sharing-icons-row__share-item sharing-icons-row__share-plus button is-light"
@@ -151,10 +156,12 @@
 </style>
 <script>
 import Icons from "Components/general/Icons.vue"
+import DonateAction from "Components/general/DonateAction.vue"
 import * as sharer from "../../util/sharer.js"
 
 export default {
 	components: {
+    DonateAction,
 		Icons
 	},
 	data () {
@@ -190,15 +197,6 @@ export default {
 		},
 		shareEmail () {
 			sharer.shareByEmail(this.fullURL, this.shareText, this.siteName, this.shareWindowTitle)
-		},
-		donate () {
-      sharer.donate({
-        fullPath: `${window.location.origin}${window.location.pathname}`,
-        referrer: this.fullURL,
-        campaign: this.campaignId,
-        trigger: this.trigger,
-        timestamp: Math.floor(Date.now() / 1000)
-      })
 		}
 	}
 }

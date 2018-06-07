@@ -1,3 +1,6 @@
+import Vue from 'vue'
+var vm = new Vue()
+
 export function shareOnTwitter (url, text, via, title) {
   var newText = stripTags(text)
   if (newText.length > 111) {
@@ -36,12 +39,9 @@ export function shareOnFacebook (url, text, via, title) {
 		})
 	}
 }
-
-export function donate (referrer) {
-  console.log('donate, referrer: ', referrer)
-  //this.$emit("donateFromButton")
+export function donate() {
+  console.log('old donate action')  
 }
-
 function popUpWindow (url, title, w, h) {
 	// Credit goes to https://stackoverflow.com/a/16861050/1176464
 	// Fixes dual-screen position                         Most browsers      Firefox

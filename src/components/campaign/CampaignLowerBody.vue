@@ -95,7 +95,11 @@
               <div class="tab-section tab-section__giving-level">
                 <h4>Choose a giving level</h4>
                 <div class="user-optional__giving-level-wrapper">
-                  <CampaignGivingLevel :level="givingLevel" v-for="(givingLevel, index) in campaign.giving_levels" :key="index" ></CampaignGivingLevel>
+                  <CampaignGivingLevel
+                    :level="givingLevel"
+                    v-for="(givingLevel, index) in campaign.giving_levels"
+                    :key="index"
+                    :campaign="campaign" ></CampaignGivingLevel>
                 </div>
               </div>
               <div class="top-donors">
@@ -122,8 +126,12 @@
                   layout="sharing"/>
                 <button class="button is-warning is-load-more" @click="loadMoreDonations()" v-if="moreDonations">Load more donations</button>
               </div>
-              <div class="button campaign-pledge__cta is-success is-large" @click="donateRightColumn()">
-                Donate now
+              <div class="button campaign-pledge__cta is-success is-large">
+                <DonateAction
+                  :campaign-id="campaign.campaign_id"
+                  trigger="campaign/lower/right/donors">
+                  Donate now
+                </DonateAction>
               </div>
             </div>
           </transition>
@@ -202,6 +210,7 @@ import CampaignNonprofitDetails from "Components/campaign/CampaignNonprofitDetai
 import Comments from "Components/general/Comments.vue"
 import DonorsList from "Components/general/DonorsList.vue"
 import * as sharer from "../../util/sharer.js"
+import DonateAction from "Components/general/DonateAction.vue"
 
 export default {
 	props: [ "campaign" ],
@@ -210,6 +219,7 @@ export default {
     CampaignNonprofitDetails,
 		CampaignUpdates,
 		Comments,
+    DonateAction,
 		DonorsList
 	},
 	data () {
@@ -282,15 +292,6 @@ export default {
 		loadDonationsTab () {
 			this.currentTab = 3
 			// scroll to tab bar
-		},
-    donateRightColumn () {
-      sharer.donate({
-        campaign: this.campaign.campaign_id,
-        fullPath: `${window.location.origin}${window.location.pathname}`,
-        referrer: window.location.href,
-        timestamp: Math.floor(Date.now() / 1000),
-        trigger: "campaign/lower/right/donors",
-      })      
     }
 	},
 	// Data to be fetched asynchronously, only in the client.
