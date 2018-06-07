@@ -27,7 +27,7 @@
           :key="$route.fullPath"
           :route-path="$route.fullPath"
           :campaign-id="campaign.campaign_id"
-          trigger="campaign/campaigner" />
+          trigger="campaign/campaigner/shareIconsRow" />
       </div>
     </div>
   </div>

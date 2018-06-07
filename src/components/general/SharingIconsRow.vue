@@ -25,6 +25,7 @@
       <div class="column">
         <DonateAction
           :campaign-id="campaignId"
+          :nonprofit-ein="nonprofitEin"          
           :trigger="trigger">
           <div class="sharing-icons-row__share-item sharing-icons-row__share-email button is-white">
             <Icons iconwidth="20px" iconheight="20px" icon="usd" color="#fff" class="icon" />
@@ -172,7 +173,7 @@ export default {
 			shareWindowTitle: "Sharing"
 		}
 	},
-	props: [ "routePath", "campaignId", "trigger" ],
+	props: [ "routePath", "campaignId", "trigger", "nonprofitEin" ],
 	mounted () {
 		this.fullURL = window.location.origin + this.routePath
 		this.loadScripts()

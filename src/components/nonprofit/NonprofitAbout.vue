@@ -24,7 +24,13 @@
                 <Icons iconwidth="24px" iconheight="24px" icon="email" color="#f0f0f0" class="icon"/>
                 <span v-html="nonprofit.data.email"></span>
               </div>
-              <button class="button is-success nonprofit-extended__donate" type="submit">Donate</button>
+              <DonateAction
+                :nonprofit-ein="nonprofit.EIN"
+                trigger="nonprofit/about/data">
+                <button class="button is-success nonprofit-extended__donate" type="submit">
+                  Donate
+                </button>
+              </DonateAction>
             </div>
           </div>
         </div>
@@ -44,12 +50,17 @@
           </flickity>
         </div>
       </div>
-      <SharingIconsRow :key="$route.fullPath" :route-path="$route.fullPath" />
+      <SharingIconsRow
+        :key="$route.fullPath"
+        :nonprofit-ein="nonprofit.EIN"
+        :route-path="$route.fullPath"
+        trigger="nonprofit/about/shareIconsRow" />
     </div>
   </div>
 </template>
 
 <script>
+import DonateAction from "Components/general/DonateAction.vue"
 import SharingIconsRow from "Components/general/SharingIconsRow.vue"
 import Icons from "Components/general/Icons.vue"
 import Flickity from "Components/plugins/Flickity.vue"
@@ -57,6 +68,7 @@ import Flickity from "Components/plugins/Flickity.vue"
 export default {
 	props: [ "nonprofit" ],
 	components: {
+    DonateAction,
 		Icons,
 		Flickity,
 		SharingIconsRow

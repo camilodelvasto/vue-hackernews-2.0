@@ -25,9 +25,9 @@
       <a>
         <DonateAction
           :campaign-id="campaignId"
-          :comment="commentId"
+          :commentId="commentId"
           :trigger="trigger"
-          :update="updateId">
+          :updateId="updateId">
           Donate
         </DonateAction>
       </a>
@@ -85,7 +85,7 @@ export default {
 	},
 	methods: {
 		replyTo (commentId) {
-			this.$emit("replyTo", { comment_id: commentId })
+			this.$emit("replyTo", { commentId: commentId })
 		},
 		share (commentId) {
 			this.openShareBox = !this.openShareBox

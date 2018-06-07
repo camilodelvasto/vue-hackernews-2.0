@@ -109,7 +109,7 @@ export default {
 	methods: {
 		openReplyBox (payload) {
 			this.showReplyBox = true
-			this.inReplyTo = payload.comment_id
+			this.inReplyTo = payload.commentId
 		},
 		getPermalink (id) {
 			return `${window.location.origin}${window.location.pathname}?comment_id=${id}`
