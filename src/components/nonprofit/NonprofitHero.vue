@@ -17,8 +17,17 @@
               Donate
             </DonateAction>
           </div>
-          <div class="button nonprofit-hero__cta-share">
-            <Icons iconwidth="16px" iconheight="16px" icon="share" color="#ffffff" class="icon" />
+          <div class="button nonprofit-hero__cta-share" @click="share()">
+            <transition name="slide-fade">
+              <ShareBox
+                v-if="openShareBox"
+                class="share-box__wrapper"
+                :url="fullURL"
+                :text="shareText"
+                :via="siteName"
+                :title="shareWindowTitle" />
+            </transition>
+            <Icons iconwidth="16px" iconheight="16px" icon="share" color="#ffffff" class="share-icon-trigger" />
             Share
           </div>
           <div class="nonprofit-hero__cta-manage" v-if="!nonprofit.data.about"><a>Manage this nonprofit</a></div>
@@ -174,14 +183,25 @@
 
   &__cta-share {
     background-color: rgba($color-text, 0.5);
+    position: relative;
 
-    .icon {
+    .share-icon-trigger {
       margin-right: 10px !important;
+      margin-top: 5px;
       display: block;
     }
 
     &:hover {
       background-color: rgba($color-text, 0.7);
+    }
+    .share-box__wrapper {
+      position: absolute;
+      right: 0;
+      top: -20px;
+
+      @include breakpoint($mobile) {
+        top: 80px;
+      }
     }
   }
   &__cta-manage {
@@ -197,13 +217,32 @@
 
 <script>
 import DonateAction from "Components/general/DonateAction.vue"
+import ShareBox from "Components/general/ShareBox.vue"
 import Icons from "Components/general/Icons.vue"
 
 export default {
 	props: [ "common", "nonprofit" ],
 	components: {
     DonateAction,
-		Icons
-	}
+		Icons,
+    ShareBox
+	},
+  data () {
+    return {
+      fullURL: "",
+      shareText: "Check out this nonprofit!",
+      siteName: "Volunteerathon",
+      shareWindowTitle: "Share Nonprofit",
+      openShareBox: false
+    }
+  },
+  mounted () {
+    this.fullURL = `${window.location.origin}${window.location.pathname}`
+  },
+  methods: {
+    share (commentId) {
+      this.openShareBox = !this.openShareBox
+    }
+  }
 }
 </script>
