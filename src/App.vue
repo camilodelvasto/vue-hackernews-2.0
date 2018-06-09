@@ -7,6 +7,7 @@
     <nav class="fake-menu">
       <router-link to="/nonprofits/43178037">Nonprofit (Generic)</router-link>
       <router-link to="/nonprofits/43138428">Nonprofit (Claimed)</router-link>
+      <router-link to="/campaigns/254">Campaign</router-link>
       <router-link to="/nonprofits/99999943138428">nonexistent Nonprofit</router-link>
     </nav>
   </div>

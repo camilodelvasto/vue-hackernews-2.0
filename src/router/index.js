@@ -20,21 +20,36 @@ export function createRouter () {
 		mode: "history",
 		fallback: false,
 		saveScrollPosition: true,
-		scrollBehavior: () => ({ y: 0 }),
+		scrollBehavior (to, from, savedPosition) {
+      if (!to.name.includes('/donate')) {
+        // Retain position if we are opening a donate (modal) route
+        return { y: 0 }
+      }
+    },
 		routes: [
+      {
+        path: "/",
+        name: "home",
+        component: HomePage
+      },
+      {
+        path: "/nonprofits/:ein",
+        name: "nonprofit",
+        component: Nonprofit
+      },
 			{
-				path: "/",
-				name: "home",
-				component: HomePage
-			},
-			{
-				path: "/nonprofits/:ein",
-				name: "nonprofit",
+				path: "/nonprofits/:ein/donate",
+				name: "nonprofit/donate",
 				component: Nonprofit
 			},
+      {
+        path: "/campaigns/:id",
+        name: "campaign",
+        component: Campaign
+      },
 			{
-				path: "/campaigns/:id",
-				name: "campaign",
+				path: "/campaigns/:id/donate",
+				name: "campaign/donate",
 				component: Campaign
 			},
 			{

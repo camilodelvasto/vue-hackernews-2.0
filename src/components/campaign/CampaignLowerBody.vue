@@ -223,7 +223,8 @@ export default {
 	},
 	data () {
 		return {
-			currentTab: 1
+			currentTab: 1,
+      mounted: false
 		}
 	},
 	computed: {
@@ -251,7 +252,7 @@ export default {
 	},
 	methods: {
 		loadMoreComments (paginated = true) {
-			if (this.moreComments) {
+			if (this.moreComments && this.mounted) {
 				const campaignId = this.$route.params.id
 				return this.$store.dispatch("FETCH_COMMENTS", { campaignId: campaignId, paginated: paginated })
 					.then(data => {
@@ -291,7 +292,68 @@ export default {
 		loadDonationsTab () {
 			this.currentTab = 3
 			// scroll to tab bar
-		}
+		},
+    loadUpdatesAndScrollTo (itemId) {
+      const target = `#update_${itemId}`
+
+      var targetExists = this.updates.find(update => {
+        return update.id === parseInt(itemId, 10)
+      })
+      if (targetExists) {
+        this.$scrollTo(target, { offset: -200 })
+      } else {
+        if (this.moreUpdates) {
+          return this.loadMoreUpdates()
+            .then(data => {
+              if (data) {
+                return this.loadUpdatesAndScrollTo(itemId)
+              }
+            })
+            .catch(err => {
+              return err
+            })
+        } else {
+          return { code: 404 }
+        }
+      }
+    },
+    loadCommentsAndScrollTo (itemId) {
+      const target = `#comment_${itemId}`
+
+      var targetExists = false
+      this.comments.forEach(comment => {
+        if (comment.id === parseInt(itemId, 10)) {
+          targetExists = true
+        }
+
+        if (comment.replies && comment.replies.length) {
+          var a = comment.replies.find(reply => {
+            return reply.id === parseInt(itemId, 10)
+          })
+          if (a) {
+            targetExists = true
+          }
+        }
+      })
+
+      if (targetExists) {
+        this.$scrollTo(target, { offset: -200 })          
+      } else {
+        if (this.moreComments && this.mounted) {
+          return this.loadMoreComments()
+            .then(data => {
+              if (data) {
+                return this.loadCommentsAndScrollTo(itemId)
+              }
+            })
+            .catch(err => {
+              return err
+            })
+        } else {
+          return { code: 404 }
+        }
+      }
+    }    
 	},
 	// Data to be fetched asynchronously, only in the client.
 	// To be used for the below-the-fold items: comments, donors, recent donations, raised through sharing, updates
@@ -306,21 +368,23 @@ export default {
 			this.loadMoreDonations()
 		}
 
+    this.mounted = true
+
 		// If there's an update_id param, find it and scroll to it.
 		const updateId = this.$route.query.update_id
-		if (updateId) {
+		if (updateId && this.moreUpdates) {
 			this.currentTab = 5
 			setTimeout(() => {
-				loadUpdatesAndScrollTo(updateId, this)
+				this.loadUpdatesAndScrollTo(updateId)
 			}, 4500)
 		}
 
 		// If there's a comment_id param, find it and scroll to it.
 		const commentId = this.$route.query.comment_id
-		if (commentId) {
+		if (commentId && this.moreComments) {
 			this.currentTab = 4
 			setTimeout(() => {
-				loadCommentsAndScrollTo(commentId, this)
+				this.loadCommentsAndScrollTo(commentId)
 			}, 4500)
 		}
 	},
@@ -330,70 +394,11 @@ export default {
 }
 
 function showMoreButton (state, arg) {
-	const limit = state[arg].limit
-	const current = state[arg].current
-	const count = state.campaign[`${arg}_count`]
-	const totalPages = Math.ceil(count / limit)
+	const limit = state[arg].limit //2
+	const current = state[arg].current //306
+	const count = state.campaign[`${arg}_count`] //6
+	const totalPages = Math.ceil(count / limit) //6/2 = 3
 	return totalPages >= current
 }
 
-function loadUpdatesAndScrollTo (itemId, vm) {
-	const target = `#update_${itemId}`
-
-	var targetExists = vm.updates.find(update => {
-		return update.id === parseInt(itemId, 10)
-	})
-	if (targetExists) {
-		vm.$scrollTo(target, { offset: -200 })
-	} else {
-		if (vm.moreUpdates) {
-			return vm.loadMoreUpdates()
-				.then(data => {
-					return loadUpdatesAndScrollTo(itemId, vm)
-				})
-				.catch(err => {
-					return err
-				})
-		} else {
-			return { code: 404 }
-		}
-	}
-}
-
-function loadCommentsAndScrollTo (itemId, vm) {
-	const target = `#comment_${itemId}`
-
-	var targetExists = false
-	vm.comments.forEach(comment => {
-		if (comment.id === parseInt(itemId, 10)) {
-			targetExists = true
-			return
-		}
-
-		if (comment.replies && comment.replies.length) {
-			var a = comment.replies.find(reply => {
-				return reply.id === parseInt(itemId, 10)
-			})
-			if (a) {
-				targetExists = true
-			}
-		}
-	})
-
-	if (targetExists) {
-		vm.$scrollTo(target, { offset: -200 })
-	} else {
-		if (vm.moreComments) {
-			return vm.loadMoreComments()
-				.then(data => {
-					return loadCommentsAndScrollTo(itemId, vm)
-				})
-				.catch(err => {
-					return err
-				})
-		} else {
-			return { code: 404 }
-		}
-	}
-}
 </script>

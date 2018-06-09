@@ -1,11 +1,13 @@
 <template>
   <div class="campaign">
     <AppHeader layout="app"></AppHeader>
-
+    <transition name="slide-fade">
+      <DonateView v-if="donateActive" parent="campaign"></DonateView>
+    </transition>
     <CampaignHeader :campaign="campaign"></CampaignHeader>
-    <CampaignHero :campaign="campaign"></CampaignHero>
+    <CampaignHero :campaign="campaign" :auto-scroll="!donateActive" :key="donateActive"></CampaignHero>
     <CampaignCampaigner :campaign="campaign"></CampaignCampaigner>
-    <CampaignLowerBody :campaign="campaign"></CampaignLowerBody>
+    <CampaignLowerBody :campaign="campaign" :key="donateModal"></CampaignLowerBody>
 
     <AppFooter></AppFooter>
   </div>
@@ -20,6 +22,7 @@ import CampaignCampaigner from "Components/campaign/CampaignCampaigner.vue"
 import CampaignHeader from "Components/campaign/CampaignHeader.vue"
 import CampaignHero from "Components/campaign/CampaignHero.vue"
 import CampaignLowerBody from "Components/campaign/CampaignLowerBody.vue"
+import DonateView from "./DonateView.vue"
 
 Vue.use(VueMeta)
 
@@ -31,7 +34,8 @@ export default {
 		CampaignCampaigner,
 		CampaignHeader,
 		CampaignHero,
-		CampaignLowerBody
+		CampaignLowerBody,
+    DonateView
 	},
 	data () {
 		return {
@@ -63,7 +67,13 @@ export default {
 	computed: {
 		campaign () {
 			return this.$store.state.campaign
-		}
+		},
+    donateModal () {
+      return this.$route.name
+    },
+    donateActive () {
+      return this.donateModal === 'campaign/donate'
+    }
 	},
 
 	// We only fetch the item itself before entering the view

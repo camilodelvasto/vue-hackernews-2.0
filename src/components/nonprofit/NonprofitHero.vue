@@ -10,13 +10,13 @@
         <div class="nonprofit-hero__nonprofit-name column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd" :class="{'not-claimed': !nonprofit.data.about}">{{nonprofit.NAME}}</div>
         <div class="nonprofit-hero__cta-wrapper column is-6-tablet is-5-desktop is-5-widescreen is-5-fullhd" :class="{'not-claimed': !nonprofit.data.about}">
           <div class="button nonprofit-hero__cta-fundraise">Fundraise</div>
-          <div class="button nonprofit-hero__cta-donate">
-            <DonateAction
-              :nonprofit-ein="nonprofit.EIN"
-              trigger="nonprofit/hero/cta">
+          <DonateAction
+            :nonprofit-ein="nonprofit.EIN"
+            trigger="nonprofit/hero/cta">
+            <div class="button nonprofit-hero__cta-donate">
               Donate
-            </DonateAction>
-          </div>
+            </div>
+          </DonateAction>
           <div class="button nonprofit-hero__cta-share" @click="share()">
             <transition name="slide-fade">
               <ShareBox

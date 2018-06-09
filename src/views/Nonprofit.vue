@@ -2,6 +2,10 @@
   <div class="">
     <AppHeader layout="app"></AppHeader>
 
+    <transition name="slide-fade">
+      <DonateView v-if="donateActive" parent="nonprofit"></DonateView>
+    </transition>
+
     <NonprofitHero :nonprofit="nonprofit" :common="common" />
     <NonprofitForm submit-button-label="Submit" />
 
@@ -35,6 +39,7 @@ import Vue from "vue"
 import VueMeta from "vue-meta"
 import AppFooter from "Components/general/AppFooter.vue"
 import AppHeader from "Components/general/AppHeader.vue"
+import DonateView from "./DonateView.vue"
 import DonorsList from "Components/general/DonorsList.vue"
 import FloatingShareTools from "Components/general/FloatingShareTools.vue"
 import NonprofitForm from "Components/nonprofit/NonprofitForm.vue"
@@ -50,6 +55,7 @@ export default {
 	components: {
 		AppFooter,
 		AppHeader,
+    DonateView,
 		DonorsList,
 		FloatingShareTools,
 		NonprofitAbout,
@@ -98,7 +104,13 @@ export default {
 		},
 		common () {
 			return this.$store.state.common
-		}
+		},
+    donateModal () {
+      return this.$route.name
+    },
+    donateActive () {
+      return this.donateModal.includes('/donate')
+    }
 	},
 
 	// We only fetch the item itself before entering the view

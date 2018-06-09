@@ -25,11 +25,12 @@ export default {
 				trigger: this.trigger,
 				updateId: this.updateId
 			}
-			console.log(args)
+
+      // save donation info in store
 			this.$store.dispatch("START_DONATION", { initiator: args })
-			// save donation info in store
+
 			// open donation funnel
-			// this.$router.push('/')
+			this.$router.push({name: `${this.$route.name}/donate`, params: this.$route.params})
 		}
 	}
 }

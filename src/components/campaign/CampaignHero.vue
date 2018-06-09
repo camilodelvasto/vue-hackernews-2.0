@@ -163,7 +163,7 @@ import ProgressBar from "Components/general/ProgressBar.vue"
 import Flickity from "Components/plugins/Flickity.vue"
 
 export default {
-	props: [ "campaign" ],
+	props: [ "campaign", "autoScroll" ],
 	components: {
 		DonateAction,
 		Flickity,
@@ -176,9 +176,9 @@ export default {
 				prevNextButtons: false,
 				pageDots: true,
 				wrapAround: true,
-				autoPlay: 3500
+				autoPlay: this.autoScroll ? 3500 : false
 			}
 		}
-	}
+  }
 }
 </script>

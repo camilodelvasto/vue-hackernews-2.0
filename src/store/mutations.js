@@ -50,6 +50,8 @@ export default {
 	START_DONATION: (state, { initiator }) => {
 		state.userActions.donation.status = "started"
 		state.userActions.donation.amount = initiator.givingLevel ? initiator.givingLevel.amount : state.userActions.donation.amount
-		state.userActions.donation.initiator = initiator
+    state.userActions.donation.initiator = initiator
+    state.userActions.donation.campaignId = initiator.campaignId
+		state.userActions.donation.nonprofitEin = initiator.nonprofitEin
 	}
 }
