@@ -4,18 +4,23 @@
       <div class="amount-box column is-4 is-6-mobile" v-for="box in boxes">
         <div
           class="amount-box__inner"
-          :class="{'selected': box === donation.amount}"
-          @click="donation.amount = box">
+          :class="{'selected': box === donation.amount && !donation.isCustomAmount}"
+          @click="selectAmount(box)">
           {{box | usd}}
         </div>
       </div>
     </div>
     <div class="columns form-column__wrapper form-column__extra-padded input-line">
-      <div class="column is-5 form-column__label-column input-label"><label class="label">Other:</label></div>
+      <div class="column is-5 form-column__label-column input-label">
+        <label class="label">
+          <input class="pad-right" type="checkbox" v-model="donation.isCustomAmount">
+          Other amount:
+        </label>
+      </div>
       <div class="column is-3 form-column__input-column">
         <div class="control input-wrapper">
           <Icons icon="usd" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
-          <input class="input" type="number" name="amount" :placeholder="donation.amount" v-model="donation.amount">
+          <input class="input custom-amount-input" type="number" name="amount" :placeholder="donation.customAmount" v-model="donation.customAmount" :disabled="!donation.isCustomAmount">
         </div>
       </div>
     </div>
@@ -138,6 +143,8 @@ export default {
 			nonprofitIs: "",
       donation: {
         amount: 350,
+        customAmount: 350,
+        isCustomAmount: false,
         isGift: false,
         email: "",
         cardNumber: null,
@@ -153,6 +160,10 @@ export default {
   methods: {
     donate () {
       console.log(this.donation)
+    },
+    selectAmount(amount) {
+      this.donation.isCustomAmount = false
+      this.donation.amount = amount
     }
   },
   computed: {
@@ -291,5 +302,13 @@ export default {
 }
 .save-method {
   margin-top: 5px;
+}
+.pad-right {
+  margin-right: 5px;
+}
+.custom-amount-input {
+  &:disabled {
+    color: rgba($color-text, 0.2);
+  }
 }
 </style>
