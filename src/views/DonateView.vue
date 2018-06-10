@@ -9,18 +9,8 @@
         <span class="page-title__first">Support {{campaign.campaigner.name}}'s Volunteerathon</span> <span class="page-title__second">{{campaign.name}}</span>
       </h2>
       <DonateForm
-
+        :trigger="donationData.initiator.trigger"
       ></DonateForm>
-
-      <div class="containerx">
-        <strong>amount:</strong> {{donationData.amount}}<br>
-        <strong>donating to campaign:</strong> {{donationData.campaignId}}<br>
-        <strong>donating to nonprofit:</strong> {{donationData.nonprofitEin}}<br>
-        <strong>trigger:</strong> {{donationData.initiator.trigger}}<br>
-        <strong>Giving level:</strong> {{donationData.initiator.givingLevel}}<br>
-        <div style="height: 2000px;" >{{donationData}}</div>
-      </div>
-      <!-- Any other Bulma elements you want -->
     </div>
     <button class="modal-close is-large" aria-label="close"></button>
   </div>
@@ -29,12 +19,16 @@
 <script>
 import Vue from "vue"
 import VueMeta from "vue-meta"
+import DonateForm from "Components/donate/DonateForm.vue"
 
 Vue.use(VueMeta)
 
 export default {
   props: [ "parent" ],
   name: "nonprofit",
+  components: {
+    DonateForm
+  },
   data () {
     return {
       bottom: false,
@@ -91,6 +85,7 @@ export default {
       display: block;
       font-weight: normal;
       font-size: 26px;
+      margin-bottom: 10px;
     }
     &__second {
       color: $color-emphasis-alt;      

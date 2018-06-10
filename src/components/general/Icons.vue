@@ -48,6 +48,15 @@
     <svg :style="{width: `${iconwidth}`, height: `${iconheight}`}" viewBox="0 0 24 24" v-if="icon === 'chevron-down'">
       <path :fill="color" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
     </svg>
+    <svg :style="{width: `${iconwidth}`, height: `${iconheight}`}" viewBox="0 0 24 24" v-if="icon === 'user'">
+      <path :fill="color" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+    </svg>
+    <svg :style="{width: `${iconwidth}`, height: `${iconheight}`}" viewBox="0 0 24 24" v-if="icon === 'credit-card'">
+      <path :fill="color" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+    </svg>
+    <svg :style="{width: `${iconwidth}`, height: `${iconheight}`}" viewBox="0 0 24 24" v-if="icon === 'lock'">
+      <path :fill="color" d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+    </svg>
     <svg :style="{width: `${iconwidth}`, height: `${iconheight}`}" viewBox="0 0 24 24" v-if="icon === 'usd'">
       <path :fill="color" d="M7,15H9C9,16.08 10.37,17 12,17C13.63,17 15,16.08 15,15C15,13.9 13.96,13.5 11.76,12.97C9.64,12.44 7,11.78 7,9C7,7.21 8.47,5.69 10.5,5.18V3H13.5V5.18C15.53,5.69 17,7.21 17,9H15C15,7.92 13.63,7 12,7C10.37,7 9,7.92 9,9C9,10.1 10.04,10.5 12.24,11.03C14.36,11.56 17,12.22 17,15C17,16.79 15.53,18.31 13.5,18.82V21H10.5V18.82C8.47,18.31 7,16.79 7,15Z" />
     </svg>
