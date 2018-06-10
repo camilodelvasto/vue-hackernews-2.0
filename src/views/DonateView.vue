@@ -86,6 +86,10 @@ export default {
       font-weight: normal;
       font-size: 26px;
       margin-bottom: 10px;
+
+      @include breakpoint($tablet) {
+        margin-bottom: 0;
+      }
     }
     &__second {
       color: $color-emphasis-alt;      
