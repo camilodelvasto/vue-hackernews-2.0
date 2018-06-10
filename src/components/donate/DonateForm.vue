@@ -43,7 +43,7 @@
           This is a gift or in tribute to somebody ($30 minimum)
       </label>
     </div>
-    <div class="billing-info">
+    <div class="billing-info" v-if="!userName">
       <div class="columns form-column__wrapper form-column__extra-padded input-line">
         <div class="column is-5 form-column__label-column input-label"><label class="label">Email (for the receipt):</label></div>
         <div class="column is-5 form-column__input-column">
@@ -110,6 +110,11 @@
           </label>
         </div>
       </div>
+    </div>
+    <div class="centered" v-if="userName">
+      *You are paying with your preferred payment method. <a>Click here</a> if you want to manage your data.
+    </div>
+    <div>
       <div class="form-submit-wrapper" @click.prevent="donate()">
         <button class="button is-large is-danger">{{submitButtonLabel || 'Donate'}}</button>
       </div>
@@ -148,6 +153,11 @@ export default {
   methods: {
     donate () {
       console.log(this.donation)
+    }
+  },
+  computed: {
+    userName () {
+      return this.$store.state.user.fullName
     }
   }
 }

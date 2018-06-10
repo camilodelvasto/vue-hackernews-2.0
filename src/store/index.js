@@ -38,7 +38,9 @@ export function createStore () {
 				limit: 6
 			},
 			home: {},
-			user: {},
+			user: {
+        fullName: null
+      },
 			userActions: {
 				donation: {
 					status: "",
