@@ -67,6 +67,7 @@
       </div>
       <DonateBillingMethod
         :payment="donation.paymentMethod"
+        v-on:input:method="donation.paymentMethod.method = $event"
         v-on:input:name="donation.paymentMethod.nameOnCard = $event"
         v-on:input:card="donation.paymentMethod.cardNumber = $event"
         v-on:input:month="donation.paymentMethod.expirationMonth = $event"
@@ -91,6 +92,7 @@
       <p class="add-payment-method__cta" @click="toggleNewPaymentMethod()" v-if="donation.isNewPaymentMethod"><a>Use a stored payment method instead</a></p>
       <DonateBillingMethod
         :payment="donation.paymentMethod"
+        v-on:input:method="donation.paymentMethod.method = $event"
         v-on:input:name="donation.paymentMethod.nameOnCard = $event"
         v-on:input:card="donation.paymentMethod.cardNumber = $event"
         v-on:input:month="donation.paymentMethod.expirationMonth = $event"
@@ -127,6 +129,7 @@ export default {
       donation: {
         isNewPaymentMethod: false,
         paymentMethod: {
+          method: 'card',
           nameOnCard: null,
           cardNumber: null,
           expirationMonth: null,

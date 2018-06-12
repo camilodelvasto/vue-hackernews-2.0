@@ -2,6 +2,30 @@
   <div>
     <div class="billing-info">
       <div class="columns form-column__wrapper form-column__extra-padded input-line">
+        <div class="column is-2 form-column__input-column method">
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="method" v-model="payment.method" value="card"
+                v-on:input="$emit('input:method', $event.target.value)"
+              >
+              Credit Cart
+            </label>
+            <label class="radio">
+              <input type="radio" name="method" v-model="payment.method" value="paypal"
+                v-on:input="$emit('input:method', $event.target.value)"
+              >
+              PayPal
+            </label>
+            <label class="radio">
+              <input type="radio" name="method" v-model="payment.method" value="check"
+                v-on:input="$emit('input:method', $event.target.value)"
+              >
+              Check
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="columns form-column__wrapper form-column__extra-padded input-line">
         <div class="column is-5 form-column__label-column input-label"><label class="label">Name on card:</label></div>
         <div class="column is-5 form-column__input-column">
           <div class="control input-wrapper">
@@ -171,4 +195,26 @@ export default {
   }
 }
 
+.method {
+  flex: 1;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  @include breakpoint($tablet) {
+    padding: 0 100px;
+    margin-top: 10px;
+  }
+  .control {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      margin-right: 5px;
+    }
+  }
+}
 </style>
