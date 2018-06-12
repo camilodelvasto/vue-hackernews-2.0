@@ -39,11 +39,11 @@ export function createStore () {
 			},
 			home: {},
 			user: {
-        loggedIn: false,
+        loggedIn: true,
         fullName: null,
         paymentMethods: [
-          { id: 123456789, fourDigits: 2301, franchise: "AMEX" },
-          { id: 765432459, fourDigits: 6452, franchise: "VISA" }
+          { id: 123456789, fourDigits: 2301, provider: "AMEX" },
+          { id: 765432459, fourDigits: 6452, provider: "VISA" }
         ]
       },
 			userActions: {

@@ -151,7 +151,7 @@ export default {
   @include breakpoint($tablet) {
     margin-bottom: 20px;
   }
-  .input-card-code {
+  &.input-card-code {
     @include breakpoint($tablet) {
       display: flex;
       flex-direction: row;
