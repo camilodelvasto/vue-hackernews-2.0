@@ -75,6 +75,29 @@
         v-on:input:code="donation.paymentMethod.securityCode = $event"
         v-on:input:save="donation.paymentMethod.savePaymentMethod = $event"
       />
+      <div
+        v-if="!loggedIn && donation.paymentMethod.savePaymentMethod"
+      >
+        <p class="centered instructions" >Create a password so you can access this payment method in the future.<br>Your email address will be your account ID.</p>
+        <div class="columns form-column__wrapper form-column__extra-padded input-line password-input-wrapper">
+          <div class="column is-5 form-column__label-column input-label"><label class="label">Password:</label></div>
+          <div class="column is-5 form-column__input-column">
+            <div class="control input-wrapper">
+              <Icons icon="lock" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
+              <input class="input" type="password" name="action" placeholder="password" v-model="donation.password">
+            </div>
+          </div>
+        </div>
+        <div class="columns form-column__wrapper form-column__extra-padded input-line password-input-wrapper">
+          <div class="column is-5 form-column__label-column input-label"><label class="label">Password confirmation:</label></div>
+          <div class="column is-5 form-column__input-column">
+            <div class="control input-wrapper">
+              <Icons icon="lock" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
+              <input class="input" type="password" name="action" placeholder="password" v-model="donation.passwordConfirmation">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="billing-info centered logged-in" v-if="loggedIn">      
       <h2><span>Payment method</span></h2>
@@ -290,6 +313,11 @@ export default {
       margin-bottom: 10px;
     }
   }
+  &.password-input-wrapper {
+    @include breakpoint($tablet) {
+      margin-top: 10px;
+    }
+  }
 }
 .form-column__input-column {
   padding-bottom: 0;
@@ -351,6 +379,13 @@ export default {
   margin-bottom: 0;
   line-height: 2.25em;
   padding-bottom: 0;
+}
+
+.instructions {
+  font-size: 14px;
+  @include breakpoint($tablet) {
+    font-size: 16px;
+  }
 }
 
 </style>
