@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="columns form-column__wrapper form-column__extra-padded input-line">
+    <div class="columns form-column__wrapper form-column__extra-padded input-line custom-amount-wrapper">
       <div class="column is-5 form-column__label-column input-label">
         <label class="label">
           <input class="pad-right" type="checkbox" v-model="donation.isCustomAmount">
@@ -48,8 +48,15 @@
           This is a gift or in tribute to somebody ($30 minimum)
       </label>
     </div>
-    <div class="billing-info" v-if="!userName">
-      <div class="columns form-column__wrapper form-column__extra-padded input-line">
+    <div class="centered is-gift-wrapper">
+      <label class="checkbox">
+        <input type="checkbox" v-model="donation.isAnonymous">
+          Make donation anonymously
+      </label>
+    </div>
+    <div class="billing-info" v-if="!loggedIn">
+      <h2><span>Billing info</span> <span class="login-link"><a>log in to use stored info</a></span></h2>
+      <div class="columns form-column__wrapper form-column__extra-padded input-line email-input-wrapper">
         <div class="column is-5 form-column__label-column input-label"><label class="label">Email (for the receipt):</label></div>
         <div class="column is-5 form-column__input-column">
           <div class="control input-wrapper">
@@ -58,70 +65,44 @@
           </div>
         </div>
       </div>
-      <div class="columns form-column__wrapper form-column__extra-padded input-line">
-        <div class="column is-5 form-column__label-column input-label"><label class="label">First name:</label></div>
-        <div class="column is-5 form-column__input-column">
-          <div class="control input-wrapper">
-            <Icons icon="user" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
-            <input class="input" type="text" name="action" placeholder="First name" v-model="donation.firstName">
-          </div>
-        </div>
-      </div>
-      <div class="columns form-column__wrapper form-column__extra-padded input-line">
-        <div class="column is-5 form-column__label-column input-label"><label class="label">Last name:</label></div>
-        <div class="column is-5 form-column__input-column">
-          <div class="control input-wrapper">
-            <Icons icon="user" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
-            <input class="input" type="text" name="action" placeholder="Last name" v-model="donation.lastName">
-          </div>
-        </div>
-      </div>
-      <div class="columns form-column__wrapper form-column__extra-padded input-line input-card-number">
-        <div class="column is-5 form-column__label-column input-label"><label class="label">Card Number:</label></div>
-        <div class="column is-5 form-column__input-column">
-          <div class="control input-wrapper">
-            <Icons icon="credit-card" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
-            <input class="input" type="number" name="action" placeholder="0000 0000 0000 0000" v-model="donation.cardNumber">
-          </div>
-        </div>
-      </div>
-      <div class="columns form-column__wrapper form-column__extra-padded input-line input-expiry-number">
-        <div class="column is-5 form-column__label-column input-label"><label class="label">Expiration date (MM/YY):</label></div>
-        <div class="column is-3 form-column__input-column">
-          <div class="select">
-            <select v-model="donation.expirationMonth">
-              <option v-for="month in [1,2,3,4,5,6,7,8,9,10,11,12]">{{month}}</option>
-            </select>
-          </div>
-          <div class="select" v-model="donation.expirationyear">
-            <select>
-              <option v-for="year in [18,19,20,21,22,23,24,25,26,27]">{{year}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="columns form-column__wrapper form-column__extra-padded input-line input-card-code">
-        <div class="column is-5 form-column__label-column input-label"><label class="label">Security Code:</label></div>
-        <div class="column is-2 form-column__input-column">
-          <div class="control input-wrapper">
-            <Icons icon="lock" class="input-icon" iconwidth="20px" iconheight="20px" color="#999"></Icons>
-            <input class="input" type="number" name="action" placeholder="0000" min="0" max="9999" v-model="donation.cardCode">
-          </div>
-        </div>
-        <div class="column is-4 form-column__input-column save-method">
-          <label class="checkbox">
-            <input type="checkbox" v-model="donation.savePaymentMethod">
-              Save the payment method
-          </label>
-        </div>
-      </div>
+      <DonateBillingMethod
+        :payment="donation.paymentMethod"
+        v-on:input:name="donation.paymentMethod.nameOnCard = $event"
+        v-on:input:card="donation.paymentMethod.cardNumber = $event"
+        v-on:input:month="donation.paymentMethod.expirationMonth = $event"
+        v-on:input:year="donation.paymentMethod.expirationYear = $event"
+        v-on:input:code="donation.paymentMethod.securityCode = $event"
+        v-on:input:save="donation.paymentMethod.savePaymentMethod = $event"
+      />
     </div>
-    <div class="centered" v-if="userName">
-      *You are paying with your preferred payment method. <a>Click here</a> if you want to manage your data.
+    <div class="billing-info centered logged-in" v-if="loggedIn">      
+      <h2><span>Payment method</span></h2>
+
+      <div v-if="!donation.isNewPaymentMethod">
+        <p>Choose an existing payment method:</p>
+        <div class="select">
+          <select>
+            <option v-for="paymentMethod in paymentMethods" :value="paymentMethod.id">{{`Card ending in ${paymentMethod.fourDigits}`}}</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="add-payment-method__cta" @click="toggleNewPaymentMethod()" v-if="!donation.isNewPaymentMethod"><a>Use a new payment method</a></p>
+      <p class="add-payment-method__cta" @click="toggleNewPaymentMethod()" v-if="donation.isNewPaymentMethod"><a>Use a stored payment method instead</a></p>
+      <DonateBillingMethod
+        :payment="donation.paymentMethod"
+        v-on:input:name="donation.paymentMethod.nameOnCard = $event"
+        v-on:input:card="donation.paymentMethod.cardNumber = $event"
+        v-on:input:month="donation.paymentMethod.expirationMonth = $event"
+        v-on:input:year="donation.paymentMethod.expirationYear = $event"
+        v-on:input:code="donation.paymentMethod.securityCode = $event"
+        v-on:input:save="donation.paymentMethod.savePaymentMethod = $event"
+        v-if="donation.isNewPaymentMethod" />
     </div>
     <div>
       <div class="form-submit-wrapper" @click.prevent="donate()">
         <button class="button is-large is-danger">{{submitButtonLabel || 'Donate'}}</button>
+        <span class="small-text">By clicking Donate, you agree to the <a>Terms and Conditions</a>.</span>
       </div>
     </div>
   </form>
@@ -130,10 +111,12 @@
 
 <script>
 import Icons from "Components/general/Icons.vue"
+import DonateBillingMethod from "Components/donate/DonateBillingMethod.vue"
 
 export default {
 	props: ["submitButtonLabel", "trigger"],
   components: {
+    DonateBillingMethod,
     Icons
   },
 	data () {
@@ -142,17 +125,22 @@ export default {
 			volunteerFor: "",
 			nonprofitIs: "",
       donation: {
+        isNewPaymentMethod: false,
+        paymentMethod: {
+          nameOnCard: null,
+          cardNumber: null,
+          expirationMonth: null,
+          expirationYear: null,
+          securityCode: null,
+          savePaymentMethod: true
+        },
         amount: 350,
         customAmount: 350,
         isCustomAmount: false,
+        isAnonymous: false,
         isGift: false,
         email: "",
-        cardNumber: null,
-        cardCode: null,
-        expirationMonth: 1,
-        expirationyear: 2018,
         frequency: 'once',
-        savePaymentMethod: true,
         trigger: this.trigger
       }
 		}
@@ -164,12 +152,24 @@ export default {
     selectAmount(amount) {
       this.donation.isCustomAmount = false
       this.donation.amount = amount
+    },
+    toggleNewPaymentMethod () {
+      this.donation.isNewPaymentMethod = !this.donation.isNewPaymentMethod
     }
   },
   computed: {
+    loggedIn () {
+      return this.$store.state.user.loggedIn
+    },
     userName () {
       return this.$store.state.user.fullName
+    },
+    paymentMethods () {
+      return this.$store.state.user.paymentMethods
     }
+  },
+  mounted () {
+    console.log(this.loggedIn)
   }
 }
 </script>
@@ -213,33 +213,108 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.label {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0;
-  line-height: 2.25em;
-  padding-bottom: 0;
-}
 
 .centered {
   text-align: center;
 }
 
+.form-submit-wrapper {
+  margin: 20px auto;
+  text-align: center;
+}
+.save-method {
+  margin-top: 5px;
+}
+.pad-right {
+  margin-right: 5px;
+}
+.custom-amount-input {
+  &:disabled {
+    color: rgba($color-text, 0.2);
+  }
+}
+.small-text {
+  display: block;
+  font-size: 14px;
+  margin: 10px 0;
+}
+.billing-info {
+  h2 {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 30px;
+    color: $color-text;
+    justify-content: center;
+    a {
+      color: $color-emphasis-alt;
+      text-decoration: underline;
+      &:hover {
+        color: $color-text;
+      }
+    }
+    .login-link {
+      margin-left: 20px;
+    }
+  }
+  &.logged-in {
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.add-payment-method__cta {
+  margin: 10px 0 20px;
+}
 .input-line {
   margin-bottom: 10px;
   &:first-child {
     margin-top: 0px;
   }
   @include breakpoint($tablet) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
-    &:first-child {
-      margin-top: 25px;
+    &.custom-amount-wrapper {
+      margin-bottom: 20px;
+    }
+  }
+  &.email-input-wrapper {
+    margin-bottom: 0;
+    @include breakpoint($tablet) {
+      margin-bottom: 10px;
     }
   }
 }
+.form-column__input-column {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.frequency {
+  flex: 1;
+  margin-top: 30px;
+
+  @include breakpoint($tablet) {
+    padding: 0 100px;
+    margin-top: 10px;
+  }
+  .control {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      margin-right: 5px;
+    }
+  }
+}
+
 .input-label {
   display: flex;
   align-items: center;
@@ -265,50 +340,14 @@ export default {
   }
 }
 
-.form-column__input-column {
-  padding-bottom: 0.2rem;
-  padding-top: 0;
+.label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  line-height: 2.25em;
+  padding-bottom: 0;
 }
 
-.input-expiry-number {
-  .select {
-    width: 50%;
-  }
-}
-.frequency {
-  flex: 1;
-  margin-top: 30px;
-
-  @include breakpoint($tablet) {
-    padding: 0 100px;
-    margin-top: 10px;
-  }
-  .control {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  .radio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    input {
-      margin-right: 5px;
-    }
-  }
-}
-.form-submit-wrapper {
-  margin: 20px auto;
-  text-align: center;
-}
-.save-method {
-  margin-top: 5px;
-}
-.pad-right {
-  margin-right: 5px;
-}
-.custom-amount-input {
-  &:disabled {
-    color: rgba($color-text, 0.2);
-  }
-}
 </style>

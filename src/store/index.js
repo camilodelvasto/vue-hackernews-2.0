@@ -39,7 +39,12 @@ export function createStore () {
 			},
 			home: {},
 			user: {
-        fullName: null
+        loggedIn: false,
+        fullName: null,
+        paymentMethods: [
+          { id: 123456789, fourDigits: 2301, franchise: "AMEX" },
+          { id: 765432459, fourDigits: 6452, franchise: "VISA" }
+        ]
       },
 			userActions: {
 				donation: {
