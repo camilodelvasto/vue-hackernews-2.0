@@ -10,6 +10,7 @@
       </h2>
       <DonateForm
         :trigger="donationData.initiator.trigger"
+        :giving-levels="typeof campaign !== 'undefined' ? campaign.giving_levels : null"
       ></DonateForm>
     </div>
     <button class="modal-close is-large" aria-label="close"></button>

@@ -1,12 +1,21 @@
 <template>
   <form>
     <div class="columns boxes-wrapper is-multiline">
-      <div class="amount-box column is-4 is-6-mobile" v-for="box in boxes">
+      <div class="amount-box column is-4 is-6-mobile" v-for="box in boxes" v-if="!givingLevels">
         <div
           class="amount-box__inner"
           :class="{'selected': box === donation.amount && !donation.isCustomAmount}"
           @click="selectAmount(box)">
           {{box | usd}}
+        </div>
+      </div>
+      <div class="amount-box amount-box-giving-levels column is-6 is-6-mobile" v-for="level in givingLevels" v-if="givingLevels">
+        <div
+          class="amount-box__inner"
+          :class="{'selected': level.amount === donation.amount && !donation.isCustomAmount}"
+          @click="selectAmount(level.amount); donation.givingLevel = level">
+          <p>{{level.amount | usd}}</p>
+          <p class="small-text">{{level.tagline}}</p>
         </div>
       </div>
     </div>
@@ -139,7 +148,7 @@ import Icons from "Components/general/Icons.vue"
 import DonateBillingMethod from "Components/donate/DonateBillingMethod.vue"
 
 export default {
-	props: ["submitButtonLabel", "trigger"],
+	props: ["submitButtonLabel", "trigger", "givingLevels"],
   components: {
     DonateBillingMethod,
     Icons
@@ -165,6 +174,7 @@ export default {
         isCustomAmount: false,
         isAnonymous: false,
         isGift: false,
+        givingLevel: {},
         email: "",
         frequency: 'once',
         trigger: this.trigger
@@ -204,12 +214,13 @@ export default {
 .boxes-wrapper {
   margin: -.25rem;
   margin-bottom: 10px;
+  justify-content: center;
 
   @include breakpoint ($tablet) {
     max-width: 400px;
     margin-bottom: 30px;
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto;
   }  
 }
 .amount-box {
@@ -232,6 +243,12 @@ export default {
     }
     &.selected {
       background-color: $color-emphasis-alt;
+    }
+  }
+  &-giving-levels {
+    .amount-box__inner {
+      display: block;
+      text-align: center;
     }
   }
 }
