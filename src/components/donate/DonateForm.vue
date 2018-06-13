@@ -203,9 +203,6 @@ export default {
     paymentMethods () {
       return this.$store.state.user.paymentMethods
     }
-  },
-  mounted () {
-    console.log(this.loggedIn)
   }
 }
 </script>

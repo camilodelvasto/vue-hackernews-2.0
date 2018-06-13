@@ -39,7 +39,7 @@ export function createStore () {
 			},
 			home: {},
 			user: {
-        loggedIn: false,
+        loggedIn: true,
         fullName: null,
         paymentMethods: [
           { id: 123456789, fourDigits: 2301, provider: "AMEX" },
