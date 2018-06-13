@@ -82,7 +82,7 @@ var server = jsonServer.create() // Express server
 
 app.use("/static", express.static(path.join(__dirname, "src/demodata/public")))
 
-server.use(function (req, res, next) {
+app.use('/api', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   next()
