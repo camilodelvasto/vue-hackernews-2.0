@@ -68,6 +68,7 @@ router.onReady(() => {
 				next()
 			})
 			.catch(err => {
+        router.push('/404')
 				console.log(err)
 				next()
 			})
