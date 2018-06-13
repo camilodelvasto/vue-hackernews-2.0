@@ -72,6 +72,28 @@ app.use('/public', serve('./public', true))
 app.use('/manifest.json', serve('./manifest.json', true))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
 
+var jsonServer = require("json-server")
+var demodata = require("./src/demodata/db.json")
+var routes = require("./src/demodata/routes.json")
+
+var router = jsonServer.router(demodata) // Express router
+
+var server = jsonServer.create() // Express server
+
+app.use("/static", express.static(path.join(__dirname, "src/demodata/public")))
+
+server.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
+
+//server.use('/api', jsonServer.rewriter(routes))
+app.use('/api', jsonServer.rewriter(routes))
+app.use('/api', router)
+
+
+
 // since this app has no user-specific content, every page is micro-cacheable.
 // if your app involves user-specific content, you need to implement custom
 // logic to determine whether a request is cacheable based on its url and
@@ -100,7 +122,7 @@ function render (req, res) {
   }
 
   const context = {
-    title: 'Vue HN 2.0', // default title
+    title: 'Volunteerathon', // default title
     url: req.url
   }
   renderer.renderToString(context, (err, html) => {
@@ -118,7 +140,11 @@ app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))
 })
 
+
+
+
 const port = process.env.PORT || 8080
 app.listen(port, () => {
+  console.log(path.join(__dirname, "src/demodata/public"))
   console.log(`server started at localhost:${port}`)
 })
